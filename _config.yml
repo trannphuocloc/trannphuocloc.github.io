@@ -8,7 +8,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 title                    : "Trần Phước Lộc"
-title_separator          : "-"
+title_separator          : "|"
 name                     : &name "Trần Phước Lộc"
 description              : &description "personal description"
 url                      : https://trannphuocloc.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
@@ -24,8 +24,8 @@ author:
   name             : "Trần Phước Lộc"
   pronouns         : # example: "she/her"  
   bio              : "Data Analytics enthusiast"
-  location         : "HCMC, VN"
-  employer         : "Ho Chi Minh City Open University"
+  location         : "Ho Chi Minh City, Vietnam"
+  employer         : "HCMC Open University"
   uri              : # URL
   email            : "tranphuocloc.da@gmail.com" 
 
