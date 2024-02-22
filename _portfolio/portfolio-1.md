@@ -30,7 +30,7 @@ ON a.Reason_for_absence = c.Number;
 
 Output [1]:
 
-| ID | Reason for absence | Month of absence | Day of the week | Seasons | Transportation expense | Distance from Residence to Work | Service time | Age | Work load Average/day | Hit target | Disciplinary failure | Education | Son | Social drinker | Social smoker | Pet | Weight | Height | Body mass index | Absenteeism time in hours | comp_hr | Number | Reason |
+| ID | Reason for absence | Month of absence | Day of the week | Seasons | Transportation expense | Distance from Residence to Work | Service time | Age | Work load Average/day | Hit target | Disciplinary failure | Education | Son | Social drinker | Social smoker | Pet | Weight | Height | Body mass index | Absenteeism time in hours | ID | comp_hr | Number | Reason |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | 26 | 7 | 3 | 1 | 289 | 36 | 13 | 33 | 239554 | 97 | 0 | 1 | 2 | 1 | 0 | 1 | 90 | 172 | 30 | 4 | 1 | 35 | 26 | unjustified absence  |
 | 2 | 0 | 7 | 3 | 1 | 118 | 13 | 18 | 50 | 239554 | 97 | 1 | 1 | 1 | 1 | 0 | 0 | 98 | 178 | 31 | 0 | 2 | 49 | 0 | Unkown |
