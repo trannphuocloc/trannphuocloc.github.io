@@ -5,39 +5,155 @@ collection: portfolio
 author_profile: false
 ---
 
-This data analysis project was designed to showcase the concept of simulating a daily required task from the HR department to query and visualize the data on human resources with the wireframe, including the lifestyle of the employees—are they smokers or drinkers? to get the bonus program from the company.
+<h1>This data analysis project was designed to showcase the concept of simulating a daily required task from the HR department to query and visualize the data on human resources with the wireframe, including the lifestyle of the employees—are they smokers or drinkers? to get the bonus program from the company.</h1>
 
-### Requirements from HR department
-1. Provide a list of Healthy Individuals & Low Absenteeism for our healthy bonus program - Total Budget $1000 USD
-2. Calculate a Wage Increase or annual compensation for Non-Smoler for
-	- Insurance Budget of $983,221 for all Non-Smokers
-3. Create a Dashboard for HR to understand Absenteeism at work based on the approved wireframe.
+<h3>Requirements from HR department</h3>
 
-And csv files that include employee data, check [my repository](https://github.com/trannphuocloc/HR-dataset-project) here for the data.
+<ol>
+  <li>Provide a list of Healthy Individuals & Low Absenteeism for our healthy bonus program - Total Budget $1000 USD</li>
+  <li>Calculate a Wage Increase or annual compensation for Non-Smoler for
+    - Insurance Budget of $983,221 for all Non-Smokers</li>
+  <li>Create a Dashboard for HR to understand Absenteeism at work based on the approved wireframe.</li>
+</ol>
 
-So, let's dive into these project details
+<p>And csv files that include employee data, check <a href="https://github.com/trannphuocloc/HR-dataset-project">my repository</a> here for the data.</p>
 
-Start creating a join table for the whole dataset to ensure that we do not misclaim the employee information from HR.
+<h2>So, let's dive into these project details</h2>
 
-Input [1]:
-```
+<p>Start creating a join table for the whole dataset to ensure that we do not misclaim the employee information from HR.</p>
+
+<h3>Input [1]:</h3>
+
+<pre>
 SELECT * FROM Absenteeism_at_work a
 LEFT JOIN compensation b
 ON a.ID = b.ID
 LEFT JOIN Reasons c
 ON a.Reason_for_absence = c.Number;
-```
+</pre>
 
-Output [1]:
+<h3>Output [1]:</h3>
 
-<div style="overflow-x: auto;">
-| ID | Reason for absence | Month of absence | Day of the week | Seasons | Transportation expense | Distance from Residence to Work | Service time | Age | Work load Average/day | Hit target | Disciplinary failure | Education | Son | Social drinker | Social smoker | Pet | Weight | Height | Body mass index | Absenteeism time in hours | ID | comp_hr | Number | Reason |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | 26 | 7 | 3 | 1 | 289 | 36 | 13 | 33 | 239554 | 97 | 0 | 1 | 2 | 1 | 0 | 1 | 90 | 172 | 30 | 4 | 1 | 35 | 26 | unjustified absence  |
-| 2 | 0 | 7 | 3 | 1 | 118 | 13 | 18 | 50 | 239554 | 97 | 1 | 1 | 1 | 1 | 0 | 0 | 98 | 178 | 31 | 0 | 2 | 49 | 0 | Unkown |
-| 3 | 23 | 7 | 4 | 1 | 179 | 51 | 18 | 38 | 239554 | 97 | 0 | 1 | 0 | 1 | 0 | 0 | 89 | 170 | 31 | 2 | 3 | 47 | 23 | medical consultation  |
-| 4 | 7 | 7 | 5 | 1 | 279 | 5 | 14 | 39 | 239554 | 97 | 0 | 1 | 2 | 1 | 1 | 0 | 68 | 168 | 24 | 4 | 4 | 51 | 7 | Diseases of the eye and adnexa |
-| 5 | 23 | 7 | 5 | 1 | 289 | 36 | 13 | 33 | 239554 | 97 | 0 | 1 | 2 | 1 | 0 | 1 | 90 | 172 | 30 | 2 | 5 | 25 | 23 | medical consultation  |
-</div>
-
-From this, we find the list of employees for the bonus 
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Reason for absence</th>
+      <th>Month of absence</th>
+      <th>Day of the week</th>
+      <th>Seasons</th>
+      <th>Transportation expense</th>
+      <th>Distance from Residence to Work</th>
+      <th>Service time</th>
+      <th>Age</th>
+      <th>Work load Average/day</th>
+      <th>Hit target</th>
+      <th>Disciplinary failure</th>
+      <th>Education</th>
+      <th>Son</th>
+      <th>Social drinker</th>
+      <th>Social smoker</th>
+      <th>Pet</th>
+      <th>Weight</th>
+      <th>Height</th>
+      <th>Body mass index</th>
+      <th>Absenteeism time in hours</th>
+      <th>ID</th>
+      <th>comp_hr</th>
+      <th>Number</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>26</td>
+      <td>7</td>
+      <td>3</td>
+      <td>1</td>
+      <td>289</td>
+      <td>36</td>
+      <td>13</td>
+      <td>33</td>
+      <td>239554</td>
+      <td>97</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>90</td>
+      <td>172</td>
+      <td>30</td>
+      <td>4</td>
+      <td>1</td>
+      <td>35</td>
+      <td>26</td>
+      <td>unjustified absence </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0</td>
+      <td>7</td>
+      <td>3</td>
+      <td>1</td>
+      <td>118</td>
+      <td>13</td>
+      <td>18</td>
+      <td>50</td>
+      <td>239554</td>
+      <td>97</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>98</td>
+      <td>178</td>
+      <td>31</td>
+      <td>0</td>
+      <td>2</td>
+      <td>49</td>
+      <td>0</td>
+      <td>Unkown</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>23</td>
+      <td>7</td>
+      <td>4</td>
+      <td>1</td>
+      <td>179</td>
+      <td>51</td>
+      <td>18</td>
+      <td>38</td>
+      <td>239554</td>
+      <td>97</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>89</td>
+      <td>170</td>
+      <td>31</td>
+      <td>2</td>
+      <td>3</td>
+      <td>47</td>
+      <td>23</td>
+      <td>medical consultation </td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>7</td>
+      <td>7</td>
+      <td>5</td>
+      <td>1</td>
+      <td>279</td>
+      <td>5</td>
+      <td>14</td>
+      <td>39</td>
+      <td>239554
