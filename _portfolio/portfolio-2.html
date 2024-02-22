@@ -5,24 +5,25 @@ collection: portfolio
 author_profile: false
 ---
 
-<h1>This data analysis project was designed to showcase the concept of simulating a daily required task from the HR department to query and visualize the data on human resources with the wireframe, including the lifestyle of the employees—are they smokers or drinkers? to get the bonus program from the company.</h1>
+<h2>Data Analysis Project: HR Dashboard</h2>
+
+<p>This project showcases simulating daily HR tasks, including querying and visualizing employee data related to lifestyle habits and absenteeism for bonus programs.</p>
 
 <h3>Requirements from HR department</h3>
 
-<ol>
-  <li>Provide a list of Healthy Individuals & Low Absenteeism for our healthy bonus program - Total Budget $1000 USD</li>
-  <li>Calculate a Wage Increase or annual compensation for Non-Smoler for
-    - Insurance Budget of $983,221 for all Non-Smokers</li>
+<ul>
+  <li>Provide a list of Healthy Individuals & Low Absenteeism for the healthy bonus program (Total Budget: $1000 USD)</li>
+  <li>Calculate a Wage Increase or annual compensation for Non-Smokers (Insurance Budget: $983,221)</li>
   <li>Create a Dashboard for HR to understand Absenteeism at work based on the approved wireframe.</li>
-</ol>
+</ul>
 
-<p>And csv files that include employee data, check <a href="https://github.com/trannphuocloc/HR-dataset-project">my repository</a> here for the data.</p>
+<p>Employee data can be found in the CSV files located in the following repository: <a href="https://github.com/trannphuocloc/HR-dataset-project">HR-dataset-project</a></p>
 
-<h2>So, let's dive into these project details</h2>
+<h3>Project Details</h3>
 
-<p>Start creating a join table for the whole dataset to ensure that we do not misclaim the employee information from HR.</p>
+<p>We'll start by creating a join table to combine all relevant datasets and ensure accurate employee information.</p>
 
-<h3>Input [1]:</h3>
+<h4>Input [1]:</h4>
 
 <pre>
 SELECT * FROM Absenteeism_at_work a
@@ -32,9 +33,9 @@ LEFT JOIN Reasons c
 ON a.Reason_for_absence = c.Number;
 </pre>
 
-<h3>Output [1]:</h3>
+<h4>Output [1]:</h4>
 
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>ID</th>
@@ -67,7 +68,7 @@ ON a.Reason_for_absence = c.Number;
   <tbody>
     <tr>
       <td>1</td>
-      <td>26</td>
+      <td>unjustified absence </td>
       <td>7</td>
       <td>3</td>
       <td>1</td>
@@ -90,11 +91,10 @@ ON a.Reason_for_absence = c.Number;
       <td>1</td>
       <td>35</td>
       <td>26</td>
-      <td>unjustified absence </td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0</td>
+      <td>Unkown</td>
       <td>7</td>
       <td>3</td>
       <td>1</td>
@@ -117,11 +117,10 @@ ON a.Reason_for_absence = c.Number;
       <td>2</td>
       <td>49</td>
       <td>0</td>
-      <td>Unkown</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>23</td>
+      <td>medical consultation </td>
       <td>7</td>
       <td>4</td>
       <td>1</td>
@@ -144,11 +143,10 @@ ON a.Reason_for_absence = c.Number;
       <td>3</td>
       <td>47</td>
       <td>23</td>
-      <td>medical consultation </td>
     </tr>
     <tr>
       <td>4</td>
-      <td>7</td>
+      <td>Diseases of the eye and adnexa</td>
       <td>7</td>
       <td>5</td>
       <td>1</td>
@@ -156,4 +154,49 @@ ON a.Reason_for_absence = c.Number;
       <td>5</td>
       <td>14</td>
       <td>39</td>
-      <td>239554
+      <td>239554</td>
+      <td>97</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>68</td>
+      <td>168</td>
+      <td>24</td>
+      <td>4</td>
+      <td>4</td>
+      <td>51</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>medical consultation </td>
+      <td>7</td>
+      <td>5</td>
+      <td>1</td>
+      <td>289</td>
+      <td>36</td>
+      <td>13</td>
+      <td>33</td>
+      <td>239554</td>
+      <td>97</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>90</td>
+      <td>172</td>
+      <td>30</td>
+      <td>2</td>
+      <td>5</td>
+      <td>25</td>
+      <td>23</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This data can be used to analyze employee absenteeism patterns and identify potential areas for improvement.</p>
