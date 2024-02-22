@@ -1,6 +1,6 @@
 ---
-title: "Portfolio item number 1"
-excerpt: "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+title: "Data Analysis Project"
+excerpt: "Find the healthy employees for the bonus <br/><img src='/images/thumb.png'>"
 collection: portfolio
 author_profile: false
 ---
