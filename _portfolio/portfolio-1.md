@@ -1,6 +1,6 @@
 ---
 title: "Data Analysis Project"
-excerpt: " **Find the healthy employees for the bonus ** <br/> <br/><img src='/images/thumb1.png'>"
+excerpt: " **Find the healthy employees for the bonus **  <br/><img src='/images/thumb1.png'>"
 collection: portfolio
 author_profile: false
 ---
