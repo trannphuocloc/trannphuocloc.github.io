@@ -5,4 +5,39 @@ collection: portfolio
 author_profile: false
 ---
 
-This is an item in your portfolio. It can be have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML. 
+This data analysis project was designed to showcase the concept of simulating a daily required task from the HR department to query and visualize the data on human resources with the wireframe, including the lifestyle of the employees—are they smokers or drinkers? to get the bonus program from the company.
+
+### Requirements from HR department
+1. Provide a list of Healthy Individuals & Low Absenteeism for our healthy bonus program - Total Budget $1000 USD
+2. Calculate a Wage Increase or annual compensation for Non-Smoler for
+	- Insurance Budget of $983,221 for all Non-Smokers
+3. Create a Dashboard for HR to understand Absenteeism at work based on the approved wireframe.
+
+And csv files that include employee data, check [my repository](https://github.com/trannphuocloc/HR-dataset-project) here for the data.
+
+So, let's dive into these project details
+
+Start creating a join table for the whole dataset to ensure that we do not misclaim the employee information from HR.
+
+Input [1]:
+```
+SELECT * FROM Absenteeism_at_work a
+LEFT JOIN compensation b
+ON a.ID = b.ID
+LEFT JOIN Reasons c
+ON a.Reason_for_absence = c.Number;
+```
+
+Output [1]:
+
+<div style="overflow-x: auto;">
+| ID | Reason for absence | Month of absence | Day of the week | Seasons | Transportation expense | Distance from Residence to Work | Service time | Age | Work load Average/day | Hit target | Disciplinary failure | Education | Son | Social drinker | Social smoker | Pet | Weight | Height | Body mass index | Absenteeism time in hours | ID | comp_hr | Number | Reason |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | 26 | 7 | 3 | 1 | 289 | 36 | 13 | 33 | 239554 | 97 | 0 | 1 | 2 | 1 | 0 | 1 | 90 | 172 | 30 | 4 | 1 | 35 | 26 | unjustified absence  |
+| 2 | 0 | 7 | 3 | 1 | 118 | 13 | 18 | 50 | 239554 | 97 | 1 | 1 | 1 | 1 | 0 | 0 | 98 | 178 | 31 | 0 | 2 | 49 | 0 | Unkown |
+| 3 | 23 | 7 | 4 | 1 | 179 | 51 | 18 | 38 | 239554 | 97 | 0 | 1 | 0 | 1 | 0 | 0 | 89 | 170 | 31 | 2 | 3 | 47 | 23 | medical consultation  |
+| 4 | 7 | 7 | 5 | 1 | 279 | 5 | 14 | 39 | 239554 | 97 | 0 | 1 | 2 | 1 | 1 | 0 | 68 | 168 | 24 | 4 | 4 | 51 | 7 | Diseases of the eye and adnexa |
+| 5 | 23 | 7 | 5 | 1 | 289 | 36 | 13 | 33 | 239554 | 97 | 0 | 1 | 2 | 1 | 0 | 1 | 90 | 172 | 30 | 2 | 5 | 25 | 23 | medical consultation  |
+</div>
+
+From this, we find the list of employees for the bonus 
