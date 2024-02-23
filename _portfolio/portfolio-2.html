@@ -91,6 +91,7 @@ ON a.Reason_for_absence = c.Number;
       <td>1</td>
       <td>35</td>
       <td>26</td>
+      <td>unjustified absence</td>
     </tr>
     <tr>
       <td>2</td>
@@ -117,6 +118,7 @@ ON a.Reason_for_absence = c.Number;
       <td>2</td>
       <td>49</td>
       <td>0</td>
+      <td>Unkown</td>
     </tr>
     <tr>
       <td>3</td>
@@ -143,6 +145,7 @@ ON a.Reason_for_absence = c.Number;
       <td>3</td>
       <td>47</td>
       <td>23</td>
+      <td>medical consultation</td>
     </tr>
     <tr>
       <td>4</td>
@@ -169,6 +172,7 @@ ON a.Reason_for_absence = c.Number;
       <td>4</td>
       <td>51</td>
       <td>7</td>
+      <td>Diseases of the eye and adnexa</td>
     </tr>
     <tr>
       <td>5</td>
@@ -195,6 +199,7 @@ ON a.Reason_for_absence = c.Number;
       <td>5</td>
       <td>25</td>
       <td>23</td>
+      <td>medical consultation</td>
     </tr>
   </tbody>
 </table>
@@ -521,3 +526,94 @@ ORDER BY Absenteeism_time_in_hours;
   </tbody>
 </table>
 </div>
+
+<p>Here, the list of company employees who have a healthy lifestyle matches the selection criteria for the bonus program. The output comes from 111 employees. <em>There are ten of them.</em></p>
+
+<p>Let’s move on to the next requirement from HR: calculating a wage increase or annual compensation for the insurance budget of $983,221 for all non-smokers</p>
+
+<i>Note: the requirement is to calculate a wage increase or annual compensation for the insurance budget of $983,221 for ALL NON-SMOKER, it shall not be the same list as the previous requirement.</i>
+
+<p>Firstly, query the number of employees who are nonsmokers:</p>
+
+<h4>Input [3]:</h4>
+<pre>
+SELECT COUNT(*) AS count_nonsmoker 
+FROM Absenteeism_at_work
+WHERE Social_smoker = 0;
+</pre>
+
+  <h4>Output [3]:</h4>
+<table border="1">
+  <thead>
+    <tr>
+      <th>count_nonsmoker</th>
+     </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>686</td>
+    </tr>
+    </tbody>
+</table>
+
+<p>Calculate the total number of hours nonsmokers worked in a year if they worked 8 hours per day, 5 days a week, for 52 weeks:</p>
+
+<i>686 x 8 x 5 x 52 = 1426880 (hours)</i>
+
+<p>Next, calculate how much the hourly wage of a nonsmoker increases as the company's insurance budget increases by $983,221.</p>
+
+<i>983221/1426880 = 0.68907 ($/hour)</i>
+
+<p>Let's do it backward to see the cost in total for an employee per year after the company increases the insurance budget.</p>
+
+<i>0.68907 x 8 x 5 x 52 = 1,433.26 ($/year)</i>
+
+<p>The rise of $0.689 per hour in an employee's hourly income may seem substantial, but a mere $1433 payment for a nonsmoker employee's insurance will have a significant impact on wellness and employee incentives. That's just too tiny for the company to encourage employees to get a better lifestyle for the next bonus program.</p>
+
+<p>Before creating dashboard sections, as you can see from the two previous requirements, we query the data by using SELECT * all the time, which makes sense for people who just check out for the first time and want complete information. For some columns that we don't need in PowerBI, optimize the query again using:</p>
+
+<h4>Input [4]:</h4>
+<pre>
+SELECT 
+	a.ID, 
+	c.Reason,
+	a.Month_of_absence,
+	a.Body_mass_index,
+CASE
+	WHEN a.Body_mass_index < 18.5 THEN 'Underweight'
+	WHEN a.Body_mass_index BETWEEN 18.5 AND 25 THEN 'Healthy'
+	WHEN a.Body_mass_index BETWEEN 25 AND 30 THEN 'Overweight'
+	WHEN a.Body_mass_index > 40 THEN 'Obese'
+	ELSE 'Unknown'
+END AS BMI_Caretory,
+CASE 
+	WHEN Month_of_absence IN (12,1,2) THEN 'Winter'
+	WHEN Month_of_absence IN (3,4,5) THEN 'Spring'
+	WHEN Month_of_absence IN (6,7,8) THEN 'Summer'
+	WHEN Month_of_absence IN (9,10,11) THEN 'Fall'
+	ELSE 'Unknown'
+END AS seasons_name,
+	Seasons,
+	Month_of_absence,
+	Day_of_the_week,
+	Transportation_expense,
+	Education,
+	Son,
+	Social_drinker,
+	Social_smoker,
+	Pet,
+	Disciplinary_failure,
+	Age,
+	Work_load_Average_day,
+	Absenteeism_time_in_hours
+FROM Absenteeism_at_work a
+LEFT JOIN compensation b
+ON a.ID = b.ID
+LEFT JOIN Reasons c
+ON a.Reason_for_absence = c.Number;
+</pre>
+
+<p>We use this data to create a dashboard using PowerBI with a frame approved by HR departments.</p>
+<p><strong>The wireframe</strong></p>
+<p><img src="/images/wireframe1.png" alt="This is an alt text." title="This is a sample image."></p>
+<p>And check <a href="https://app.powerbi.com/view?r=eyJrIjoiMGYzMGJjNzktZmQ0OS00MDY4LWEzZTMtZjE1NDkwODdhMzg3IiwidCI6Ijc3ZGIwZDg5LTgyNzAtNGQwNy05NGY4LWNlZDhkYTVjNThjNiIsImMiOjEwfQ%3D%3D">my final report</a> here in PowerBI.</p>
