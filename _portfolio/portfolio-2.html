@@ -199,4 +199,324 @@ ON a.Reason_for_absence = c.Number;
   </tbody>
 </table>
 <div style="overflow-x: auto;">
-<p>This data can be used to analyze employee absenteeism patterns and identify potential areas for improvement.</p>
+<p>From this, we find the list of employees who are healthy individuals and have low absenteeism for the bonus program. With the assumption that healthy individuals are non-smokers and non-drinkers, their BMI is less than 25, and their absence time must be under the average of the list.</p>
+<h4>Input [2]:</h4>
+<pre>
+SELECT * FROM Absenteeism_at_work a
+LEFT JOIN compensation b
+ON a.ID = b.ID
+LEFT JOIN Reasons c
+ON a.Reason_for_absence = c.Number
+WHERE Social_drinker = 0 
+AND Social_smoker = 0
+AND Body_mass_index < 25
+AND Absenteeism_time_in_hours < (SELECT AVG(Absenteeism_time_in_hours) FROM Absenteeism_at_work)
+ORDER BY Absenteeism_time_in_hours;
+</pre>
+
+<h4>Output [2]:</h4>
+<div style="overflow-x: auto;">
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Reason for absence</th>
+      <th>Month of absence</th>
+      <th>Day of the week</th>
+      <th>Seasons</th>
+      <th>Transportation expense</th>
+      <th>Distance from Residence to Work</th>
+      <th>Service time</th>
+      <th>Age</th>
+      <th>Work load Average/day</th>
+      <th>Hit target</th>
+      <th>Disciplinary failure</th>
+      <th>Education</th>
+      <th>Son</th>
+      <th>Social drinker</th>
+      <th>Social smoker</th>
+      <th>Pet</th>
+      <th>Weight</th>
+      <th>Height</th>
+      <th>Body mass index</th>
+      <th>Absenteeism time in hours</th>
+      <th>ID</th>
+      <th>comp_hr</th>
+      <th>Number</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>52</td>
+      <td>0</td>
+      <td>9</td>
+      <td>2</td>
+      <td>4</td>
+      <td>225</td>
+      <td>26</td>
+      <td>9</td>
+      <td>28</td>
+      <td>241476</td>
+      <td>92</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>69</td>
+      <td>169</td>
+      <td>24</td>
+      <td>0</td>
+      <td>52</td>
+      <td>42</td>
+      <td>0</td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <td>217</td>
+      <td>0</td>
+      <td>5</td>
+      <td>4</td>
+      <td>3</td>
+      <td>388</td>
+      <td>15</td>
+      <td>9</td>
+      <td>50</td>
+      <td>378884</td>
+      <td>92</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>76</td>
+      <td>178</td>
+      <td>24</td>
+      <td>0</td>
+      <td>217</td>
+      <td>42</td>
+      <td>0</td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <td>531</td>
+      <td>0</td>
+      <td>10</td>
+      <td>2</td>
+      <td>4</td>
+      <td>225</td>
+      <td>26</td>
+      <td>9</td>
+      <td>28</td>
+      <td>284853</td>
+      <td>91</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>69</td>
+      <td>169</td>
+      <td>24</td>
+      <td>0</td>
+      <td>531</td>
+      <td>25</td>
+      <td>0</td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <td>559</td>
+      <td>13</td>
+      <td>12</td>
+      <td>6</td>
+      <td>4</td>
+      <td>179</td>
+      <td>26</td>
+      <td>9</td>
+      <td>30</td>
+      <td>280549</td>
+      <td>98</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>56</td>
+      <td>171</td>
+      <td>19</td>
+      <td>1</td>
+      <td>559</td>
+      <td>51</td>
+      <td>13</td>
+      <td>Diseases of the musculoskeletal system and connective tissue</td>
+    </tr>
+    <tr>
+      <td>504</td>
+      <td>23</td>
+      <td>9</td>
+      <td>4</td>
+      <td>1</td>
+      <td>225</td>
+      <td>26</td>
+      <td>9</td>
+      <td>28</td>
+      <td>261756</td>
+      <td>87</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>69</td>
+      <td>169</td>
+      <td>24</td>
+      <td>1</td>
+      <td>504</td>
+      <td>50</td>
+      <td>23</td>
+      <td>Medical consultation</td>
+    </tr>
+    <tr>
+      <td>522</td>
+      <td>1</td>
+      <td>10</td>
+      <td>4</td>
+      <td>4</td>
+      <td>228</td>
+      <td>14</td>
+      <td>16</td>
+      <td>58</td>
+      <td>284853</td>
+      <td>91</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>65</td>
+      <td>172</td>
+      <td>22</td>
+      <td>1</td>
+      <td>522</td>
+      <td>55</td>
+      <td>1</td>
+      <td>Certain infectious and parasitic diseases</td>
+    </tr>
+    <tr>
+      <td>525</td>
+      <td>13</td>
+      <td>10</td>
+      <td>5</td>
+      <td>4</td>
+      <td>225</td>
+      <td>26</td>
+      <td>9</td>
+      <td>28</td>
+      <td>284853</td>
+      <td>91</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>69</td>
+      <td>169</td>
+      <td>24</td>
+      <td>1</td>
+      <td>525</td>
+      <td>39</td>
+      <td>13</td>
+      <td>Diseases of the musculoskeletal system and connective tissue</td>
+    </tr>
+    <tr>
+      <td>263</td>
+      <td>23</td>
+      <td>8</td>
+      <td>5</td>
+      <td>1</td>
+      <td>179</td>
+      <td>26</td>
+      <td>9</td>
+      <td>30</td>
+      <td>265615</td>
+      <td>94</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>56</td>
+      <td>171</td>
+      <td>19</td>
+      <td>1</td>
+      <td>263</td>
+      <td>50</td>
+      <td>23</td>
+      <td>Medical consultation</td>
+    </tr>
+    <tr>
+      <td>184</td>
+      <td>28</td>
+      <td>3</td>
+      <td>2</td>
+      <td>3</td>
+      <td>225</td>
+      <td>26</td>
+      <td>9</td>
+      <td>28</td>
+      <td>343253</td>
+      <td>95</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>69</td>
+      <td>169</td>
+      <td>24</td>
+      <td>1</td>
+      <td>184</td>
+      <td>37</td>
+      <td>28</td>
+      <td>Dental consultation</td>
+    </tr>
+    <tr>
+      <td>186</td>
+      <td>23</td>
+      <td>4</td>
+      <td>4</td>
+      <td>3</td>
+      <td>225</td>
+      <td>26</td>
+      <td>9</td>
+      <td>28</td>
+      <td>326452</td>
+      <td>96</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>69</td>
+      <td>169</td>
+      <td>24</td>
+      <td>1</td>
+      <td>186</td>
+      <td>46</td>
+      <td>23</td>
+      <td>Medical consultation</td>
+    </tr>
+  </tbody>
+</table>
+<div style="overflow-x: auto;">
