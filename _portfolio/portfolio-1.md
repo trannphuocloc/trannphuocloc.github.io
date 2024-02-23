@@ -84,7 +84,7 @@ WHERE Social_smoker = 0;
 ```
 Output [3]:
 | count_nonsmoker |
-|---|
+| --- |
 | 686 |
 
 Calculate the total number of hours nonsmokers worked in a year if they worked 8 hours per day, 5 days a week, for 52 weeks: 
