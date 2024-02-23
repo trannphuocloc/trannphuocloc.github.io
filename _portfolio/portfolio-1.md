@@ -5,7 +5,7 @@ collection: portfolio
 author_profile: false
 ---
 
-This data analysis project was designed to showcase the concept of simulating a daily required task from the HR department to query and visualize the data on human resources with the wireframe, including the lifestyle of the employees—are they smokers or drinkers? to get the bonus program from the company.
+*This data analysis project was designed to showcase the concept of simulating a daily required task from the HR department to query and visualize the data on human resources with the wireframe, including the lifestyle of the employees—are they smokers or drinkers? to get the bonus program from the company.*
 
 ### Requirements from HR departments
 1. Provide a list of Healthy Individuals & Low Absenteeism for our healthy bonus program - Total Budget $1000 USD
@@ -13,11 +13,11 @@ This data analysis project was designed to showcase the concept of simulating a 
 	- Insurance Budget of $983,221 for all Non-Smokers
 3. Create a Dashboard for HR to understand Absenteeism at work based on the approved wireframe.
 
-And csv files that include employee data, check [my repository](https://github.com/trannphuocloc/HR-dataset-project) here for the data.
+And CSV files that include employee data, check [my repository](https://github.com/trannphuocloc/HR-dataset-project) here for the data.
 
-So, let's dive into these project details
+### Project Details
 
-Start creating a join table for the whole dataset to ensure that we do not misclaim the employee information from HR.
+Start by creating a join table  to combine all relevant datasets and ensure accurate employee information.
 
 Input [1]:
 ```
@@ -106,11 +106,52 @@ That's just too tiny for the company to encourage employees to get a better life
 
 
 
-After all of the SQL queries to obtain the data we need for the first two requirements. 
-Create the dashboard with an approved frame from HR departments.
+Before creating dashboard sections, as you can see from the two previous requirements, we query the data by using SELECT * all the time, which makes sense for people who just check out for the first time and want complete information. For some columns that we don't need in PowerBI, optimize the query again using
+Input [4]:
+
+```
+SELECT 
+	a.ID, 
+	c.Reason,
+	a.Month_of_absence,
+	a.Body_mass_index,
+CASE
+	WHEN a.Body_mass_index < 18.5 THEN 'Underweight'
+	WHEN a.Body_mass_index BETWEEN 18.5 AND 25 THEN 'Healthy'
+	WHEN a.Body_mass_index BETWEEN 25 AND 30 THEN 'Overweight'
+	WHEN a.Body_mass_index > 40 THEN 'Obese'
+	ELSE 'Unknown'
+END AS BMI_Caretory,
+CASE 
+	WHEN Month_of_absence IN (12,1,2) THEN 'Winter'
+	WHEN Month_of_absence IN (3,4,5) THEN 'Spring'
+	WHEN Month_of_absence IN (6,7,8) THEN 'Summer'
+	WHEN Month_of_absence IN (9,10,11) THEN 'Fall'
+	ELSE 'Unknown'
+END AS seasons_name,
+	Seasons,
+	Month_of_absence,
+	Day_of_the_week,
+	Transportation_expense,
+	Education,
+	Son,
+	Social_drinker,
+	Social_smoker,
+	Pet,
+	Disciplinary_failure,
+	Age,
+	Work_load_Average_day,
+	Absenteeism_time_in_hours
+FROM Absenteeism_at_work a
+LEFT JOIN compensation b
+ON a.ID = b.ID
+LEFT JOIN Reasons c
+ON a.Reason_for_absence = c.Number
+```
+We use this data to create a dashboard using PowerBI with a frame approved by HR departments.
 
 **The wireframe**
 ![This is an alt text.](/images/wireframe1.png "This is a sample image.")
 
 
-And [my complete report](https://app.powerbi.com/view?r=eyJrIjoiMGYzMGJjNzktZmQ0OS00MDY4LWEzZTMtZjE1NDkwODdhMzg3IiwidCI6Ijc3ZGIwZDg5LTgyNzAtNGQwNy05NGY4LWNlZDhkYTVjNThjNiIsImMiOjEwfQ%3D%3D)
+And check [my final report](https://app.powerbi.com/view?r=eyJrIjoiMGYzMGJjNzktZmQ0OS00MDY4LWEzZTMtZjE1NDkwODdhMzg3IiwidCI6Ijc3ZGIwZDg5LTgyNzAtNGQwNy05NGY4LWNlZDhkYTVjNThjNiIsImMiOjEwfQ%3D%3D) here in PowerBI.
