@@ -56,7 +56,7 @@ ORDER BY Absenteeism_time_in_hours;
 
 Output [2]:
 | ID | Reason for absence | Month of absence | Day of the week | Seasons | Transportation expense | Distance from Residence to Work | Service time | Age | Work load Average/day | Hit target | Disciplinary failure | Education | Son | Social drinker | Social smoker | Pet | Weight | Height | Body mass index | Absenteeism time in hours | ID | comp_hr | Number | Reason |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 52 | 0 | 9 | 2 | 4 | 225 | 26 | 9 | 28 | 241476 | 92 | 1 | 1 | 1 | 0 | 0 | 2 | 69 | 169 | 24 | 0 | 52 | 42 | 0 | Unkown |
 | 217 | 0 | 5 | 4 | 3 | 388 | 15 | 9 | 50 | 378884 | 92 | 1 | 1 | 0 | 0 | 0 | 0 | 76 | 178 | 24 | 0 | 217 | 42 | 0 | Unkown |
 | 531 | 0 | 10 | 2 | 4 | 225 | 26 | 9 | 28 | 284853 | 91 | 1 | 1 | 1 | 0 | 0 | 2 | 69 | 169 | 24 | 0 | 531 | 25 | 0 | Unkown |
@@ -70,7 +70,7 @@ Output [2]:
 
 Here, the list of company employees who have a healthy lifestyle matches the selection criteria for the bonus program. The output comes from 111 employees. There are ten of them.
 
-Let's move on to the next requirement from HR: calculating a wage increase or annual compensation for the insurance budget of $983,221 for all non-smokers..
+Let's move on to the next requirement from HR: calculating a wage increase or annual compensation for the insurance budget of $983,221 for all non-smokers
 
 *Note: the requirement is to calculate a wage increase or annual compensation for the insurance budget of $983,221 for ALL NON-SMOKER, it shall not be the same list as the previous requirement.*
 
@@ -83,7 +83,7 @@ FROM Absenteeism_at_work
 WHERE Social_smoker = 0;
 ```
 Output [3]:
-|count_nonsmoker|
+| count_nonsmoker |
 |---|
 | 686 |
 
@@ -99,7 +99,7 @@ Let's do it backward to see the cost in total for an employee per year after the
 
 *0.68907 x 8 x 5 x 52 = 1,433.26 ($/year)*
 
-**The rise of $0.689 per hour in an employee's hourly income may seem substantial, but a mere $1433 payment for a nonsmoker's insurance will have a significant impact on wellness and employee incentives.**
+** The rise of $0.689 per hour in an employee's hourly income may seem substantial, but a mere $1433 payment for a nonsmoker's insurance will have a significant impact on wellness and employee incentives. **
 That's just too tiny for the company to encourage employees to get a better lifestyle for the next bonus program.
 
 
