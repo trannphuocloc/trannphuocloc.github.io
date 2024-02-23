@@ -55,6 +55,7 @@ ORDER BY Absenteeism_time_in_hours;
 ```
 
 Output [2]:
+
 | ID | Reason for absence | Month of absence | Day of the week | Seasons | Transportation expense | Distance from Residence to Work | Service time | Age | Work load Average/day | Hit target | Disciplinary failure | Education | Son | Social drinker | Social smoker | Pet | Weight | Height | Body mass index | Absenteeism time in hours | ID | comp_hr | Number | Reason |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 52 | 0 | 9 | 2 | 4 | 225 | 26 | 9 | 28 | 241476 | 92 | 1 | 1 | 1 | 0 | 0 | 2 | 69 | 169 | 24 | 0 | 52 | 42 | 0 | Unkown |
@@ -83,6 +84,7 @@ FROM Absenteeism_at_work
 WHERE Social_smoker = 0;
 ```
 Output [3]:
+
 | count_nonsmoker |
 | --- |
 | 686 |
