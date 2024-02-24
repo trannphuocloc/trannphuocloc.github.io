@@ -527,7 +527,7 @@ ORDER BY Absenteeism_time_in_hours;
 
 <p>Here, the list of company employees who have a healthy lifestyle matches the selection criteria for the bonus program. The output comes from 111 employees. <em>There are ten of them as an example.</em></p>
 
-	
+<h2>Requirement 2</h2>
 <p>Let’s move on to the next requirement from HR: calculating a wage increase or annual compensation for the insurance budget of $983,221 for all non-smokers</p>
 
 <i>Note: the requirement is to calculate a wage increase or annual compensation for the insurance budget of $983,221 for ALL NON-SMOKER, it shall not be the same list as the previous requirement.</i>
@@ -555,18 +555,16 @@ WHERE Social_smoker = 0;
     </tbody>
 </table>
 
-<p>Calculate the total number of hours nonsmokers worked in a year if they worked 8 hours per day, 5 days a week, for 52 weeks:</p>
-<i>686 x 8 x 5 x 52 = 1426880 (hours)</i>
+<p>Calculate the total number of hours nonsmokers worked in a year if they worked 8 hours per day, 5 days a week, for 52 weeks: <i>686 x 8 x 5 x 52 = 1426880 (hours)</i></p>
 
-<p>Next, calculate how much the hourly wage of a nonsmoker increases as the company's insurance budget increases by $983,221.</p>
-<i>983221/1426880 = 0.68907 ($/hour)</i>
+<p>Next, calculate how much the hourly wage of a nonsmoker increases as the company's insurance budget increases by $983,221: <i>983221/1426880 = 0.68907 ($/hour)</i> </p>
 
-<p>Let's do it backward to see the cost in total for an employee per year after the company increases the insurance budget.</p>
-<i>0.68907 x 8 x 5 x 52 = 1,433.26 ($/year)</i>
+<p>Let's do it backward to see the cost in total for an employee per year after the company increases the insurance budget: <i>0.68907 x 8 x 5 x 52 = 1,433.26 ($/year)</i></p>
 
 <p><b>The rise of 0.689 per hour in an employee's hourly income may seem substantial, but a mere $1433 payment for a nonsmoker employee's insurance will have a significant impact on wellness and employee incentives.</b> That's just too tiny for the company to encourage employees to get a better lifestyle for the next bonus program.</p>
 
-<p>Before creating dashboard sections, as you can see from the two previous requirements, we query the data by using SELECT * all the time, which makes sense for people who just check out for the first time and want complete information. For some columns that we don't need in PowerBI, optimize the query again using:</p>
+<h2>Requirement 3</h2>
+<p>Before creating dashboard sections, as you can see from the two previous requirements, we query the data by using <code>SELECT *</code> all the time, which makes sense for people who just check out for the first time and want complete information. For some columns that we don't need in PowerBI, optimize the query again using:</p>
 
 <h4>Input [4]:</h4>
 <pre>
