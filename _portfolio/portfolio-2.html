@@ -532,6 +532,7 @@ ORDER BY Absenteeism_time_in_hours;
 
 <i>Note: the requirement is to calculate a wage increase or annual compensation for the insurance budget of $983,221 for ALL NON-SMOKER, it shall not be the same list as the previous requirement.</i>
 
+	
 <p>Firstly, query the number of employees who are nonsmokers:</p>
 
 <h4>Input [3]:</h4>
@@ -614,16 +615,18 @@ ON a.Reason_for_absence = c.Number;
 <p>And check <a href="https://app.powerbi.com/view?r=eyJrIjoiMGYzMGJjNzktZmQ0OS00MDY4LWEzZTMtZjE1NDkwODdhMzg3IiwidCI6Ijc3ZGIwZDg5LTgyNzAtNGQwNy05NGY4LWNlZDhkYTVjNThjNiIsImMiOjEwfQ%3D%3D">my final report</a> here in PowerBI.</p>
 
 <h2>Insights and Recomendation from the data</h2>
-<p><strong>Insight 1</strong></p>
+<h3>Insight 1</h3>
 <p>By filtering the <strong>Count of Reason</strong>, it is simple to identify the 4 most common reasons, all of which are related to the employee's health: 385/740, or 52.02%, that employees mentioned when they asked for absence permission. Furthermore, if we include all the health-related factors, the percentage could be more than 70%, and it has a significant impact on the employee's performance throughout the week, not only at the beginning of the week.</p>
 <p><img src="/images/insight2.png" alt="This is an alt text." title="This is a sample image."></p>
-<p><em>Recomendation:</em></p>
-<p>For this reason, HR departments pay attention to the employee's health in their workplace and have a plan to provide insurance for employees by analyzing more employee's data to have a specific policy.</p>
-
-<p><strong>Insight 2</strong></p>
+<p><b>Recomendation:</b></p>
+<ul>
+<li>For this reason, HR departments pay attention to the employee's health in their workplace and have a plan to provide insurance for employees by analyzing more employee's data to have a specific policy.</li>
+</ul>
+	
+<h3>Insight 2</h3>
 <p>As the report shows in the graph of <strong>Sum of Absenteeism time in hour by Day of the week</strong>, amount of employees's absence time is highest on Monday of the week and decreases steadily until the end of the week. That's a lot of sense in reality, and there are a lot of factors that could have contributed to this, such as employees unfortunately getting into an unexpected situation for their health reasons (<strong>Insight 1</strong>) where they couldn't go to work at the beginning of the week, or in another scenario, employees may spend much time on their entertainment activities at the previous weekend.</p>
 <p><img src="/images/insight4.png" alt="This is an alt text." title="This is a sample image."></p>
-<p><em>Recomendation:</em></p>
+<p><b>Recomendation:</b></p>
 <ul>
 <li>Adjusting or reducing the working time to adapt the employee's reality schedule by adjusting from 8 a.m-5 p.m to 10 a.m - 7 p.m or reducing working hours from 8 a.m - 5 p.m to 10 a.m - 5 p.m, will guarantee  employees get high performance at the beginning of the week.</li>
 <li>Establishing policies that encourage employees to reduce their absence time at the beginning of the week, like providing more employees's welfare on Monday, Tuesday, and Wednesday.</li>
