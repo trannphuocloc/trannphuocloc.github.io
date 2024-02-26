@@ -4,7 +4,7 @@ title: "About me"
 permalink: /aboutme/
 author_profile: true
 ---
-My short [CV](files/CV.pdf) here.
+My short [résumé](files/resume.pdf) here.
 
 
 # My other experience
