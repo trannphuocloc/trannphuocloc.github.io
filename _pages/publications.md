@@ -14,8 +14,8 @@ Below this line, that's a summary of  my other experience before I got into the 
 All of my projects in data analytics show you my technical skills in SQL and PowerBI. Outside of my portfolio, in this introduction section, I want to introduce the experience that I had before I moved onto the data career path.
 
 I used to work as a staff member at the FnB service branch. I spent six months performing excellently in my role and got nominated for the Shift Leader position. Here, I had experience in: 
-- Operation management (including managing staff, customer services, and infrastructure maintenance),
-- Performance tracking, and 
+- Operation management (including managing staff, customer services, and infrastructure maintenance)
+- Performance tracking and 
 - Monthly report to General Manager.
   
-By taking care of all the stuff, that helped me build my attitude, such as meticulous attention to numbers and effective communication with staff and managers.
+By taking care of all the work, helped me build my attitude, such as high responsibility and meticulousness in tasks, especially in numbers, and effective communication with staff and managers.
