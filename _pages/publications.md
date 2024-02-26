@@ -6,7 +6,8 @@ author_profile: true
 ---
 My short [CV](files/CV.pdf) here.
 
-# MY OTHER EXPERIENCE
+
+# My other experience
 
 Below this line, that's a summary of  my other experience before I got into the data career path. If you are considering how my other skills, like effective communication, teamwork, and my attitude at work were built, it's for you. If you are not interested, please skip this part and check my CV above and [my portfolio](https://trannphuocloc.github.io/portfolio/) instead.
 
