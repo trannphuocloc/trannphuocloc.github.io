@@ -1,9 +1,9 @@
 # main links links
 main:
- - title: "Portfolio"
+- title: "Portfolio"
     url: /portfolio/
 
- - title: "About me"
+- title: "About me"
     url: /aboutme/  
     
 #  - title: "Talks"
