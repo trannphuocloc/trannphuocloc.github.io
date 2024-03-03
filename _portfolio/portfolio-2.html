@@ -23,13 +23,30 @@ author_profile: false
 
 <h4>Input [1]:</h4>
 
-<pre>
-SELECT TOP 5 * FROM Absenteeism_at_work a
-LEFT JOIN compensation b
-ON a.ID = b.ID
-LEFT JOIN Reasons c
-ON a.Reason_for_absence = c.Number;
-</pre>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example SQL Code Block</title>
+    <style>
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ccc;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+        <code>
+            SELECT TOP 5 * FROM Absenteeism_at_work a
+            LEFT JOIN compensation b
+            ON a.ID = b.ID
+            LEFT JOIN Reasons c
+            ON a.Reason_for_absence = c.Number;
+        </code>
+    </pre>
+</body>
 
 <h4>Output [1]:</h4>
 <div style="overflow-x: auto;">
