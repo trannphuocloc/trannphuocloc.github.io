@@ -29,6 +29,7 @@ author_profile: false
     <title>Example SQL Code Block</title>
     <style>
         pre {
+		display: inline-block;
             background-color: #f4f4f4;
             padding: 10px;
             border: 1px solid #ccc;
@@ -38,6 +39,7 @@ author_profile: false
 </head>
 <body>
     <pre>
+	<div class="code-container">
         <code>
             SELECT TOP 5 * FROM Absenteeism_at_work a
             LEFT JOIN compensation b
@@ -45,6 +47,7 @@ author_profile: false
             LEFT JOIN Reasons c
             ON a.Reason_for_absence = c.Number;
         </code>
+	</div>
     </pre>
 </body>
 
