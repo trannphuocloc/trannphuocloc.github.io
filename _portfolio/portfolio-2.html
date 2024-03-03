@@ -38,15 +38,13 @@ author_profile: false
 </head>
 
 <h4>Input [1]:</h4>
-    <pre>
-        <code>
-            SELECT TOP 5 * FROM Absenteeism_at_work a
-            LEFT JOIN compensation b
-            ON a.ID = b.ID
-            LEFT JOIN Reasons c
-            ON a.Reason_for_absence = c.Number;
-        </code>
-    </pre>
+<pre>
+SELECT TOP 5 * FROM Absenteeism_at_work a
+LEFT JOIN compensation b
+ON a.ID = b.ID
+LEFT JOIN Reasons c
+ON a.Reason_for_absence = c.Number;
+</pre>
 
 
 <h4>Output [1]:</h4>
