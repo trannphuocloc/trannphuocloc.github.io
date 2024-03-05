@@ -31,7 +31,7 @@ author_profile: false
         <li>Who can you offer limited-time offers to and try to reactivate?</li>
 	<li>...</li>
     </ul>
-<p>For our visualization, three dimensions of Recency, Frequency, and Monetary coincide with 3D graphics. However, it doesn't work effectively and difficult to understand the result. By combining Frequency and Monetary and turning it to 2D, it is much easier to understand because when a customer subscribes to a month for &dollar;100 12 times in 12 months, it is equivalent to when customers subscribe for $1200 per year all at once. At that time, Recency represented the customer's engagement with our brand.</p>
+<p>For our visualization, three dimensions of Recency, Frequency, and Monetary coincide with 3D graphics. However, it doesn't work effectively and difficult to understand the result. By combining Frequency and Monetary and turning it to 2D, it is much easier to understand because when a customer subscribes to a month for 100 dollar 12 times in 12 months, it is equivalent to when customers subscribe for $1200 per year all at once. At that time, Recency represented the customer's engagement with our brand.</p>
 
 <p>Having 11 customer segments have the same behavior as the table that we will group them into:</p>
 
@@ -108,10 +108,228 @@ author_profile: false
         <td>Lowest recency, frequency and monetary scores.</td>
         <td>Revive interest with reach out campaign, ignore otherwise.</td>
     </tr>
-
 </table>
 
 <h2>Details</h2>	
+Here <a href="https://github.com/trannphuocloc/sales-data">our datASet</a> for the project.
+And let's jump right in by checking the data
+
+<h4>Input [1]:</h4>
+<pre>
+SELECT * FROM sales;
+</pre>
+
+<h4>Output [1]:</h4>
+<div style="overflow-x: auto;">
+<table border="1">
+  <thead>
+    <tr>
+      <th>Row_ID</th>
+      <th>Order_ID</th>
+      <th>Order_Date</th>
+      <th>Ship_Date</th>
+      <th>Ship_Mode</th>
+      <th>Customer_ID</th>
+      <th>Customer_Name</th>
+      <th>Segment</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Postal_Code</th>
+      <th>Region</th>
+      <th>Product_ID</th>
+      <th>Category</th>
+      <th>Sub_Category</th>
+      <th>Product_Name</th>
+      <th>Sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>CA-2017-152156</td>
+      <td>08-11-17</td>
+      <td>11-11-17</td>
+      <td>Second Class</td>
+      <td>CG-12520</td>
+      <td>Claire Gute</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Henderson</td>
+      <td>Kentucky</td>
+      <td>42420</td>
+      <td>South</td>
+      <td>FUR-BO-10001798</td>
+      <td>Furniture</td>
+      <td>Bookcases</td>
+      <td>Bush Somerset Collection Bookcase</td>
+      <td>261.9599915</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>CA-2017-152156</td>
+      <td>08-11-17</td>
+      <td>11-11-17</td>
+      <td>Second Class</td>
+      <td>CG-12520</td>
+      <td>Claire Gute</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Henderson</td>
+      <td>Kentucky</td>
+      <td>42420</td>
+      <td>South</td>
+      <td>FUR-CH-10000454</td>
+      <td>Furniture</td>
+      <td>Chairs</td>
+      <td>Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back</td>
+      <td>731.9400024</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>CA-2017-138688</td>
+      <td>12-06-17</td>
+      <td>16-06-17</td>
+      <td>Second Class</td>
+      <td>DV-13045</td>
+      <td>Darrin Van Huff</td>
+      <td>Corporate</td>
+      <td>United States</td>
+      <td>Los Angeles</td>
+      <td>California</td>
+      <td>90036</td>
+      <td>West</td>
+      <td>OFF-LA-10000240</td>
+      <td>Office Supplies</td>
+      <td>Labels</td>
+      <td>Self-Adhesive Address Labels for Typewriters by Universal</td>
+      <td>14.61999989</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>US-2016-108966</td>
+      <td>11-10-16</td>
+      <td>18-10-16</td>
+      <td>Standard Class</td>
+      <td>SO-20335</td>
+      <td>Sean O'Donnell</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Fort Lauderdale</td>
+      <td>Florida</td>
+      <td>33311</td>
+      <td>South</td>
+      <td>FUR-TA-10000577</td>
+      <td>Furniture</td>
+      <td>Tables</td>
+      <td>Bretford CR4500 Series Slim Rectangular Table</td>
+      <td>957.5775146</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+	<tr>
+	<td>9797</td>
+      <td>CA-2016-128608</td>
+      <td>12-01-16</td>
+      <td>17-01-16</td>
+      <td>Standard Class</td>
+      <td>CS-12490</td>
+      <td>Cindy Schnelling</td>
+      <td>Corporate</td>
+      <td>United States</td>
+      <td>Toledo</td>
+      <td>Ohio</td>
+      <td>43615</td>
+      <td>East</td>
+      <td>OFF-AR-10001374</td>
+      <td>Office Supplies</td>
+      <td>Art</td>
+      <td>BIC Brite Liner Highlighters, Chisel Tip</td>
+      <td>10.36800003</td>
+    </tr>
+    <tr>
+      <td>9798</td>
+      <td>CA-2016-128608</td>
+      <td>12-01-16</td>
+      <td>17-01-16</td>
+      <td>Standard Class</td>
+      <td>CS-12490</td>
+      <td>Cindy Schnelling</td>
+      <td>Corporate</td>
+      <td>United States</td>
+      <td>Toledo</td>
+      <td>Ohio</td>
+      <td>43615</td>
+      <td>East</td>
+      <td>TEC-PH-10004977</td>
+      <td>Technology</td>
+      <td>Phones</td>
+      <td>GE 30524EE4</td>
+      <td>235.1880035</td>
+    </tr>
+    <tr>
+      <td>9799</td>
+      <td>CA-2016-128608</td>
+      <td>12-01-16</td>
+      <td>17-01-16</td>
+      <td>Standard Class</td>
+      <td>CS-12490</td>
+      <td>Cindy Schnelling</td>
+      <td>Corporate</td>
+      <td>United States</td>
+      <td>Toledo</td>
+      <td>Ohio</td>
+      <td>43615</td>
+      <td>East</td>
+      <td>TEC-PH-10000912</td>
+      <td>Technology</td>
+      <td>Phones</td>
+      <td>Anker 24W Portable Micro USB Car Charger</td>
+      <td>26.37599945</td>
+    </tr>
+    <tr>
+      <td>9800</td>
+      <td>CA-2016-128608</td>
+      <td>12-01-16</td>
+      <td>17-01-16</td>
+      <td>Standard Class</td>
+      <td>CS-12490</td>
+      <td>Cindy Schnelling</td>
+      <td>Corporate</td>
+      <td>United States</td>
+      <td>Toledo</td>
+      <td>Ohio</td>
+      <td>43615</td>
+      <td>East</td>
+      <td>TEC-AC-10000487</td>
+      <td>Technology</td>
+      <td>Accessories</td>
+      <td>SanDisk Cruzer 4 GB USB Flash Drive</td>
+      <td>10.38399982</td>
+	
+</tbody>
+</table>
+</div>
+9800 rows x 18 columns
+	
 </body>
 </html>
 
