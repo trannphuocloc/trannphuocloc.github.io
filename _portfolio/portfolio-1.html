@@ -11,16 +11,26 @@ author_profile: false
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         pre {
-		display: inline-block;
+		        display: inline-block;
             background-color: #f4f4f4;
             padding: 10px;
             border: 1px solid #ccc;
             overflow-x: auto;
         }
     </style>
+  <title>Scrollable Code Block</title>
+  <style>
+      /* CSS để tạo nút cuộn cho block code */
+      .scrollable-code {
+          width: 500px; /* Chiều rộng của block code */
+          height: 200px; /* Chiều cao của block code */
+          overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
+          white-space: nowrap; /* Đảm bảo các dòng code không bị wrap */
+      }
+  </style>
 </head>
 
-<h2>RFM Summary TEST TEST</h2>
+<h2>RFM Summary</h2>
 <body>
     <p>RFM Analysis is a measurement technique that uses existing customer behavior data, based on Recency, Frequency and Monetary value of purchases, to predict how customers will act in the future as well as to group them into behavioral segments.</p>
     <p>RFM can help you answer these questions and more:</p>
@@ -121,7 +131,7 @@ And let's jump right in by checking the data
 SELECT * FROM sales;
 </pre>
 
-<h4>Outputttttttt [123456789]:</h4>
+<h4>Output [1]:</h4>
 <div style="overflow-x: auto;">
 <table border="1" width="2000">
   <thead>
@@ -332,7 +342,33 @@ SELECT * FROM sales;
 </div>
 9800 rows x 18 columns
 	
-<p> Seeing that our dataset </p>
+<p> Seeing that our dataset from Kaggle pretty clean with zero null value in any cells</p>
+<p>Let's check again with COUNT function:</p>
+<h4>Input [2]:</h4>
+<div class="scrollable-code">
+<pre>
+  SELECT SUM(
+    CASE WHEN CONCAT_WS('', Row_ID, Order_ID, Order_Date, Ship_Date, Ship_Mode, Customer_ID, Customer_Name, Segment, Country, City, State, Postal_Code, Region, Product_ID, Category, Sub_Category, Product_Name, Sales) IS NULL THEN 1 ELSE 0 END 
+) AS count_null
+FROM sales;
+</pre>
+</div>
+
+<h4>Output [2]</h4>
+<table border="1">
+  <thead>
+    <tr>
+      <th>count_null</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+
 
 
 
