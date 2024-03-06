@@ -16,7 +16,7 @@ author_profile: false
 		        display: inline-block;
             background-color: #f4f4f4;
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 0px solid #ccc;
             overflow-x: auto;
         }
     </style>
@@ -27,10 +27,10 @@ author_profile: false
           width: 760px; /* Chiều rộng của block code */
           height: 200px; /* Chiều cao của block code */
           overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
-          white-space: nowrap; /* Đảm bảo các dòng code không bị wrap */
+          white-space: pre-wrap; /* Đảm bảo các dòng code không bị wrap */
       }
       .scroll-button {
-            margin-top: 2px; /* Khoảng cách từ nút cuộn đến văn bản trên */
+            margin-top: 0px; /* Khoảng cách từ nút cuộn đến văn bản trên */
              /* Điều chỉnh độ lớn của nút cuộn */
         }
   </style>
@@ -373,10 +373,28 @@ SELECT * FROM sales;
 <p></p>	
 <p>Our Kaggle dataset is relatively clean, with no null values in any of the fields. Before we take further steps, let's double-check our data using the COUNT function to ensure that it is completely accurate.</p>
 <h4>Input [2]:</h4>
-<div class="scrollable-code" class="scroll-button">
+<div class="scrollable-code" class="scroll-button" style="height: 400PX;">
 <pre><code class="language-sql">
-  SELECT SUM(
-    CASE WHEN CONCAT_WS('', Row_ID, Order_ID, Order_Date, Ship_Date, Ship_Mode, Customer_ID, Customer_Name, Segment, Country, City, State, Postal_Code, Region, Product_ID, Category, Sub_Category, Product_Name, Sales) IS NULL THEN 1 ELSE 0 END 
+SELECT SUM(
+    CASE WHEN CONCAT_WS('', 
+    Row_ID, 
+    Order_ID, 
+    Order_Date, 
+    Ship_Date, 
+    Ship_Mode, 
+    Customer_ID, 
+    Customer_Name, 
+    Segment, 
+    Country, 
+    City, 
+    State, 
+    Postal_Code, 
+    Region, 
+    Product_ID, 
+    Category, 
+    Sub_Category, 
+    Product_Name, 
+    Sales) IS NULL THEN 1 ELSE 0 END 
 ) AS count_null
 FROM sales;
 </code></pre>
@@ -632,6 +650,7 @@ ORDER BY 2 DESC
 <p>After doing some basic analysis of the core characteristics. The most important section of the RFM technique is grouping our behavior segments and determining how much engagement our brand has with the consumer.</p>
 
 <h4>Input [7]:</h4>
+<div class="scrollable-code" class="scroll-button" style="height: 600px;">
 <pre><code class="language-sql">
   WITH rfm AS 
   (
@@ -648,8 +667,7 @@ ORDER BY 2 DESC
   ),
   rfm_calc AS
   (
-  
-    SELECT r.*,
+      SELECT r.*,
       NTILE(5) OVER (ORDER BY Recency DESC) rfm_recency,
       NTILE(5) OVER (ORDER BY Frequency) rfm_frequency,
       NTILE(5) OVER (ORDER BY MonetaryValue) rfm_monetary
@@ -662,7 +680,7 @@ ORDER BY 2 DESC
   FROM rfm_calc c
   
   SELECT Customer_Name , rfm_recency, rfm_frequency, rfm_monetary,
-    case 
+    CASE
       WHEN rfm_cell_string in (555, 554, 544, 545, 454, 455, 445) THEN 'Champions'
       WHEN rfm_cell_string in (543, 444, 435, 355, 354, 345, 344, 335) THEN 'Loyal customers'
       WHEN rfm_cell_string in (553, 551, 552, 541, 542, 533, 532, 531, 452, 451, 442, 441, 431, 453, 433, 432, 423, 353, 352, 351, 342, 341, 333, 323) THEN 'Potential loyalist'
@@ -677,7 +695,7 @@ ORDER BY 2 DESC
     END rfm_segment
   FROM #rfm
   ORDER BY rfm_recency DESC, rfm_frequency DESC ,rfm_monetary DESC;
-</code></pre>
+</code></pre></div>
 
 
 
