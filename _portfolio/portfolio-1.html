@@ -403,12 +403,13 @@ FROM sales;
 
 
 
-<p>Let's calculate crucial metrics for sales data based on its characteristics. </p>
+<p>Let's calculate crucial metrics for sales data based on its characteristics.</p>
+
 <title>Code and Table Layout</title>
 <style>
     .container {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
     }
     .code {
         width: 50%; /* Đặt chiều rộng của phần mã */
@@ -426,14 +427,12 @@ FROM sales;
         <!-- Đoạn mã của bạn -->
     <pre><code>
 SELECT Ship_Mode, 
-      ROUND(SUM(sales),2) AS shipmode_sales FROM sales 
+      ROUND(SUM(sales),2) AS shipmode_sales 
+FROM sales 
 GROUP BY Ship_Mode
 ORDER BY 2 DESC;
-        </code></pre>
-  </div>
-  
-<div class="output">
-  <h4>Output [3]:</h4>
+        </code></pre></div>
+  <div class="output">
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table border="1" style="width: 350px;" >
       <tr>
