@@ -9,6 +9,8 @@ author_profile: false
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Nhúng thư viện Prism.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.min.css">
     <style>
         pre {
 		        display: inline-block;
@@ -152,9 +154,9 @@ Here <a href="https://github.com/trannphuocloc/sales-data">our data set</a> for 
 And let's jump right in by checking the data 
 
 <h4>Input [1]:</h4>
-<pre>
+<pre><code class="language-sql">
 SELECT * FROM sales;
-</pre>
+</code></pre>
 
 <h4>Output [1]:</h4>
 <div style="overflow-x: auto;">
@@ -372,12 +374,12 @@ SELECT * FROM sales;
 <p>Our Kaggle dataset is relatively clean, with no null values in any of the fields. Before we take further steps, let's double-check our data using the COUNT function to ensure that it is completely accurate.</p>
 <h4>Input [2]:</h4>
 <div class="scrollable-code" class="scroll-button">
-<pre>
+<pre><code class="language-sql">
   SELECT SUM(
     CASE WHEN CONCAT_WS('', Row_ID, Order_ID, Order_Date, Ship_Date, Ship_Mode, Customer_ID, Customer_Name, Segment, Country, City, State, Postal_Code, Region, Product_ID, Category, Sub_Category, Product_Name, Sales) IS NULL THEN 1 ELSE 0 END 
 ) AS count_null
 FROM sales;
-</pre>
+</code></pre>
 </div>
 
 <h4>Output [2]</h4>
@@ -414,14 +416,15 @@ FROM sales;
         
     }
     .code {
-        width: 70%; /* Đặt chiều rộng của phần mã */
-        padding: 10px;
-        overflow-x: auto;
+        width: 72%; /* Đặt chiều rộng của phần mã */
+        padding: 5px;
+        overflow-x: hidden;
         white-space: nowrap;
         align-items: center;
+        display: inline-block;
     }
     .output {
-        width: 30%; /* Đặt chiều rộng của phần output */
+        width: 20%; /* Đặt chiều rộng của phần output */
         align-items: center;
     }
 </style>
@@ -432,14 +435,13 @@ FROM sales;
 <div class="container">
   <div class="code">
         <!-- Đoạn mã của bạn -->
-    <pre><code>
+    <pre><code class="language-sql">
 SELECT Ship_Mode, 
       ROUND(SUM(sales),2) AS shipmode_sales 
 FROM sales 
 GROUP BY Ship_Mode
 ORDER BY 2 DESC;
         </code></pre></div>
-<h4>Output [3]:</h4> 
   <div class="output">
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover" border="1" style="width: 150px;" >
@@ -472,14 +474,13 @@ ORDER BY 2 DESC;
 <div class="container">
   <div class="code">
         <!-- Đoạn mã của bạn -->
-    <pre><code>
+    <pre><code class="language-sql">
 SELECT Segment, 
       ROUND(SUM(sales),2) AS segment_sales
 FROM sales 
 GROUP BY Segment
 ORDER BY 2 DESC;
         </code></pre></div>
-<h4>Output [3]:</h4> 
   <div class="output">
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover" border="1" style="width: 150px;" >
@@ -507,14 +508,13 @@ ORDER BY 2 DESC;
 <div class="container">
   <div class="code" >
         <!-- Đoạn mã của bạn -->
-    <pre><code>
+    <pre><code class="language-sql">
 SELECT Category, 
       ROUND(SUM(sales),2) AS category_sales 
 FROM sales
 GROUP BY Category
 ORDER BY 2 DESC
         </code></pre></div>
-<h4>Output [3]:</h4>         
   <div class="output" >
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover" border="1" style="width: 150px;" >
@@ -542,14 +542,13 @@ ORDER BY 2 DESC
 <div class="container">
   <div class="code">
         <!-- Đoạn mã của bạn -->
-    <pre><code>
+    <pre><code class="language-sql">
 SELECT Sub_Category, 
       ROUND(SUM(sales),2) AS sub_category_sales 
 FROM sales
 GROUP BY Sub_Category
 ORDER BY 2 DESC
         </code></pre></div>
-<h4>Output [3]:</h4> 
   <div class="output">
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover" border="1" style="width: 150px;" >
@@ -629,6 +628,61 @@ ORDER BY 2 DESC
     </div>
 </div>
 
+
+<p>After doing some basic analysis of the core characteristics. The most important section of the RFM technique is grouping our behavior segments and determining how much engagement our brand has with the consumer.</p>
+
+<h4>Input [7]:</h4>
+<pre><code class="language-sql">
+  WITH rfm AS 
+  (
+    SELECT 
+      Customer_Name, 
+      sum(sales) MonetaryValue,
+      avg(sales) AvgMonetaryValue,
+      count(Order_ID) Frequency,
+      max(Order_Date) last_order_date,
+      (SELECT max(Order_Date) FROM sales) max_order_date,
+      DATEDIFF(DD, max(Order_Date), (SELECT max(Order_Date) FROM sales)) Recency
+    FROM sales
+    GROUP BY Customer_Name
+  ),
+  rfm_calc AS
+  (
+  
+    SELECT r.*,
+      NTILE(5) OVER (ORDER BY Recency DESC) rfm_recency,
+      NTILE(5) OVER (ORDER BY Frequency) rfm_frequency,
+      NTILE(5) OVER (ORDER BY MonetaryValue) rfm_monetary
+    FROM rfm r
+  )
+  SELECT 
+    c.*, rfm_recency+ rfm_frequency+ rfm_monetary AS rfm_cell,
+    CAST(rfm_recency AS VARCHAR) + CAST(rfm_frequency AS VARCHAR) + CAST(rfm_monetary  AS VARCHAR)rfm_cell_string
+  INTO #rfm
+  FROM rfm_calc c
+  
+  SELECT Customer_Name , rfm_recency, rfm_frequency, rfm_monetary,
+    case 
+      WHEN rfm_cell_string in (555, 554, 544, 545, 454, 455, 445) THEN 'Champions'
+      WHEN rfm_cell_string in (543, 444, 435, 355, 354, 345, 344, 335) THEN 'Loyal customers'
+      WHEN rfm_cell_string in (553, 551, 552, 541, 542, 533, 532, 531, 452, 451, 442, 441, 431, 453, 433, 432, 423, 353, 352, 351, 342, 341, 333, 323) THEN 'Potential loyalist'
+      WHEN rfm_cell_string in (512, 511, 422, 421, 412, 411, 311) THEN 'Recent customers'
+      WHEN rfm_cell_string in (525, 524, 523, 522, 521, 515, 514, 513, 425, 424, 413, 414, 415, 315, 314, 313) THEN 'Promising'
+      WHEN rfm_cell_string in (535, 534, 443, 434, 343, 334, 325, 324) THEN 'Customers needing attention' 
+      WHEN rfm_cell_string in (331, 321, 312, 221, 213) THEN 'About to sleep' 
+      WHEN rfm_cell_string in (255, 254, 245, 244, 253, 252, 243, 242, 235, 234, 225, 224, 153, 152, 145, 143, 142, 135, 134, 133, 125, 124) THEN 'At risk'
+      WHEN rfm_cell_string in (155, 154, 144, 214, 215, 115, 114, 113) THEN 'Can’t lose them'
+      WHEN rfm_cell_string in (332, 322, 231, 241, 251, 233, 232, 223, 222, 132, 123, 122, 212, 211) THEN 'Hibernating' 
+      WHEN rfm_cell_string in (111, 112, 121, 131, 141, 151) THEN 'Lost'
+    END rfm_segment
+  FROM #rfm
+  ORDER BY rfm_recency DESC, rfm_frequency DESC ,rfm_monetary DESC;
+</code></pre>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>
 
