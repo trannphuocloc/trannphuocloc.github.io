@@ -411,16 +411,18 @@ FROM sales;
 <style>
     .container {
         display: flex;
-        align-items: center;
+        
     }
     .code {
-        width: 50%; /* Đặt chiều rộng của phần mã */
+        width: 70%; /* Đặt chiều rộng của phần mã */
         padding: 10px;
         overflow-x: auto;
         white-space: nowrap;
+        align-items: center;
     }
     .output {
         width: 30%; /* Đặt chiều rộng của phần output */
+        align-items: center;
     }
 </style>
 </head>
@@ -439,7 +441,7 @@ ORDER BY 2 DESC;
         </code></pre></div>
   <div class="output">
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
-    <table border="1" style="width: 150px;" >
+    <table class="table table-hover" border="1" style="width: 150px;" >
       <tr>
         <th>Ship_Mode</th>
         <th>shipmode_sales</th>
@@ -478,7 +480,7 @@ ORDER BY 2 DESC;
         </code></pre></div>
   <div class="output">
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
-    <table border="1" style="width: 150px;" >
+    <table class="table table-hover" border="1" style="width: 150px;" >
       <tr>
         <th>Segment</th>
         <th>segment_sales</th>
@@ -501,7 +503,7 @@ ORDER BY 2 DESC;
 
 <h4>Input [5]:</h4> 
 <div class="container">
-  <div class="code">
+  <div class="code" >
         <!-- Đoạn mã của bạn -->
     <pre><code>
 SELECT Category, 
@@ -511,9 +513,9 @@ GROUP BY Category
 ORDER BY 2 DESC
       
         </code></pre></div>
-  <div class="output">
+  <div class="output" >
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
-    <table border="1" style="width: 150px;" >
+    <table class="table table-hover" border="1" style="width: 150px;" >
       <tr>
         <th>Category</th>
         <th>category_sales</th>
@@ -547,7 +549,7 @@ ORDER BY 2 DESC
         </code></pre></div>
   <div class="output">
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
-    <table border="1" style="width: 150px;" >
+    <table class="table table-hover" border="1" style="width: 150px;" >
       <tr>
         <th>Sub_Category</th>
         <th>sub_category_sales</th>
