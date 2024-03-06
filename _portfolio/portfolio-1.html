@@ -22,7 +22,7 @@ author_profile: false
   <style>
       /* CSS để tạo nút cuộn cho block code */
       .scrollable-code {
-          width: 600px; /* Chiều rộng của block code */
+          width: 800px; /* Chiều rộng của block code */
           height: 200px; /* Chiều cao của block code */
           overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
           white-space: nowrap; /* Đảm bảo các dòng code không bị wrap */
@@ -133,10 +133,10 @@ SELECT * FROM sales;
 
 <h4>Output [1]:</h4>
 <div style="overflow-x: auto;">
-<table border="1" width="2000" height="500">
+<table border="1" width="2000">
   <thead>
     <tr>
-      <th style="width: 150px;">Row_ID</th>
+      <th style="width: fit-content;">Row_ID</th>
       <th style="width: 5%;">Order_ID</th>
       <th style="width: fit-content;">Order_Date</th>
       <th style="width: fit-content;">Ship_Date</th>
@@ -152,8 +152,8 @@ SELECT * FROM sales;
       <th style="width: 10%;">Product_ID</th>
       <th style="width: fit-content;">Category</th>
       <th style="width: fit-content;">Sub_Category</th>
-      <th style="width: 40%;">Product_Name</th>
-      <th style="width: 10%;">Sales</th>
+      <th style="width: max-content;">Product_Name</th>
+      <th style="width: fit-content;">Sales</th>
     </tr>
   </thead>
   <tbody>
