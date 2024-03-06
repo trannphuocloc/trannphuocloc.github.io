@@ -22,7 +22,7 @@ author_profile: false
   <style>
       /* CSS để tạo nút cuộn cho block code */
       .scrollable-code {
-          width: 750px; /* Chiều rộng của block code */
+          width: 760px; /* Chiều rộng của block code */
           height: 200px; /* Chiều cao của block code */
           overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
           white-space: nowrap; /* Đảm bảo các dòng code không bị wrap */
@@ -32,17 +32,13 @@ author_profile: false
 
 <body>
   <style>
-    table{
-      width: 100%;
-      ;
+    table {
+      width: 760px;
     }
     .table.table-hover tr:hover{
       background: #d4d2d2 ;
     }
-    
-  </style>
-
-
+      </style>
 </body>
 
 <h2>RFM Summary</h2>
@@ -54,32 +50,34 @@ author_profile: false
         <li>Who can you send personalized messages to keep them from churning?</li>
         <li>Who is most likely to engage with your brand?</li>
         <li>Who can you offer limited-time offers to and try to reactivate?</li>
-	<li>...</li>
+	      <li>...</li>
     </ul>
 <p>For our visualization, three dimensions of Recency, Frequency, and Monetary coincide with 3D graphics. However, it doesn't work effectively and difficult to understand the result. By combining Frequency and Monetary and turning it to 2D, it is much easier to understand because when a customer subscribes to a month for 100 dollar 12 times in 12 months, it is equivalent to when customers subscribe for $1200 per year all at once. At that time, Recency represented the customer's engagement with our brand.</p>
 
 <p>Having 11 customer segments have the same behavior as the table that we will group them into:</p>
 
+
+
 <table border="1">
 <thead>
     <tr>
-        <th>Customer segment</th>
-        <th>RFM scores</th>
-        <th>Activity</th>
-		<th>Action Recommend</th>
+        <th style="width: fit-content;">Customer segment</th>
+        <th style="width: fit-content;">RFM scores</th>
+        <th style="width: fit-content;">Activity</th>
+		    <th style="width: fit-content;">Action Recommend</th>
     </tr>
 </thead>
     <tr>
         <td>Champions</td>
         <td>555, 554, 544, 545, 454, 455, 445</td>
         <td>Bought recently, buy often and spend the most!</td>
-		<td>Reward them. Can be early adopters for new products. Will promote your brand.</td>
+		    <td>Reward them. Can be early adopters for new products. Will promote your brand.</td>
     </tr>
     <tr>
         <td>Loyal customers</td>
         <td>543, 444, 435, 355, 354, 345, 344, 335</td>
         <td>Spend good money with us often. Responsive to promotions. </td>
-		<td>Upsell higher value products. Ask for reviews. Engage them.</td>
+		    <td>Upsell higher value products. Ask for reviews. Engage them.</td>
     </tr>
     <tr>
         <td>Potential loyalist</td>
@@ -137,6 +135,7 @@ author_profile: false
     </tr>
 </table>
 
+
 <h2>Details</h2>	
 Here <a href="https://github.com/trannphuocloc/sales-data">our data set</a> for the project.
 And let's jump right in by checking the data 
@@ -148,11 +147,7 @@ SELECT * FROM sales;
 
 <h4>Output [1]:</h4>
 <div style="overflow-x: auto;">
-<style>
-table{width: 2000px;}
-</style>
-
-  <table class="table table-hover" border="1" >
+  <table class="table table-hover" border="1" style="width: 2000px;">
   <thead>
     <tr>
       <th>Row_ID</th>
@@ -238,7 +233,7 @@ table{width: 2000px;}
     </tr>
     <tr>
       <td>4</td>
-      <td>US-2016-108966</td>
+      <td style="width: 5%;">US-2016-108966</td>
       <td>11-10-16</td>
       <td>18-10-16</td>
       <td>Standard Class</td>
@@ -379,12 +374,12 @@ FROM sales;
 <table class="table table-hover" border="1" >
   <thead>
     <tr>
-      <th>count_null</th>
+      <th style="width: min-content;">count_null</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>0</td>
+      <td style="width: min-content;">0</td>
     </tr>
   </tbody>
 </table>
