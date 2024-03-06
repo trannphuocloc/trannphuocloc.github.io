@@ -50,6 +50,8 @@ author_profile: false
       </style>
 </body>
 
+
+<body>
 <h2>RFM Summary</h2>
 <body>
     <p>RFM Analysis is a measurement technique that uses existing customer behavior data, based on Recency, Frequency and Monetary value of purchases, to predict how customers will act in the future as well as to group them into behavioral segments.</p>
@@ -413,13 +415,16 @@ FROM sales;
     }
     .code {
         width: 50%; /* Đặt chiều rộng của phần mã */
+        padding: 10px;
+        overflow-x: auto;
+        white-space: nowrap;
     }
     .output {
-        width: 50%; /* Đặt chiều rộng của phần output */
+        width: 30%; /* Đặt chiều rộng của phần output */
     }
 </style>
 </head>
-<body>
+
 
 <h4>Input [3]:</h4> 
 <div class="container">
@@ -434,7 +439,7 @@ ORDER BY 2 DESC;
         </code></pre></div>
   <div class="output">
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
-    <table border="1" style="width: 350px;" >
+    <table border="1" style="width: 150px;" >
       <tr>
         <th>Ship_Mode</th>
         <th>shipmode_sales</th>
@@ -460,9 +465,164 @@ ORDER BY 2 DESC;
 </div>
 
 
+<h4>Input [4]:</h4> 
+<div class="container">
+  <div class="code">
+        <!-- Đoạn mã của bạn -->
+    <pre><code>
+SELECT Segment, 
+      ROUND(SUM(sales),2) AS segment_sales
+FROM sales 
+GROUP BY Segment
+ORDER BY 2 DESC;
+        </code></pre></div>
+  <div class="output">
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table border="1" style="width: 150px;" >
+      <tr>
+        <th>Segment</th>
+        <th>segment_sales</th>
+    </tr>
+    <tr>
+        <td>Consumer</td>
+        <td>1148060.53</td>
+    </tr>
+    <tr>
+        <td>Corporate</td>
+        <td>688494.07</td>
+    </tr>
+    <tr>
+        <td>Home Office</td>
+        <td>424982.18</td>
+    </tr>
+    </table>
+    </div>
+</div>
 
+<h4>Input [5]:</h4> 
+<div class="container">
+  <div class="code">
+        <!-- Đoạn mã của bạn -->
+    <pre><code>
+SELECT Category, 
+      ROUND(SUM(sales),2) AS category_sales 
+FROM sales
+GROUP BY Category
+ORDER BY 2 DESC
+      
+        </code></pre></div>
+  <div class="output">
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table border="1" style="width: 150px;" >
+      <tr>
+        <th>Category</th>
+        <th>category_sales</th>
+    </tr>
+    <tr>
+        <td>Technology</td>
+        <td>827455.87</td>
+    </tr>
+    <tr>
+        <td>Furniture</td>
+        <td>728658.57</td>
+    </tr>
+    <tr>
+        <td>Office Supplies</td>
+        <td>705422.33</td>
+    </tr>
+    </table>
+    </div>
+</div>
 
-
+<h4>Input [6]:</h4> 
+<div class="container">
+  <div class="code">
+        <!-- Đoạn mã của bạn -->
+    <pre><code>
+SELECT Sub_Category, 
+      ROUND(SUM(sales),2) AS sub_category_sales 
+FROM sales
+GROUP BY Sub_Category
+ORDER BY 2 DESC
+        </code></pre></div>
+  <div class="output">
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table border="1" style="width: 150px;" >
+      <tr>
+        <th>Sub_Category</th>
+        <th>sub_category_sales</th>
+      </tr>
+      <tr>
+        <td>Phones</td>
+        <td>327782.45</td>
+      </tr>
+      <tr>
+        <td>Chairs</td>
+        <td>322822.73</td>
+      </tr>
+      <tr>
+        <td>Storage</td>
+        <td>219343.39</td>
+      </tr>
+      <tr>
+        <td>Tables</td>
+        <td>202810.63</td>
+      </tr>
+      <tr>
+        <td>Binders</td>
+        <td>200028.78</td>
+      </tr>
+      <tr>
+        <td>Machines</td>
+        <td>189238.63</td>
+      </tr>
+      <tr>
+        <td>Accessories</td>
+        <td>164186.7</td>
+      </tr>
+      <tr>
+        <td>Copiers</td>
+        <td>146248.09</td>
+      </tr>
+      <tr>
+        <td>Bookcases</td>
+        <td>113813.2</td>
+      </tr>
+      <tr>
+        <td>Appliances</td>
+        <td>104618.4</td>
+      </tr>
+      <tr>
+        <td>Furnishings</td>
+        <td>89212.02</td>
+      </tr>
+      <tr>
+        <td>Paper</td>
+        <td>76828.3</td>
+      </tr>
+      <tr>
+        <td>Supplies</td>
+        <td>46420.31</td>
+      </tr>
+      <tr>
+        <td>Art</td>
+        <td>26705.41</td>
+      </tr>
+      <tr>
+        <td>Envelopes</td>
+        <td>16128.05</td>
+      </tr>
+      <tr>
+        <td>Labels</td>
+        <td>12347.73</td>
+      </tr>
+      <tr>
+        <td>Fasteners</td>
+        <td>3001.96</td>
+      </tr>
+    </table>
+    </div>
+</div>
 
 </body>
 </html>
