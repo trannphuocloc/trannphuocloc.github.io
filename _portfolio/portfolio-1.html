@@ -27,6 +27,10 @@ author_profile: false
           overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
           white-space: nowrap; /* Đảm bảo các dòng code không bị wrap */
       }
+      .scroll-button {
+            margin-top: 2px; /* Khoảng cách từ nút cuộn đến văn bản trên */
+             /* Điều chỉnh độ lớn của nút cuộn */
+        }
   </style>
 </head>
 
@@ -35,6 +39,11 @@ author_profile: false
     table {
       width: 760px;
     }
+
+    table thead th{
+        text-align: left;
+    }
+
     .table.table-hover tr:hover{
       background: #d4d2d2 ;
     }
@@ -358,10 +367,9 @@ SELECT * FROM sales;
 
 
 <p></p>	
-<p> Seeing that our dataset from Kaggle pretty clean with zero null value in any cells</p>
-<p>Let's check again with COUNT function:</p>
+<p>Our Kaggle dataset is relatively clean, with no null values in any of the fields. Before we take further steps, let's double-check our data using the COUNT function to ensure that it is completely accurate.</p>
 <h4>Input [2]:</h4>
-<div class="scrollable-code">
+<div class="scrollable-code" class="scroll-button">
 <pre>
   SELECT SUM(
     CASE WHEN CONCAT_WS('', Row_ID, Order_ID, Order_Date, Ship_Date, Ship_Mode, Customer_ID, Customer_Name, Segment, Country, City, State, Postal_Code, Region, Product_ID, Category, Sub_Category, Product_Name, Sales) IS NULL THEN 1 ELSE 0 END 
@@ -384,6 +392,73 @@ FROM sales;
   </tbody>
 </table>
 
+<p>After reviewing the data, we may realize some crucial attributes in the table for analyzing and comparing each type with each other, such as:</p>
+<ul>
+  <li><strong>Ship mode</strong> includes <strong> Standard Class, Second Class, First Class, and Same Day,</strong> representing the delivery methods that we have served.</li>
+  <li><strong>Segment</strong> includes <strong>Consumer, Corporate, and Home Office,</strong> which represent our customer segments.</li>
+  <li><strong>Category</strong> includes <strong>Furniture, Office Supplies, and Technology.</strong></li>
+  <li>Each <strong>Sub-category</strong> includes <strong>Chairs, Bookcases, Tables, Art, Paper, Copiers, Accessories, and Phones,...</strong> every single sub-category has numerous items from different brands.</li>
+  <li><strong>State</strong> represents 49 states in the US excluding Hawaii, which our store isn't located.</li>
+</ul>
+
+
+
+<p>Let's calculate crucial metrics for sales data based on its characteristics. </p>
+<title>Code and Table Layout</title>
+<style>
+    .container {
+        display: flex;
+        align-items: flex-start;
+    }
+    .code {
+        width: 50%; /* Đặt chiều rộng của phần mã */
+    }
+    .output {
+        width: 50%; /* Đặt chiều rộng của phần output */
+    }
+</style>
+</head>
+<body>
+
+<h4>Input [3]:</h4> 
+<div class="container">
+  <div class="code">
+        <!-- Đoạn mã của bạn -->
+    <pre><code>
+SELECT Ship_Mode, 
+      ROUND(SUM(sales),2) AS shipmode_sales FROM sales 
+GROUP BY Ship_Mode
+ORDER BY 2 DESC;
+        </code></pre>
+  </div>
+  
+<div class="output">
+  <h4>Output [3]:</h4>
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table border="1" style="width: 350px;" >
+      <tr>
+        <th>Ship_Mode</th>
+        <th>shipmode_sales</th>
+    </tr>
+    <tr>
+        <td>Standard Class</td>
+        <td>1340831.31</td>
+    </tr>
+    <tr>
+        <td>Second Class</td>
+        <td>449914.18</td>
+    </tr>
+    <tr>
+        <td>First Class</td>
+        <td>345572.26</td>
+    </tr>
+    <tr>
+        <td>Same Day</td>
+        <td>125219.04</td>
+    </tr>
+    </table>
+    </div>
+</div>
 
 
 
