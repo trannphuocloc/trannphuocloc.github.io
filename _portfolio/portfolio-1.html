@@ -22,13 +22,28 @@ author_profile: false
   <style>
       /* CSS để tạo nút cuộn cho block code */
       .scrollable-code {
-          width: 800px; /* Chiều rộng của block code */
+          width: 750px; /* Chiều rộng của block code */
           height: 200px; /* Chiều cao của block code */
           overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
           white-space: nowrap; /* Đảm bảo các dòng code không bị wrap */
       }
   </style>
 </head>
+
+<body>
+  <style>
+    table{
+      width: 100%;
+      ;
+    }
+    .table.table-hover tr:hover{
+      background: #d4d2d2 ;
+    }
+    
+  </style>
+
+
+</body>
 
 <h2>RFM Summary</h2>
 <body>
@@ -133,27 +148,31 @@ SELECT * FROM sales;
 
 <h4>Output [1]:</h4>
 <div style="overflow-x: auto;">
-<table border="1" width="2000">
+<style>
+table{width: 2000px;}
+</style>
+
+  <table class="table table-hover" border="1" >
   <thead>
     <tr>
-      <th style="width: fit-content;">Row_ID</th>
-      <th style="width: 5%;">Order_ID</th>
-      <th style="width: fit-content;">Order_Date</th>
-      <th style="width: fit-content;">Ship_Date</th>
-      <th style="width: fit-content;">Ship_Mode</th>
-      <th style="width: fit-content;">Customer_ID</th>
-      <th style="width: fit-content;">Customer_Name</th>
-      <th style="width: fit-content;">Segment</th>
-      <th style="width: fit-content;">Country</th>
-      <th style="width: fit-content;">City</th>
-      <th style="width: fit-content;">State</th>
-      <th style="width: fit-content;">Postal_Code</th>
-      <th style="width: fit-content;">Region</th>
-      <th style="width: 10%;">Product_ID</th>
-      <th style="width: fit-content;">Category</th>
-      <th style="width: fit-content;">Sub_Category</th>
-      <th style="width: max-content;">Product_Name</th>
-      <th style="width: fit-content;">Sales</th>
+      <th>Row_ID</th>
+      <th>Order_ID</th>
+      <th>Order_Date</th>
+      <th>Ship_Date</th>
+      <th>Ship_Mode</th>
+      <th>Customer_ID</th>
+      <th>Customer_Name</th>
+      <th>Segment</th>
+      <th>Country</th>
+      <th >City</th>
+      <th >State</th>
+      <th >Postal_Code</th>
+      <th >Region</th>
+      <th >Product_ID</th>
+      <th >Category</th>
+      <th >Sub_Category</th>
+      <th>Product_Name</th>
+      <th >Sales</th>
     </tr>
   </thead>
   <tbody>
@@ -194,7 +213,7 @@ SELECT * FROM sales;
       <td>FUR-CH-10000454</td>
       <td>Furniture</td>
       <td>Chairs</td>
-      <td>Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back</td>
+      <td style="width: max-content;">Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back</td>
       <td>731.9400024</td>
     </tr>
     <tr>
@@ -341,7 +360,9 @@ SELECT * FROM sales;
 </table>
 </div>
 9800 rows x 18 columns
-	
+
+
+<p></p>	
 <p> Seeing that our dataset from Kaggle pretty clean with zero null value in any cells</p>
 <p>Let's check again with COUNT function:</p>
 <h4>Input [2]:</h4>
@@ -355,7 +376,7 @@ FROM sales;
 </div>
 
 <h4>Output [2]</h4>
-<table border="1">
+<table class="table table-hover" border="1" >
   <thead>
     <tr>
       <th>count_null</th>
