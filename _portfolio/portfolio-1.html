@@ -15,7 +15,6 @@ author_profile: false
         pre {
 		        display: inline-block;
             background-color: #f4f4f4;
-            padding: 10px;
             border: 1px solid #ccc;
             overflow-x: auto;
             font-size: 5px;
@@ -25,7 +24,7 @@ author_profile: false
   <style>
       /* CSS để tạo nút cuộn cho block code */
       .scrollable-code {
-          width: 340px; /* Chiều rộng của block code */
+          width: 350px; /* Chiều rộng của block code */
           height: 100px; /* Chiều cao của block code */
           overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
           white-space: normal; /* Đảm bảo các dòng code không bị wrap */
@@ -397,7 +396,7 @@ SELECT * FROM sales;
 <p></p>	
 <p>Our Kaggle dataset is relatively clean, with no null values in any of the fields. Before we take further steps, let's double-check our data using the COUNT function to ensure that it is completely accurate.</p>
 <h4>Input [2]:</h4>
-<div class="scrollable-code" class="scroll-button" style="height: 400PX;">
+<div class="scrollable-code" class="scroll-button" style="height: 350PX;">
 <pre><code class="language-sql">
 SELECT SUM(
     CASE WHEN CONCAT_WS('', 
@@ -629,11 +628,6 @@ ORDER BY 2 DESC
         <td>...</td>
       </tr>
       <tr>
-        <td>15</td>
-        <td>Envelopes</td>
-        <td>16128.05</td>
-      </tr>
-      <tr>
         <td>16</td>
         <td>Labels</td>
         <td>12347.73</td>
@@ -651,7 +645,7 @@ ORDER BY 2 DESC
 <p>After doing some basic analysis of the core characteristics. The most important section of the RFM technique is grouping our behavior segments and determining how much engagement our brand has with the consumer.</p>
 
 <h4>Input [7]:</h4>
-<div class="scrollable-code" class="scroll-button" style="width: 760px ; height: 1050px;">
+<div class="scrollable-code" class="scroll-button" style="width: 760px ; height: 485px;">
 <pre><code class="language-sql">
   WITH rfm AS 
   (
