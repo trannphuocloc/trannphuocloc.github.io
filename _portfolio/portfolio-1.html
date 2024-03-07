@@ -32,13 +32,15 @@ author_profile: false
           margin-top: 0; /* Khoảng cách phía trên */
           margin-bottom: 0; /* Khoảng cách phía dưới */
           margin-right: 0px;
-          font-size: 12px;
+          font-size: 14px;
+          padding: 1;
 
           
       }
       .scroll-button {
             margin-top: 0px; /* Khoảng cách từ nút cuộn đến văn bản trên */
-             /* Điều chỉnh độ lớn của nút cuộn */
+            margin-bottom: 0;
+            padding: 0; /* Điều chỉnh độ lớn của nút cuộn */
         }
   </style>
 </head>
@@ -47,9 +49,14 @@ author_profile: false
   <style>
     table {
       width: 760px;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 14px;
+      min-width: 40px;
     }
 
     table thead th{
+        background-color: #ccc;
         text-align: left;
     }
 
@@ -57,9 +64,19 @@ author_profile: false
       background: #d4d2d2 ;
     }
     .table.table-striped tbody tr:nth-child(odd){
-      background: #cecece ;
+      background: #f0f0f0 ;
     }
-      </style>
+    </style>
+
+    <style>
+        .odd {
+            background-color: #f0f0f0;
+        }
+
+        .even {
+            background-color: #ffffff;
+        }
+    </style>
 </body>
 
 
@@ -81,7 +98,7 @@ author_profile: false
 
 
 
-<table class="table table-striped" border="1">
+<table border="1">
 <thead>
     <tr>
         <th style="width: fit-content;">Customer segment</th>
@@ -96,19 +113,19 @@ author_profile: false
         <td>Bought recently, buy often and spend the most!</td>
 		    <td>Reward them. Can be early adopters for new products. Will promote your brand.</td>
     </tr>
-    <tr>
+    <tr class="odd">
         <td>Loyal customers</td>
         <td>543, 444, 435, 355, 354, 345, 344, 335</td>
         <td>Spend good money with us often. Responsive to promotions. </td>
 		    <td>Upsell higher value products. Ask for reviews. Engage them.</td>
     </tr>
-    <tr>
+    <tr >
         <td>Potential loyalist</td>
         <td>553, 551, 552, 541, 542, 533, 532, 531, 452, 451, 442, 441, 431, 453, 433, 432, 423, 353, 352, 351, 342, 341, 333, 323</td>
         <td>Recent customers, but spent a good amount and bought more than once.</td>
         <td>Offer membership / loyalty program, recommend other products.</td>
     </tr>
-    <tr>
+    <tr class="odd">
         <td>Recent customers</td>
         <td>512, 511, 422, 421, 412, 411, 311</td>
         <td>Bought most recently, but not often.</td>
@@ -120,7 +137,7 @@ author_profile: false
         <td>Recent shoppers, but haven’t spent much.</td>
         <td>Create brand awareness, offer free trials</td>
     </tr>
-    <tr>
+    <tr class="odd">
         <td>Customers Needing Attention</td>
         <td>535, 534, 443, 434, 343, 334, 325, 324</td>
         <td>Above average recency, frequency and monetary values. May not have bought very recently though.</td>
@@ -132,7 +149,7 @@ author_profile: false
         <td>Below average recency, frequency and monetary values. Will lose them if not reactivated.</td>
         <td>Share valuable resources, recommend popular products / renewals at discount, reconnect with them</td>
     </tr>
-    <tr>
+    <tr class="odd">
         <td>At risk</td>
         <td>255, 254, 245, 244, 253, 252, 243, 242, 235, 234, 225, 224, 153, 152, 145, 143, 142, 135, 134, 133, 125, 124</td>
         <td>Spent big money and purchased often. But long time ago. Need to bring them back!</td>
@@ -144,7 +161,7 @@ author_profile: false
         <td>Made biggest purchases, and often. But haven’t returned for a long time.</td>
         <td>Win them back via renewals or newer products, don’t lose them to competition, talk to them.</td>
     </tr>
-    <tr>
+    <tr class="odd">
         <td>Hibernating</td>
         <td>332, 322, 231, 241, 251, 233, 232, 223, 222, 132, 123, 122, 212, 211</td>
         <td>Last purchase was long back, low spenders and low number of orders.</td>
@@ -164,14 +181,14 @@ Here <a href="https://github.com/trannphuocloc/sales-data">our data set</a> for 
 And let's jump right in by checking the data 
 
 <h4>Input [1]:</h4>
-<pre><code class="language-sql" style="font-size: 12px;">
+<pre><code class="language-sql" style="font-size: 14px;">
 SELECT * FROM sales;
 </code></pre>
 
 <h4>Output [1]:</h4>
 <div style="overflow-x: auto;">
-  <table class="table table-hover table-striped" border="1" style="width: 2000px;">
-  <thead>
+  <table class="table table-hover " border="1" style="width: 2000px;">
+  <thead >
     <tr>
       <th>Row_ID</th>
       <th>Order_ID</th>
@@ -214,7 +231,7 @@ SELECT * FROM sales;
       <td>Bush Somerset Collection Bookcase</td>
       <td>261.9599915</td>
     </tr>
-    <tr>
+    <tr class="odd">
       <td>2</td>
       <td>CA-2017-152156</td>
       <td>08-11-17</td>
@@ -254,7 +271,7 @@ SELECT * FROM sales;
       <td>Self-Adhesive Address Labels for Typewriters by Universal</td>
       <td>14.61999989</td>
     </tr>
-    <tr>
+    <tr class="odd">
       <td>4</td>
       <td style="width: 5%;">US-2016-108966</td>
       <td>11-10-16</td>
@@ -294,8 +311,8 @@ SELECT * FROM sales;
       <td>...</td>
       <td>...</td>
     </tr>
-	<tr>
-	<td>9797</td>
+	<tr class="odd">
+	<td >9797</td>
       <td>CA-2016-128608</td>
       <td>12-01-16</td>
       <td>17-01-16</td>
@@ -334,7 +351,7 @@ SELECT * FROM sales;
       <td>GE 30524EE4</td>
       <td>235.1880035</td>
     </tr>
-    <tr>
+    <tr  class="odd">
       <td>9799</td>
       <td>CA-2016-128608</td>
       <td>12-01-16</td>
@@ -411,8 +428,8 @@ FROM sales;
 </div>
 
 <h4>Output [2]</h4>
-<table class="table table-hover" border="1" >
-  <thead>
+<table class="table table-hover " border="1" >
+  <thead >
     <tr>
       <th style="width: min-content;">count_null</th>
     </tr>
@@ -465,7 +482,7 @@ FROM sales;
   <div class="code">
     <h4>Input [3]:</h4> 
         <!-- Đoạn mã của bạn -->
-    <pre><code class="language-sql" style="font-size: 12px;">
+    <pre><code class="language-sql" style="font-size: 14px;">
 SELECT Ship_Mode, 
       ROUND(SUM(sales),2) AS shipmode_sales 
 FROM sales 
@@ -475,8 +492,8 @@ ORDER BY 2 DESC;
   <div class="output">
     <h4>Output [3]:</h4> 
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
-    <table class="table table-hover" border="1" style="width: 150px;" >
-      <tr>
+    <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
         <th>Ship_Mode</th>
         <th>shipmode_sales</th>
     </tr>
@@ -506,7 +523,7 @@ ORDER BY 2 DESC;
   <div class="code">
     <h4>Input [4]:</h4> 
         <!-- Đoạn mã của bạn -->
-    <pre><code class="language-sql" style="font-size: 12px;">
+    <pre><code class="language-sql" style="font-size: 14px;">
 SELECT Segment, 
       ROUND(SUM(sales),2) AS segment_sales
 FROM sales 
@@ -516,8 +533,8 @@ ORDER BY 2 DESC;
   <div class="output">
     <h4>Output [4]:</h4>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
-    <table class="table table-hover" border="1" style="width: 150px;" >
-      <tr>
+    <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
         <th>Segment</th>
         <th>segment_sales</th>
     </tr>
@@ -542,7 +559,7 @@ ORDER BY 2 DESC;
   <div class="code" >
     <h4>Input [5]:</h4> 
         <!-- Đoạn mã của bạn -->
-    <pre><code class="language-sql" style="font-size: 12px;">
+    <pre><code class="language-sql" style="font-size: 14px;">
 SELECT Category, 
       ROUND(SUM(sales),2) AS category_sales 
 FROM sales
@@ -552,8 +569,8 @@ ORDER BY 2 DESC
   <div class="output" >
     <h4>Output [5]:</h4>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
-    <table class="table table-hover" border="1" style="width: 150px;" >
-      <tr>
+    <table class="table table-hover table-striped " border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
         <th>Category</th>
         <th>category_sales</th>
     </tr>
@@ -578,7 +595,7 @@ ORDER BY 2 DESC
   <div class="code">
     <h4>Input [6]:</h4> 
         <!-- Đoạn mã của bạn -->
-    <pre><code class="language-sql" style="font-size: 12px;">
+    <pre><code class="language-sql" style="font-size: 14px;">
 SELECT Sub_Category, 
       ROUND(SUM(sales),2) AS sub_category_sales 
 FROM sales
@@ -588,8 +605,8 @@ ORDER BY 2 DESC
   <div class="output">
     <h4>Output [6]:</h4>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
-    <table class="table table-hover" border="1" style="width: 150px;" >
-      <tr>
+    <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
         <th>Sub_Category</th>
         <th>sub_category_sales</th>
       </tr>
