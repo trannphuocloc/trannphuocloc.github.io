@@ -436,28 +436,29 @@ FROM sales;
 <style>
     .container {
         display: flex;
-        align-items: center;
-        
+        align-items: top;
+     
     }
     .code {
         flex-basis: 72%; /* Đặt chiều rộng của phần mã */
-        padding: 0px;
-        overflow-x: hidden;
         white-space: nowrap;
         align-items: center;
-        display: inline-block;
+        align-content: baseline;
+
     }
     .output {
         flex-basis: 20%; /* Đặt chiều rộng của phần output */
-        align-items: bottom;
+        align-items: center;
+        align-content: baseline;
     }
 </style>
 </head>
 
 
-<h4>Input [3]:</h4> 
+
 <div class="container">
   <div class="code">
+    <h4>Input [3]:</h4> 
         <!-- Đoạn mã của bạn -->
     <pre><code class="language-sql">
 SELECT Ship_Mode, 
@@ -467,6 +468,7 @@ GROUP BY Ship_Mode
 ORDER BY 2 DESC;
         </code></pre></div>
   <div class="output">
+    <h4>Output [3]:</h4> 
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover" border="1" style="width: 150px;" >
       <tr>
@@ -494,9 +496,10 @@ ORDER BY 2 DESC;
 </div>
 
 
-<h4>Input [4]:</h4> 
+
 <div class="container">
   <div class="code">
+    <h4>Input [4]:</h4> 
         <!-- Đoạn mã của bạn -->
     <pre><code class="language-sql">
 SELECT Segment, 
@@ -506,6 +509,7 @@ GROUP BY Segment
 ORDER BY 2 DESC;
         </code></pre></div>
   <div class="output">
+    <h4>Output [4]:</h4>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover" border="1" style="width: 150px;" >
       <tr>
@@ -528,9 +532,10 @@ ORDER BY 2 DESC;
     </div>
 </div>
 
-<h4>Input [5]:</h4> 
+
 <div class="container">
   <div class="code" >
+    <h4>Input [5]:</h4> 
         <!-- Đoạn mã của bạn -->
     <pre><code class="language-sql">
 SELECT Category, 
@@ -540,6 +545,7 @@ GROUP BY Category
 ORDER BY 2 DESC
         </code></pre></div>
   <div class="output" >
+    <h4>Output [5]:</h4>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover" border="1" style="width: 150px;" >
       <tr>
@@ -562,9 +568,10 @@ ORDER BY 2 DESC
     </div>
 </div>
 
-<h4>Input [6]:</h4> 
+
 <div class="container">
   <div class="code">
+    <h4>Input [6]:</h4> 
         <!-- Đoạn mã của bạn -->
     <pre><code class="language-sql">
 SELECT Sub_Category, 
@@ -574,6 +581,7 @@ GROUP BY Sub_Category
 ORDER BY 2 DESC
         </code></pre></div>
   <div class="output">
+    <h4>Output [6]:</h4>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover" border="1" style="width: 150px;" >
       <tr>
@@ -656,7 +664,7 @@ ORDER BY 2 DESC
 <p>After doing some basic analysis of the core characteristics. The most important section of the RFM technique is grouping our behavior segments and determining how much engagement our brand has with the consumer.</p>
 
 <h4>Input [7]:</h4>
-<div class="scrollable-code" class="scroll-button" style="width: 7600px ; height: 600px;">
+<div class="scrollable-code" class="scroll-button" style="width: 760px ; height: 600px;">
 <pre><code class="language-sql">
   WITH rfm AS 
   (
