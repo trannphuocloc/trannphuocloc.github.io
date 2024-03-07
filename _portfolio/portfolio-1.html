@@ -13,11 +13,12 @@ author_profile: false
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.min.css">
     <style>
         pre {
-		        display: inline-block;
+		        display: grid;
             background-color: #f4f4f4;
             padding: 0px 0px;
             border: 0px  solid #ccc;
             overflow-x: auto;
+            font-size: small;
         }
     </style>
   <title>Scrollable Code Block</title>
@@ -27,11 +28,11 @@ author_profile: false
           width: 760px; /* Chiều rộng của block code */
           height: 200px; /* Chiều cao của block code */
           overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
-          white-space: pre-wrap; /* Đảm bảo các dòng code không bị wrap */
+          white-space: normal; /* Đảm bảo các dòng code không bị wrap */
           margin-top: 0; /* Khoảng cách phía trên */
           margin-bottom: 0; /* Khoảng cách phía dưới */
           margin-right: 0px;
-          padding: 1px 1px;
+
           
       }
       .scroll-button {
@@ -664,7 +665,7 @@ ORDER BY 2 DESC
 <p>After doing some basic analysis of the core characteristics. The most important section of the RFM technique is grouping our behavior segments and determining how much engagement our brand has with the consumer.</p>
 
 <h4>Input [7]:</h4>
-<div class="scrollable-code" class="scroll-button" style="width: 760px ; height: 600px;">
+<div class="scrollable-code" class="scroll-button" style="width: 760px ; height: 1200px;">
 <pre><code class="language-sql">
   WITH rfm AS 
   (
