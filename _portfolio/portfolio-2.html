@@ -26,6 +26,9 @@ author_profile: false
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Nhúng thư viện Prism.js -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.min.css">
+
     <style>
         pre {
 		display: inline-block;
@@ -37,19 +40,45 @@ author_profile: false
     </style>
 </head>
 
+<body>
+  <style>
+    table thead th{
+        background-color: #ccc;
+        text-align: left;
+    }
+
+    .table.table-hover tr:hover{
+      background: #d4d2d2 ;
+    }
+    .table.table-striped tbody tr:nth-child(even){
+      background: #f0f0f0 ;
+    }
+    </style>
+
+    <style>
+        .odd {
+            background-color: #f0f0f0;
+        }
+
+        .even {
+            background-color: #ffffff;
+        }
+    </style>
+</body>
+
 <h4>Input [1]:</h4>
-<pre>
+<pre> <code class="language-sql">
 SELECT TOP 5 * FROM Absenteeism_at_work a
 LEFT JOIN compensation b
 ON a.ID = b.ID
 LEFT JOIN Reasons c
 ON a.Reason_for_absence = c.Number;
-</pre>
+</code></pre>
 
 
 <h4>Output [1]:</h4>
 <div style="overflow-x: auto;">
-<table border="1">
+<table class="table table-striped table-hover" border="1">
   <thead>
     <tr>
       <th>ID</th>
@@ -221,7 +250,7 @@ ON a.Reason_for_absence = c.Number;
   
 <p>From this, we find the list of employees who are healthy individuals and have low absenteeism for the bonus program. With the assumption that healthy individuals are non-smokers and non-drinkers, their BMI is less than 25, and their absence time must be under the average of the list.</p>
 <h4>Input [2]:</h4>
-<pre>
+<pre><code class="language-sql">
 SELECT TOP 10 * FROM Absenteeism_at_work a
 LEFT JOIN compensation b
 ON a.ID = b.ID
@@ -232,11 +261,11 @@ AND Social_smoker = 0
 AND Body_mass_index < 25
 AND Absenteeism_time_in_hours < (SELECT AVG(Absenteeism_time_in_hours) FROM Absenteeism_at_work)
 ORDER BY Absenteeism_time_in_hours;
-</pre>
+</code></pre>
 
 <h4>Output [2]:</h4>
 <div style="overflow-x: auto;">
-<table border="2">
+<table class="table table-striped table-hover" border="1" style="width: 1800px;">
   <thead>
     <tr>
       <th>ID</th>
@@ -373,7 +402,7 @@ ORDER BY Absenteeism_time_in_hours;
       <td>559</td>
       <td>51</td>
       <td>13</td>
-      <td>Diseases of the musculoskeletal system and connective tissue</td>
+      <td style="width: 40%;">Diseases of the musculoskeletal system and connective tissue</td>
     </tr>
     <tr>
       <td>504</td>
@@ -552,11 +581,11 @@ ORDER BY Absenteeism_time_in_hours;
 <p>Firstly, query the number of employees who are nonsmokers:</p>
 
 <h4>Input [3]:</h4>
-<pre>
+<pre><code class="language-sql">
 SELECT COUNT(*) AS count_nonsmoker 
 FROM Absenteeism_at_work
 WHERE Social_smoker = 0;
-</pre>
+</code></pre>
 
   <h4>Output [3]:</h4>
 <table border="1">
@@ -584,7 +613,7 @@ WHERE Social_smoker = 0;
 <p>Before creating dashboard sections, as you can see from the two previous requirements, we query the data by using <code>SELECT *</code> all the time, which makes sense for people who just check out for the first time and want complete information. For some columns that we don't need in PowerBI, optimize the query again using:</p>
 
 <h4>Input [4]:</h4>
-<pre>
+<pre> <code class="language-sql">
 SELECT 
 	a.ID, 
 	c.Reason,
@@ -622,7 +651,7 @@ LEFT JOIN compensation b
 ON a.ID = b.ID
 LEFT JOIN Reasons c
 ON a.Reason_for_absence = c.Number;
-</pre>
+</code></pre>
 
 	
 <p>And we will use it to create a dashboard using PowerBI with a frame approved by HR departments here.</p>
@@ -648,4 +677,7 @@ ON a.Reason_for_absence = c.Number;
 <li>Adjusting or reducing the working time to adapt the employee's reality schedule by adjusting from 8 a.m-5 p.m to 10 a.m - 7 p.m or reducing working hours from 8 a.m - 5 p.m to 10 a.m - 5 p.m, will guarantee  employees get high performance at the beginning of the week.</li>
 <li>Establishing policies that encourage employees to reduce their absence time at the beginning of the week, like providing more employees's welfare on Monday, Tuesday, and Wednesday.</li>
 </ul>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 
