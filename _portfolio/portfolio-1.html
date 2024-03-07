@@ -15,8 +15,8 @@ author_profile: false
         pre {
 		        display: inline-block;
             background-color: #f4f4f4;
-            padding: 10px;
-            border: 0px solid #ccc;
+            padding: 0px 0px;
+            border: 0px  solid #ccc;
             overflow-x: auto;
         }
     </style>
@@ -28,6 +28,11 @@ author_profile: false
           height: 200px; /* Chiều cao của block code */
           overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
           white-space: pre-wrap; /* Đảm bảo các dòng code không bị wrap */
+          margin-top: 0; /* Khoảng cách phía trên */
+          margin-bottom: 0; /* Khoảng cách phía dưới */
+          margin-right: 0px;
+          padding: 1px 1px;
+          
       }
       .scroll-button {
             margin-top: 0px; /* Khoảng cách từ nút cuộn đến văn bản trên */
@@ -431,19 +436,20 @@ FROM sales;
 <style>
     .container {
         display: flex;
+        align-items: center;
         
     }
     .code {
-        width: 72%; /* Đặt chiều rộng của phần mã */
-        padding: 5px;
+        flex-basis: 72%; /* Đặt chiều rộng của phần mã */
+        padding: 0px;
         overflow-x: hidden;
         white-space: nowrap;
         align-items: center;
         display: inline-block;
     }
     .output {
-        width: 20%; /* Đặt chiều rộng của phần output */
-        align-items: center;
+        flex-basis: 20%; /* Đặt chiều rộng của phần output */
+        align-items: bottom;
     }
 </style>
 </head>
@@ -650,7 +656,7 @@ ORDER BY 2 DESC
 <p>After doing some basic analysis of the core characteristics. The most important section of the RFM technique is grouping our behavior segments and determining how much engagement our brand has with the consumer.</p>
 
 <h4>Input [7]:</h4>
-<div class="scrollable-code" class="scroll-button" style="height: 600px;">
+<div class="scrollable-code" class="scroll-button" style="width: 7600px ; height: 600px;">
 <pre><code class="language-sql">
   WITH rfm AS 
   (
