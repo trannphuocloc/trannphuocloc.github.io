@@ -73,6 +73,15 @@ author_profile: false
             background-color: #ffffff;
         }
     </style>
+
+
+    <title>Flourish Map Embed</title>
+    <style>
+        .flourish-embed {
+            max-width: 600px;
+            max-height: 400px;
+        }
+    </style>
 </body>
 
 
@@ -98,7 +107,7 @@ author_profile: false
 <thead>
     <tr>
         <th style="width: fit-content;">Customer segment</th>
-        <th style="width: fit-content;">RFM scores</th>
+        <th style="width: 18%;">RFM scores</th>
         <th style="width: fit-content;">Activity</th>
 		    <th style="width: fit-content;">Action Recommend</th>
     </tr>
@@ -172,9 +181,10 @@ author_profile: false
 </table>
 
 
-<h2>Details</h2>	
+<h2>Checking the data</h2>	
 Here <a href="https://github.com/trannphuocloc/sales-data">our data set</a> for the project.
 And let's jump right in by checking the data 
+
 
 <h4>Input [1]:</h4>
 <pre><code class="language-sql" style="font-size: 14px;">
@@ -394,7 +404,7 @@ SELECT * FROM sales;
 
 
 <p></p>	
-<p>Our Kaggle dataset is relatively clean, with no null values in any of the fields. Before we take further steps, let's double-check our data using the COUNT function to ensure that it is completely accurate.</p>
+<p>Before taking further steps, we need to ensure our data’s integrity by counting the null values we have missed, so as to avoid coming to the wrong conclusion about the data. </p>
 <h4>Input [2]:</h4>
 <div class="scrollable-code" class="scroll-button" style="height: 350PX;">
 <pre><code class="language-sql">
@@ -437,6 +447,8 @@ FROM sales;
   </tbody>
 </table>
 
+
+<h2>Calculating metrics</h2>
 <p>After reviewing the data, we may realize some crucial attributes in the table for analyzing and comparing each type with each other, such as:</p>
 <ul>
   <li><strong>Ship mode</strong> includes <strong> Standard Class, Second Class, First Class, and Same Day,</strong> representing the delivery methods that we have served.</li>
@@ -444,17 +456,19 @@ FROM sales;
   <li><strong>Category</strong> includes <strong>Furniture, Office Supplies, and Technology.</strong></li>
   <li>Each <strong>Sub-category</strong> includes <strong>Chairs, Bookcases, Tables, Art, Paper, Copiers, Accessories, and Phones,...</strong> every single sub-category has numerous items from different brands.</li>
   <li><strong>State</strong> represents 49 states in the US excluding Hawaii, which our store isn't located.</li>
+  <li><strong>Year:</strong> 2015 - 2018</li>
 </ul>
 
 
 
-<p>Let's calculate crucial metrics for sales data based on its characteristics.</p>
+<p>Let's calculate crucial metrics for the data that we have explored based on its characteristics.</p>
 
 <title>Code and Table Layout</title>
 <style>
     .container {
         display: flex;
         align-items: top;
+        margin-top: 0;
      
     }
     .code {
@@ -642,10 +656,12 @@ ORDER BY 2 DESC
 </div>
 
 
+
+<h2>RFM Analysis</h2>
 <p>After doing some basic analysis of the core characteristics. The most important section of the RFM technique is grouping our behavior segments and determining how much engagement our brand has with the consumer.</p>
 
 <h4>Input [7]:</h4>
-<div class="scrollable-code" class="scroll-button" style="width: 760px ; height: 485px;">
+<div class="scrollable-code" class="scroll-button" style="width: 500px ; height: 485px;">
 <pre><code class="language-sql">
   WITH rfm AS 
   (
@@ -693,7 +709,7 @@ ORDER BY 2 DESC
 </code></pre></div>
 
 <h4>Outout [7]:</h4>
-<table class="table table-hover " border="1">
+<table class="table table-hover " border="1" style="width: 500PX;">
   <thead >
     <tr>
       <th>#</th>
@@ -779,6 +795,7 @@ ORDER BY 2 DESC
 </tbody>
 </table>
 
+<div class="flourish-embed flourish-map" data-src="visualisation/17083473"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
 
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
