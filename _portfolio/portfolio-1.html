@@ -465,11 +465,16 @@ FROM sales;</code></pre></div>
     .container {
         display: flex;
         align-items: top;
+        flex-direction: row;
         margin-top: 0;
+        justify-content: space-between;
      
     }
     .heading{
-      flex: 10%;
+        flex: 10%;
+        flex: ;
+        align-items: flex-start;
+
 
     }
     .code {
@@ -481,7 +486,7 @@ FROM sales;</code></pre></div>
     }
     .output {
         flex-basis: 70%; /* Đặt chiều rộng của phần output */
-        align-items: center;
+        align-items: right;
         align-content: baseline;
     }
 </style>
@@ -490,7 +495,7 @@ FROM sales;</code></pre></div>
 
 
 <div class="container">
-  <div class="heading"></div>
+
 <h3>Sales by Ship Mode</h3>
   <div class="code">
     <h4>Input [3]:</h4> 
@@ -531,7 +536,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
 
 <div class="container">
-  <div class="heading"></div>
+
   <h3>Sales by Segment</h3>
   <div class="code">
     <h4>Input [4]:</h4> 
@@ -567,7 +572,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
 
 <div class="container">
-  <div class="heading"></div>
+
   <h3>Sales by Category</h3>
   <div class="code" >
     <h4>Input [5]:</h4> 
@@ -603,7 +608,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
 
 <div class="container">
-  <div class="heading"></div>
+
   <h3>Sales by Sub - Category</h3>
   <div class="code">
     <h4>Input [6]:</h4> 
@@ -657,7 +662,7 @@ ORDER BY 2 DESC;</code></pre></div>
 </div>
 
 <div class="container">
-  <div class="heading"></div>
+
   <h3>Sales by Year</h3>
   <div class="code">
     <h4>Input [7]:</h4> 
@@ -708,7 +713,7 @@ ORDER BY 1,2;</code></pre></div>
 <div class="flourish-embed flourish-chart" data-src="visualisation/17091110" data-height="400px"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
 
 <div class="container">
-  <div class="heading"></div>
+
   <h3>Sales by State</h3>
   <div class="code">
     <h4>Input [8]:</h4> 
