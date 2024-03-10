@@ -17,15 +17,15 @@ author_profile: false
             background-color: #f4f4f4;
             border: 1px solid #ccc;
             overflow-x: auto;
-            font-size: 5px;
+            font-size: 14px;
         }
     </style>
   <title>Scrollable Code Block</title>
   <style>
       /* CSS để tạo nút cuộn cho block code */
       .scrollable-code {
-          width: 350px; /* Chiều rộng của block code */
-          height: 100px; /* Chiều cao của block code */
+          width: 600px; /* Chiều rộng của block code */
+          height: 400px; /* Chiều cao của block code */
           overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
           white-space: normal; /* Đảm bảo các dòng code không bị wrap */
           margin-top: 0; /* Khoảng cách phía trên */
@@ -405,7 +405,7 @@ And let's jump right in by checking the data
 <p></p>	
 <p>Before taking further steps, we need to ensure our data’s integrity by counting the null values we have missed, so as to avoid coming to the wrong conclusion about the data. </p>
 <h4>Input [2]:</h4>
-<div class="scrollable-code" class="scroll-button" style="height: 350PX;">
+<div class="scrollable-code" class="scroll-button" style="width: 340px;" >
 <pre><code class="language-sql">SELECT SUM(
     CASE WHEN CONCAT_WS('', 
     Row_ID, 
@@ -427,9 +427,7 @@ And let's jump right in by checking the data
     Product_Name, 
     Sales) IS NULL THEN 1 ELSE 0 END 
 ) AS count_null
-FROM sales;
-</code></pre>
-</div>
+FROM sales;</code></pre></div>
 
 <h4>Output [2]</h4>
 <table class="table table-hover " border="1" >
@@ -755,7 +753,7 @@ ORDER BY 2 DESC;</code></pre></div>
 <p>After doing some basic analysis of the core characteristics. The most important section of the RFM technique is grouping our behavior segments and determining how much engagement our brand has with the consumer.</p>
 
 <h4>Input [9]:</h4>
-<div class="scrollable-code" class="scroll-button" style="width: 500px ; height: 485px;">
+<div class="scrollable-code" class="scroll-button">
 <pre><code class="language-sql">WITH rfm AS 
   (
     SELECT 
