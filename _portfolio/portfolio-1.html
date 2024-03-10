@@ -10,8 +10,8 @@ author_profile: false
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- Nhúng thư viện Prism.js -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.min.css">
-    <style>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/magula.min.css">
+     <style>
         pre {
 		        display: inline-block;
             background-color: #f4f4f4;
@@ -187,8 +187,7 @@ And let's jump right in by checking the data
 
 
 <h4>Input [1]:</h4>
-<pre><code class="language-sql" style="font-size: 14px;">
-SELECT * FROM sales;
+<pre><code class="language-sql" style="font-size: 14px;">SELECT * FROM sales;
 </code></pre>
 
 <h4>Output [1]:</h4>
@@ -407,8 +406,7 @@ SELECT * FROM sales;
 <p>Before taking further steps, we need to ensure our data’s integrity by counting the null values we have missed, so as to avoid coming to the wrong conclusion about the data. </p>
 <h4>Input [2]:</h4>
 <div class="scrollable-code" class="scroll-button" style="height: 350PX;">
-<pre><code class="language-sql">
-SELECT SUM(
+<pre><code class="language-sql">SELECT SUM(
     CASE WHEN CONCAT_WS('', 
     Row_ID, 
     Order_ID, 
@@ -492,13 +490,11 @@ FROM sales;
   <div class="code">
     <h4>Input [3]:</h4> 
         <!-- Đoạn mã của bạn -->
-    <pre><code class="language-sql" style="font-size: 14px;">
-SELECT Ship_Mode, 
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT Ship_Mode, 
       ROUND(SUM(sales),2) AS shipmode_sales 
 FROM sales 
 GROUP BY Ship_Mode
-ORDER BY 2 DESC;
-        </code></pre></div>
+ORDER BY 2 DESC;</code></pre></div>
   <div class="output">
     <h4>Output [3]:</h4> 
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
@@ -533,13 +529,11 @@ ORDER BY 2 DESC;
   <div class="code">
     <h4>Input [4]:</h4> 
         <!-- Đoạn mã của bạn -->
-    <pre><code class="language-sql" style="font-size: 14px;">
-SELECT Segment, 
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT Segment, 
       ROUND(SUM(sales),2) AS segment_sales
 FROM sales 
 GROUP BY Segment
-ORDER BY 2 DESC;
-        </code></pre></div>
+ORDER BY 2 DESC;</code></pre></div>
   <div class="output">
     <h4>Output [4]:</h4>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
@@ -569,13 +563,11 @@ ORDER BY 2 DESC;
   <div class="code" >
     <h4>Input [5]:</h4> 
         <!-- Đoạn mã của bạn -->
-    <pre><code class="language-sql" style="font-size: 14px;">
-SELECT Category, 
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT Category, 
       ROUND(SUM(sales),2) AS category_sales 
 FROM sales
 GROUP BY Category
-ORDER BY 2 DESC
-        </code></pre></div>
+ORDER BY 2 DESC;</code></pre></div>
   <div class="output" >
     <h4>Output [5]:</h4>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
@@ -605,13 +597,11 @@ ORDER BY 2 DESC
   <div class="code">
     <h4>Input [6]:</h4> 
         <!-- Đoạn mã của bạn -->
-    <pre><code class="language-sql" style="font-size: 14px;">
-SELECT Sub_Category, 
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT Sub_Category, 
       ROUND(SUM(sales),2) AS sub_category_sales 
 FROM sales
 GROUP BY Sub_Category
-ORDER BY 2 DESC
-        </code></pre></div>
+ORDER BY 2 DESC;</code></pre></div>
   <div class="output">
     <h4>Output [6]:</h4>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
@@ -655,24 +645,127 @@ ORDER BY 2 DESC
     </div>
 </div>
 
+<div class="container">
+  <div class="code">
+    <h4>Input [7]:</h4> 
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT	YEAR(Order_Date) as Year,
+        MONTH(Order_Date) as Month, 
+        ROUND(SUM(Sales),2) Revenue, 
+        COUNT(Order_ID) Frequency
+FROM sales
+GROUP BY YEAR(Order_Date), MONTH(Order_Date)
+ORDER BY 1,3 DESC;</code></pre></div>
+  <div class="output">
+    <h4>Output [7]:</h4>
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
+        <th>#</th>
+        <th>Sub_Category</th>
+        <th>sub_category_sales</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Phones</td>
+        <td>327782.45</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Chairs</td>
+        <td>322822.73</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Storage</td>
+        <td>219343.39</td>
+      </tr>
+      <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td>Labels</td>
+        <td>12347.73</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td>Fasteners</td>
+        <td>3001.96</td>
+      </tr>
+    </table>
+    </div>
+</div>
+
+<div class="container">
+  <div class="code">
+    <h4>Input [8]:</h4> 
+        <!-- Đoạn mã của bạn -->
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT  State, 
+        ROUND(SUM(sales),2) Revenue
+FROM sales
+GROUP BY State
+ORDER BY 2 DESC;</code></pre></div>
+  <div class="output">
+    <h4>Output [8]:</h4>
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
+        <th>#</th>
+        <th>Sub_Category</th>
+        <th>sub_category_sales</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Phones</td>
+        <td>327782.45</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Chairs</td>
+        <td>322822.73</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Storage</td>
+        <td>219343.39</td>
+      </tr>
+      <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td>Labels</td>
+        <td>12347.73</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td>Fasteners</td>
+        <td>3001.96</td>
+      </tr>
+    </table>
+    </div>
+</div>
 
 
 <h2>RFM Analysis</h2>
 <p>After doing some basic analysis of the core characteristics. The most important section of the RFM technique is grouping our behavior segments and determining how much engagement our brand has with the consumer.</p>
 
-<h4>Input [7]:</h4>
+<h4>Input [9]:</h4>
 <div class="scrollable-code" class="scroll-button" style="width: 500px ; height: 485px;">
-<pre><code class="language-sql">
-  WITH rfm AS 
+<pre><code class="language-sql">WITH rfm AS 
   (
     SELECT 
       Customer_Name, 
-      sum(sales) MonetaryValue,
-      avg(sales) AvgMonetaryValue,
-      count(Order_ID) Frequency,
-      max(Order_Date) last_order_date,
-      (SELECT max(Order_Date) FROM sales) max_order_date,
-      DATEDIFF(DD, max(Order_Date), (SELECT max(Order_Date) FROM sales)) Recency
+      SUM(sales) MonetaryValue,
+      AVG(sales) AvgMonetaryValue,
+      COUNT(Order_ID) Frequency,
+      MAX(Order_Date) last_order_date,
+      (SELECT MAX(Order_Date) FROM sales) max_order_date,
+      DATEDIFF(DD, MAX(Order_Date), (SELECT MAX(Order_Date) FROM sales)) Recency
     FROM sales
     GROUP BY Customer_Name
   ),
@@ -692,23 +785,22 @@ ORDER BY 2 DESC
   
   SELECT Customer_Name , rfm_recency, rfm_frequency, rfm_monetary,
     CASE
-      WHEN rfm_cell_string in (555, 554, 544, 545, 454, 455, 445) THEN 'Champions'
-      WHEN rfm_cell_string in (543, 444, 435, 355, 354, 345, 344, 335) THEN 'Loyal customers'
-      WHEN rfm_cell_string in (553, 551, 552, 541, 542, 533, 532, 531, 452, 451, 442, 441, 431, 453, 433, 432, 423, 353, 352, 351, 342, 341, 333, 323) THEN 'Potential loyalist'
-      WHEN rfm_cell_string in (512, 511, 422, 421, 412, 411, 311) THEN 'Recent customers'
-      WHEN rfm_cell_string in (525, 524, 523, 522, 521, 515, 514, 513, 425, 424, 413, 414, 415, 315, 314, 313) THEN 'Promising'
-      WHEN rfm_cell_string in (535, 534, 443, 434, 343, 334, 325, 324) THEN 'Customers needing attention' 
-      WHEN rfm_cell_string in (331, 321, 312, 221, 213) THEN 'About to sleep' 
-      WHEN rfm_cell_string in (255, 254, 245, 244, 253, 252, 243, 242, 235, 234, 225, 224, 153, 152, 145, 143, 142, 135, 134, 133, 125, 124) THEN 'At risk'
-      WHEN rfm_cell_string in (155, 154, 144, 214, 215, 115, 114, 113) THEN 'Can’t lose them'
-      WHEN rfm_cell_string in (332, 322, 231, 241, 251, 233, 232, 223, 222, 132, 123, 122, 212, 211) THEN 'Hibernating' 
-      WHEN rfm_cell_string in (111, 112, 121, 131, 141, 151) THEN 'Lost'
+      WHEN rfm_cell_string IN (555, 554, 544, 545, 454, 455, 445) THEN 'Champions'
+      WHEN rfm_cell_string IN (543, 444, 435, 355, 354, 345, 344, 335) THEN 'Loyal customers'
+      WHEN rfm_cell_string IN (553, 551, 552, 541, 542, 533, 532, 531, 452, 451, 442, 441, 431, 453, 433, 432, 423, 353, 352, 351, 342, 341, 333, 323) THEN 'Potential loyalist'
+      WHEN rfm_cell_string IN (512, 511, 422, 421, 412, 411, 311) THEN 'Recent customers'
+      WHEN rfm_cell_string IN (525, 524, 523, 522, 521, 515, 514, 513, 425, 424, 413, 414, 415, 315, 314, 313) THEN 'Promising'
+      WHEN rfm_cell_string IN (535, 534, 443, 434, 343, 334, 325, 324) THEN 'Customers needing attention' 
+      WHEN rfm_cell_string IN (331, 321, 312, 221, 213) THEN 'About to sleep' 
+      WHEN rfm_cell_string IN (255, 254, 245, 244, 253, 252, 243, 242, 235, 234, 225, 224, 153, 152, 145, 143, 142, 135, 134, 133, 125, 124) THEN 'At risk'
+      WHEN rfm_cell_string IN (155, 154, 144, 214, 215, 115, 114, 113) THEN 'Can’t lose them'
+      WHEN rfm_cell_string IN (332, 322, 231, 241, 251, 233, 232, 223, 222, 132, 123, 122, 212, 211) THEN 'Hibernating' 
+      WHEN rfm_cell_string IN (111, 112, 121, 131, 141, 151) THEN 'Lost'
     END rfm_segment
   FROM #rfm
-  ORDER BY rfm_recency DESC, rfm_frequency DESC ,rfm_monetary DESC;
-</code></pre></div>
+  ORDER BY rfm_recency DESC, rfm_frequency DESC ,rfm_monetary DESC;</code></pre></div>
 
-<h4>Outout [7]:</h4>
+<h4>Outout [9]:</h4>
 <table class="table table-hover " border="1" style="width: 500PX;">
   <thead >
     <tr>
@@ -797,8 +889,8 @@ ORDER BY 2 DESC
 
 <div class="flourish-embed flourish-map" data-src="visualisation/17083473"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
 
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script> hljs.highlightAll();</script>
 </body>
 </html>
 
