@@ -78,7 +78,7 @@ author_profile: false
     <title>Flourish Map Embed</title>
     <style>
         .flourish-embed {
-            max-width: 600px;
+            max-width: 700px;
             max-height: 400px;
             padding: 20px 10px;
         }
@@ -448,10 +448,10 @@ FROM sales;</code></pre></div>
 <h2>Calculating metrics</h2>
 <p>After reviewing the data, we may realize some crucial attributes in the table for analyzing and comparing each type with each other, such as:</p>
 <ul>
-  <li><strong>Ship mode</strong> includes <strong> Standard Class, Second Class, First Class, and Same Day,</strong> representing the delivery methods that we have served.</li>
-  <li><strong>Segment</strong> includes <strong>Consumer, Corporate, and Home Office,</strong> which represent our customer segments.</li>
-  <li><strong>Category</strong> includes <strong>Furniture, Office Supplies, and Technology.</strong></li>
-  <li>Each <strong>Sub-category</strong> includes <strong>Chairs, Bookcases, Tables, Art, Paper, Copiers, Accessories, and Phones,...</strong> every single sub-category has numerous items from different brands.</li>
+  <li><strong>Ship mode</strong> includes <strong> Standard Class, Second Class, First Class,</strong> and <strong>Same Day,</strong> representing the delivery methods that we have served.</li>
+  <li><strong>Segment</strong> includes <strong>Consumer, Corporate,</strong> and <strong>Home Office,</strong> which represent our customer segments.</li>
+  <li><strong>Category</strong> includes <strong>Furniture, Office Supplies,</strong> and <strong>Technology.</strong></li>
+  <li>Each <strong>Sub-category</strong> includes <strong>Chairs, Bookcases, Tables, Art, Paper, Copiers, Accessories,</strong> and <strong>Phones,...</strong> every single sub-category has numerous items from different brands.</li>
   <li><strong>State</strong> represents 49 states in the US excluding Hawaii, which our store isn't located.</li>
   <li><strong>Year:</strong> 2015 - 2018</li>
 </ul>
@@ -496,7 +496,7 @@ FROM sales;</code></pre></div>
 
 <div class="container">
 
-<h3>Sales by Ship Mode</h3>
+<h3>Sales by <br>Ship Mode</h3>
   <div class="code">
     <h4>Input [3]:</h4> 
         <!-- Đoạn mã của bạn -->
@@ -537,7 +537,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
 <div class="container">
 
-  <h3>Sales by Segment</h3>
+  <h3>Sales by <br>Segment</h3>
   <div class="code">
     <h4>Input [4]:</h4> 
         <!-- Đoạn mã của bạn -->
@@ -573,7 +573,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
 <div class="container">
 
-  <h3>Sales by Category</h3>
+  <h3>Sales by <br>Category</h3>
   <div class="code" >
     <h4>Input [5]:</h4> 
         <!-- Đoạn mã của bạn -->
@@ -609,7 +609,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
 <div class="container">
 
-  <h3>Sales by <br>Sub - Category</h3>
+  <h3>Sales by <br>Sub-<br>Category</h3>
   <div class="code">
     <h4>Input [6]:</h4> 
         <!-- Đoạn mã của bạn -->
@@ -625,7 +625,7 @@ ORDER BY 2 DESC;</code></pre></div>
       <tr style="background-color: #ccc;">
         <th>#</th>
         <th>Sub <br>Category</th>
-        <th>sub_category <br>_sales</th>
+        <th>sub_category<br>_sales</th>
       </tr>
       <tr>
         <td>1</td>
@@ -663,7 +663,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
 <div class="container">
 
-  <h3>Sales by Year</h3>
+  <h3>Sales by <br>Year</h3>
   <div class="code">
     <h4>Input [7]:</h4> 
     <pre><code class="language-sql" style="font-size: 14px;">SELECT	YEAR(Order_Date) as Year,
@@ -714,7 +714,7 @@ ORDER BY 1,2;</code></pre></div>
 
 <div class="container">
 
-  <h3>Sales by State</h3>
+  <h3>Sales by <br>State</h3>
   <div class="code">
     <h4>Input [8]:</h4> 
         <!-- Đoạn mã của bạn -->
@@ -771,7 +771,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
 
 <h2>RFM Analysis</h2>
-<p>After doing some basic analysis of the core characteristics. The most important section of the RFM technique is grouping our behavior segments and determining how much engagement our brand has with the consumer.</p>
+<p>After calculating metrics for core characteristics, the most important section of the RFM technique is grouping our customer segments and determining how much engagement our brand has with the consumer.</p>
 
 <h4>Input [9]:</h4>
 <div class="scrollable-code" class="scroll-button">
@@ -908,7 +908,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
 <div class="flourish-embed flourish-hierarchy" data-src="visualisation/16972523" data-height="400px"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
 
-<p>Accoording to characteristics of each group, let's segment them again into larger group for easier to analysis:
+<p>According to the characteristics of each group, let's segment them again into larger groups for easier analysis:
   <ul>
   <li><strong>Loyal Group</strong> as <strong>Group 1</strong> includes Champions, Loyal customers.</li>
   <li><strong>Vulnerable Group</strong> as <strong>Group 2</strong> includes Potential loyalist, Promising, Customers needing action, At risk, Can't lose them and Recent customers.</li>
@@ -922,12 +922,15 @@ ORDER BY 2 DESC;</code></pre></div>
 
 
 
-  <div class="container">
+<h2>Extra Steps</h2>
+<p></p>
+
+
+
+<div class="container">
   <div class="box box-1"> Box 1</div>
   <div class="box box-2"> Box 1</div>
   <div class="box box-3"> Box 1</div>
-
-
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
