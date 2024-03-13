@@ -464,7 +464,7 @@ FROM sales;</code></pre></div>
 <style>
     .container {
         display: flex;
-        align-items: top;
+        align-items: center;
         flex-direction: row;
         margin-top: 0;
         justify-content: space-between;
@@ -819,7 +819,7 @@ ORDER BY 2 DESC;</code></pre></div>
   FROM #rfm
   ORDER BY rfm_recency DESC, rfm_frequency DESC ,rfm_monetary DESC;</code></pre></div>
 
-<h4>Outout [9]:</h4>
+<h4>Output [9]:</h4>
 <table class="table table-hover " border="1" style="width: 500PX;">
   <thead >
     <tr>
@@ -923,18 +923,327 @@ According to the characteristics of each group, let's segment them again into la
 
 
 
-<h2>Extra Steps</h2>
-<p></p>
+<h2>Further Steps</h2>
+<p>Great results and conclusions from RFM Analysis helps us to determine which customer group we have to focus on.</p>
+<p>Imagining after considering all of the conditions, we need the Orders data that represents which category and sub-category have purchased the most when customers only buy exactly 2 items per order to make decisions.</p>
 
+<h4>Input [10]:</h4>
+<pre><code class="language-sql" style="font-size: 14px;">SELECT DISTINCT Order_ID, 
+  STUFF(
+  (SELECT ',' + Category 
+  FROM sales p
+  WHERE Order_ID IN (
+            SELECT Order_ID 
+            FROM (SELECT DISTINCT Order_ID, COUNT(*) row_number
+                FROM sales 
+                GROUP BY Order_ID
+                )m 
+            WHERE row_number = 2
+            AND p.Order_ID = s.Order_ID
+                        ) 
+  FOR XML PATH ('')),1,1,'') AS Category,
+  STUFF(
+  (SELECT ',' + Sub_Category
+  FROM sales p
+  WHERE Order_ID in (
+            SELECT Order_ID 
+            FROM (SELECT DISTINCT Order_ID, COUNT(*) row_number
+                FROM sales 
+                GROUP BY Order_ID
+                )m -
+            WHERE row_number = 2
+            AND p.Order_ID = s.Order_ID
+                        )
+  FOR XML PATH ('')),1,1,'') AS Sub_Category
+FROM sales s
+ORDER BY 2 DESC;
+</code></pre>
 
+<h4>Output [10]:</h4>
+<table class="table table-hover " border="1" style="width: 500PX;">
+  <thead >
+    <tr>
+      <th>#</th>
+      <th>Order_ID</th>
+      <th>Category</th>
+      <th>Sub_Category</th>
+  </tr>
+ </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>CA-2015-134726</td>
+      <td>Technology,Technology</td>
+      <td>Accessories,Phones</td>
+    </tr>
+    <tr class="odd">
+      <td>2</td>
+      <td>CA-2015-135993</td>
+      <td>Technology,Technology</td>
+      <td>Phones,Accessories</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>CA-2015-139192</td>
+      <td>Technology,Technology</td>
+      <td>Phones,Accessories</td>
+    </tr>
+    <tr class="odd">
+      <td>4</td>
+      <td>CA-2015-143840</td>
+      <td>Technology,Technology</td>
+      <td>Phones,Phones</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+	<tr class="odd">
+    <td>4919</td>
+    <td>US-2018-168613</td>
+    <td>NULL</td>
+    <td>NULL</td>
+    </tr>
+    <tr>
+      <td>4920</td>
+      <td>US-2018-168690</td>
+      <td>NULL</td>
+      <td>NULL</td>
+    </tr>
+    <tr  class="odd">
+      <td>4921</td>
+      <td>US-2018-168802</td>
+      <td>NULL</td>
+      <td>NULL</td>
+    </tr>
+    <tr>
+      <td>4922</td>
+      <td>US-2018-169551</td>
+      <td>NULL</td>
+      <td>NULL</td>
+	</tbody>
+</table>
+
+<p>The length of the table is too long and a brief presentation is required, the <strong>Output [10]</strong> cannot comprehensively represent all results. Because of that, I added an extra file that contains all of the Output [10] in <a href="https://github.com/trannphuocloc/sales-data">my repo</a> to make it easier for analysis. </p>
+<p>Let's query again to check how many different categories come together and which sub-category is more frequently purchased by customers at a time. </p>
+<p><i>Note: As presented in <b>Calculating Metrics</b>, we have 3 different categories, allowing customers to buy 3 &times; 3 = 9 different combinations. However, Sub-Category isn't that easy, we have 17 different sub-categories leading to customers having 17  &times; 17 = 289 different combination options, it's too much that I can present it in a table, and we also brief it as previous ones. </i></p>
 
 <div class="container">
-  <div class="box box-1"> Box 1</div>
-  <div class="box box-2"> Box 1</div>
-  <div class="box box-3"> Box 1</div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <h3>Category <br>by number <br>of Orders</h3>
+    <div class="code">
+      <h4>Input [11]:</h4> 
+          <!-- Đoạn mã của bạn -->
+      <pre><code class="language-sql" style="font-size: 14px;">SELECT category, 
+      COUNT(*) AS count_order 
+FROM extra
+GROUP BY category
+ORDER BY 2 DESC;</code></pre></div>
+    <div class="output">
+      <h4>Output [11]:</h4> 
+          <!-- Bảng hoặc nội dung đầu ra của bạn -->
+      <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+        <tr style="background-color: #ccc;">
+          <th>Category</th>
+          <th>count_order</th>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Office Supplies</td>
+        <td>846</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Technology</td>
+        <td>312</td>
+      </tr>
+      <tr>
+        <td>Furniture,<br>Office Supplies</td>
+        <td>296</td>
+      </tr>
+      <tr>
+        <td>Technology,<br>Office Supplies</td>
+        <td>266</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Furniture</td>
+        <td>264</td>
+      </tr>
+      <tr>
+        <td>Furniture,Technology</td>
+        <td>118</td>
+      </tr>
+      <tr>
+        <td>Furniture,Furniture</td>
+        <td>108</td>
+      </tr>
+      <tr>
+        <td>Technology,Furniture</td>
+        <td>108</td>
+      </tr>
+      <tr>
+        <td>Technology,Technology</td>
+        <td>78</td>
+      </tr>
+      </table>
+      </div>
+  </div>
+  
+  
+  
+  <div class="container">
+  
+    <h3>Sub-<br>Category <br>by number <br>of Orders</h3>
+    <div class="code">
+      <h4>Input [12]:</h4> 
+          <!-- Đoạn mã của bạn -->
+      <pre><code class="language-sql" style="font-size: 14px;">SELECT category, sub_category, 
+      COUNT(*) AS count_order 
+FROM extra
+GROUP BY category, sub_category
+ORDER BY 1, 3 DESC;</code></pre></div>
+    <div class="output">
+      <h4>Output [12]:</h4>
+          <!-- Bảng hoặc nội dung đầu ra của bạn -->
+      <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+        <tr style="background-color: #ccc;">
+          <th>#</th>
+          <th>Category</th>
+          <th>Sub Category</th>
+          <th>Count Order</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Furniture,<br>Furniture</td>
+        <td>Furnishings,<br>Furnishings</td>
+        <td>28</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Furniture,<br>Furniture</td>
+        <td>Chairs,<br>Furnishings</td>
+        <td>18</td>
+      </tr>
+      <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+      <tr>
+        <td>219</td>
+        <td>Technology,<br>Technology</td>
+        <td>Machines,<br>Accessories</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>220</td>
+        <td>Technology,<br>Technology</td>
+        <td>Phones,<br>Copiers</td>
+        <td>2</td>
+      </tr>
+      </table>
+      </div>
+  </div>
+  
+  <div class="container">
+  
+    <h3>Rank 1 each <br>Sub-Category <br>in Category</h3>
+    <div class="code" >
+      <h4>Input [13]:</h4> 
+          <!-- Đoạn mã của bạn -->
+      <pre><code class="language-sql" style="font-size: 14px;">WITH rank_item AS (
+  SELECT  category, sub_category, 
+          COUNT(*) AS count_order,
+          RANK() OVER(PARTITION BY category 
+          ORDER BY COUNT(*) DESC) AS rank
+  FROM extra
+  GROUP BY category,sub_category)
+SELECT category, sub_category, 
+      count_order, rank
+FROM rank_item
+WHERE rank = 1
+ORDER BY 1;</code></pre></div>
+    <div class="output" >
+      <h4>Output [13]:</h4>
+          <!-- Bảng hoặc nội dung đầu ra của bạn -->
+      <table class="table table-hover table-striped" border="1" style="width: 150px heigth 100px;" >
+        <tr style="background-color: #ccc;">
+          <th>category</th>
+          <th>sub category</th>
+          <th>count<br>_order</th>
+          <th>rank</th>
+      </tr>
+      <tr>
+        <td>Furniture,<br>Furniture</td>
+        <td>Furnishings,<br>Furnishings</td>
+        <td>28</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Furniture,<br>Office Supplies</td>
+        <td>Furnishings,<br>Binders</td>
+        <td>44</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Furniture,<br>Technology</td>
+        <td>Furnishings,<br>Phones</td>
+        <td>30</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Furniture</td>
+        <td>Paper,<br>Furnishings</td>
+        <td>30</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Office Supplies</td>
+        <td>Paper,<br>Binders</td>
+        <td>58</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Technology</td>
+        <td>Paper,<br>Accessories</td>
+        <td>38</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Technology</td>
+        <td>Binders,<br>Accessories</td>
+        <td>53</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Technology,<br>Furniture</td>
+        <td>Furnishings,<br>Phones</td>
+        <td>24</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Technology,<br>Office Supplies</td>
+        <td>Phones,<br>Binders</td>
+        <td>34</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Technology,<br>Technology</td>
+        <td>Accessories,<br>Phones</td>
+        <td>38</td>
+        <td>1</td>
+      </tr>
+      </table>
+      </div>
+  </div>
+
+<p>Here is the list of every sub-category with the highest number of orders by customer in 9 combination options per category. Based on that, for each program in each different sub-category, we all have data to make decisions more accurately.</p>
+<p>Furthermore, we can adjust or add more rank in the query to get more data in a category such as Technology-Technology, to determine which will be combination sub-category in our top selections. </p>
+
+<!-- vì sự hạn chế trong khả năng mà hiện tại chưa thể đào sâu tới cùng nhiệm vụ phức tạp này, ngày qua ngày sẽ nâng cấp khả năng của mình và hoàn thiện sau. -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script> hljs.highlightAll();</script>
 </body>
 </html>
