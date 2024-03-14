@@ -94,7 +94,7 @@ author_profile: false
 </body>
 
 <h4>Input [1]:</h4>
-<pre><code class="language-sql">SELECT * 
+<pre><code class="language-sql" style="font-size: 14px;">SELECT * 
 FROM Absenteeism_at_work a
 LEFT JOIN compensation b
 ON a.ID = b.ID
@@ -385,7 +385,7 @@ ON a.Reason_for_absence = c.Number;
 740 rows &times; 25 columns
 <p><br>From this, we find the list of employees who are healthy individuals and have low absenteeism for the bonus program. With the assumption that healthy individuals are non-smokers and non-drinkers, their BMI is less than 25, and their absence time must be under the average of the list.</p>
 <h4>Input [2]:</h4>
-<div class="scrollable-code" class="scroll-button" style="height: 272px;">
+<div class="scrollable-code" class="scroll-button" style="height: 280px;">
 <pre><code class="language-sql">SELECT * FROM Absenteeism_at_work a
 LEFT JOIN compensation b
 ON a.ID = b.ID
@@ -700,7 +700,7 @@ ORDER BY Absenteeism_time_in_hours;
 <p>Firstly, query the number of employees who are nonsmokers:</p>
 
 <h4>Input [3]:</h4>
-<pre><code class="language-sql">SELECT COUNT(*) AS count_nonsmoker 
+<pre><code class="language-sql" style="font-size: 14px;">SELECT COUNT(*) AS count_nonsmoker 
 FROM Absenteeism_at_work
 WHERE Social_smoker = 0;
 </code></pre>
@@ -731,7 +731,8 @@ WHERE Social_smoker = 0;
 <p>Before creating dashboard sections, as you can see from the two previous requirements, we query the data by using <code>SELECT *</code> all the time, which makes sense for people who just check out for the first time and want complete information. For some columns that we don't need in PowerBI, optimize the query again using:</p>
 
 <h4>Input [4]:</h4>
-<pre><code class="language-sql">SELECT 
+<div class="scrollable-code" class="scroll-button" style="width: 530px;">
+<pre><code class="language-sql" style="font-size: 14px;">SELECT 
 	a.ID, 
 	c.Reason,
 	a.Month_of_absence,
@@ -768,7 +769,7 @@ LEFT JOIN compensation b
 ON a.ID = b.ID
 LEFT JOIN Reasons c
 ON a.Reason_for_absence = c.Number;
-</code></pre>
+</code></pre></div>
 
 	
 <p>And we will use it to create a dashboard using PowerBI with a frame approved by HR departments here.</p>
