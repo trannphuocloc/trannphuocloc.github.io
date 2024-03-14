@@ -36,14 +36,41 @@ author_profile: false
             padding: 10px;
             border: 1px solid #ccc;
             overflow-x: auto;
+            font-size: 14px;
         }
     </style>
+  <title>Scrollable Code Block</title>
+  <style>
+      /* CSS để tạo nút cuộn cho block code */
+      .scrollable-code {
+          width: 600px; /* Chiều rộng của block code */
+          height: 400px; /* Chiều cao của block code */
+          overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
+          white-space: normal; /* Đảm bảo các dòng code không bị wrap */
+          margin-top: 0; /* Khoảng cách phía trên */
+          margin-bottom: 0; /* Khoảng cách phía dưới */
+          margin-right: 0px;
+          font-size: 14px;
+          padding-bottom:0;
+
+          
+      }
+      .scroll-button {
+            
+            margin-top: 0px; /* Khoảng cách từ nút cuộn đến văn bản trên */
+            margin-bottom: 0;
+            padding: 0; /* Điều chỉnh độ lớn của nút cuộn */
+        }
 </head>
 
 <body>
   <style>
+    table{
+      font-size: 14px;
+    }
+
     table thead th{
-        background-color: #ccc;
+      background-color: #ccc;
         text-align: left;
     }
 
@@ -67,8 +94,8 @@ author_profile: false
 </body>
 
 <h4>Input [1]:</h4>
-<pre> <code class="language-sql">
-SELECT TOP 5 * FROM Absenteeism_at_work a
+<pre><code class="language-sql">SELECT * 
+FROM Absenteeism_at_work a
 LEFT JOIN compensation b
 ON a.ID = b.ID
 LEFT JOIN Reasons c
@@ -77,193 +104,6 @@ ON a.Reason_for_absence = c.Number;
 
 
 <h4>Output [1]:</h4>
-<div style="overflow-x: auto;">
-<table class="table table-striped table-hover" border="1">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Reason for absence</th>
-      <th>Month of absence</th>
-      <th>Day of the week</th>
-      <th>Seasons</th>
-      <th>Transportation expense</th>
-      <th>Distance from Residence to Work</th>
-      <th>Service time</th>
-      <th>Age</th>
-      <th>Work load Average/day</th>
-      <th>Hit target</th>
-      <th>Disciplinary failure</th>
-      <th>Education</th>
-      <th>Son</th>
-      <th>Social drinker</th>
-      <th>Social smoker</th>
-      <th>Pet</th>
-      <th>Weight</th>
-      <th>Height</th>
-      <th>Body mass index</th>
-      <th>Absenteeism time in hours</th>
-      <th>ID</th>
-      <th>comp_hr</th>
-      <th>Number</th>
-      <th>Reason</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>unjustified absence </td>
-      <td>7</td>
-      <td>3</td>
-      <td>1</td>
-      <td>289</td>
-      <td>36</td>
-      <td>13</td>
-      <td>33</td>
-      <td>239554</td>
-      <td>97</td>
-      <td>0</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>90</td>
-      <td>172</td>
-      <td>30</td>
-      <td>4</td>
-      <td>1</td>
-      <td>35</td>
-      <td>26</td>
-      <td>unjustified absence</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Unkown</td>
-      <td>7</td>
-      <td>3</td>
-      <td>1</td>
-      <td>118</td>
-      <td>13</td>
-      <td>18</td>
-      <td>50</td>
-      <td>239554</td>
-      <td>97</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>98</td>
-      <td>178</td>
-      <td>31</td>
-      <td>0</td>
-      <td>2</td>
-      <td>49</td>
-      <td>0</td>
-      <td>Unkown</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>medical consultation </td>
-      <td>7</td>
-      <td>4</td>
-      <td>1</td>
-      <td>179</td>
-      <td>51</td>
-      <td>18</td>
-      <td>38</td>
-      <td>239554</td>
-      <td>97</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>89</td>
-      <td>170</td>
-      <td>31</td>
-      <td>2</td>
-      <td>3</td>
-      <td>47</td>
-      <td>23</td>
-      <td>medical consultation</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Diseases of the eye and adnexa</td>
-      <td>7</td>
-      <td>5</td>
-      <td>1</td>
-      <td>279</td>
-      <td>5</td>
-      <td>14</td>
-      <td>39</td>
-      <td>239554</td>
-      <td>97</td>
-      <td>0</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>68</td>
-      <td>168</td>
-      <td>24</td>
-      <td>4</td>
-      <td>4</td>
-      <td>51</td>
-      <td>7</td>
-      <td>Diseases of the eye and adnexa</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>medical consultation </td>
-      <td>7</td>
-      <td>5</td>
-      <td>1</td>
-      <td>289</td>
-      <td>36</td>
-      <td>13</td>
-      <td>33</td>
-      <td>239554</td>
-      <td>97</td>
-      <td>0</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>90</td>
-      <td>172</td>
-      <td>30</td>
-      <td>2</td>
-      <td>5</td>
-      <td>25</td>
-      <td>23</td>
-      <td>medical consultation</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-  
-<p>From this, we find the list of employees who are healthy individuals and have low absenteeism for the bonus program. With the assumption that healthy individuals are non-smokers and non-drinkers, their BMI is less than 25, and their absence time must be under the average of the list.</p>
-<h4>Input [2]:</h4>
-<pre><code class="language-sql">
-SELECT TOP 10 * FROM Absenteeism_at_work a
-LEFT JOIN compensation b
-ON a.ID = b.ID
-LEFT JOIN Reasons c
-ON a.Reason_for_absence = c.Number
-WHERE Social_drinker = 0 
-AND Social_smoker = 0
-AND Body_mass_index < 25
-AND Absenteeism_time_in_hours < (SELECT AVG(Absenteeism_time_in_hours) FROM Absenteeism_at_work)
-ORDER BY Absenteeism_time_in_hours;
-</code></pre>
-
-<h4>Output [2]:</h4>
 <div style="overflow-x: auto;">
 <table class="table table-striped table-hover" border="1" style="width: 1800px;">
   <thead>
@@ -297,6 +137,303 @@ ORDER BY Absenteeism_time_in_hours;
   </thead>
   <tbody>
     <tr>
+      <td>1</td>
+      <td>26</td>
+      <td>7</td>
+      <td>3</td>
+      <td>1</td>
+      <td>289</td>
+      <td>36</td>
+      <td>13</td>
+      <td>33</td>
+      <td>239554</td>
+      <td>97</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>90</td>
+      <td>172</td>
+      <td>30</td>
+      <td>4</td>
+      <td>1</td>
+      <td>35</td>
+      <td>26</td>
+      <td>unjustified absence</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0</td>
+      <td>7</td>
+      <td>3</td>
+      <td>1</td>
+      <td>118</td>
+      <td>13</td>
+      <td>18</td>
+      <td>50</td>
+      <td>239554</td>
+      <td>97</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>98</td>
+      <td>178</td>
+      <td>31</td>
+      <td>0</td>
+      <td>2</td>
+      <td>49</td>
+      <td>0</td>
+      <td>Unkown</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>23</td>
+      <td>7</td>
+      <td>4</td>
+      <td>1</td>
+      <td>179</td>
+      <td>51</td>
+      <td>18</td>
+      <td>38</td>
+      <td>239554</td>
+      <td>97</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>89</td>
+      <td>170</td>
+      <td>31</td>
+      <td>2</td>
+      <td>3</td>
+      <td>47</td>
+      <td>23</td>
+      <td>medical consultation</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>7</td>
+      <td>7</td>
+      <td>5</td>
+      <td>1</td>
+      <td>279</td>
+      <td>5</td>
+      <td>14</td>
+      <td>39</td>
+      <td>239554</td>
+      <td>97</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>68</td>
+      <td>168</td>
+      <td>24</td>
+      <td>4</td>
+      <td>4</td>
+      <td>51</td>
+      <td>7</td>
+      <td>Diseases of the eye and adnexa</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <td>737</td>
+      <td>11</td>
+      <td>7</td>
+      <td>3</td>
+      <td>1</td>
+      <td>235</td>
+      <td>11</td>
+      <td>14</td>
+      <td>37</td>
+      <td>264604</td>
+      <td>93</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>88</td>
+      <td>172</td>
+      <td>29</td>
+      <td>4</td>
+      <td>737</td>
+      <td>26</td>
+      <td>11</td>
+      <td>Diseases of the digestive system</td>
+    </tr>
+    <tr>
+      <td>738</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>118</td>
+      <td>14</td>
+      <td>13</td>
+      <td>40</td>
+      <td>271219</td>
+      <td>95</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>8</td>
+      <td>98</td>
+      <td>170</td>
+      <td>34</td>
+      <td>0</td>
+      <td>738</td>
+      <td>48</td>
+      <td>0</td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <td>739</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>2</td>
+      <td>231</td>
+      <td>35</td>
+      <td>14</td>
+      <td>39</td>
+      <td>271219</td>
+      <td>95</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>100</td>
+      <td>170</td>
+      <td>35</td>
+      <td>0</td>
+      <td>739</td>
+      <td>42</td>
+      <td>0</td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <td>740</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6</td>
+      <td>3</td>
+      <td>179</td>
+      <td>45</td>
+      <td>14</td>
+      <td>53</td>
+      <td>271219</td>
+      <td>95</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>77</td>
+      <td>175</td>
+      <td>25</td>
+      <td>0</td>
+      <td>740</td>
+      <td>55</td>
+      <td>0</td>
+      <td>Unknown</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+740 rows &times; 25 columns
+<p><br>From this, we find the list of employees who are healthy individuals and have low absenteeism for the bonus program. With the assumption that healthy individuals are non-smokers and non-drinkers, their BMI is less than 25, and their absence time must be under the average of the list.</p>
+<h4>Input [2]:</h4>
+<div class="scrollable-code" class="scroll-button" style="height: 272px;">
+<pre><code class="language-sql">SELECT * FROM Absenteeism_at_work a
+LEFT JOIN compensation b
+ON a.ID = b.ID
+LEFT JOIN Reasons c
+ON a.Reason_for_absence = c.Number
+WHERE Social_drinker = 0 
+AND Social_smoker = 0
+AND Body_mass_index < 25
+AND Absenteeism_time_in_hours < (SELECT AVG(Absenteeism_time_in_hours) FROM Absenteeism_at_work)
+ORDER BY Absenteeism_time_in_hours;
+</code></pre></div>
+
+<h4>Output [2]:</h4>
+<div style="overflow-x: auto;">
+<table class="table table-striped table-hover" border="1" style="width: 1800px;">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>ID</th>
+      <th>Reason for absence</th>
+      <th>Month of absence</th>
+      <th>Day of the week</th>
+      <th>Seasons</th>
+      <th>Transportation expense</th>
+      <th>Distance from Residence to Work</th>
+      <th>Service time</th>
+      <th>Age</th>
+      <th>Work load Average/day</th>
+      <th>Hit target</th>
+      <th>Disciplinary failure</th>
+      <th>Education</th>
+      <th>Son</th>
+      <th>Social drinker</th>
+      <th>Social smoker</th>
+      <th>Pet</th>
+      <th>Weight</th>
+      <th>Height</th>
+      <th>Body mass index</th>
+      <th>Absenteeism time in hours</th>
+      <th>ID</th>
+      <th>comp_hr</th>
+      <th>Number</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
       <td>52</td>
       <td>0</td>
       <td>9</td>
@@ -324,6 +461,7 @@ ORDER BY Absenteeism_time_in_hours;
       <td>Unknown</td>
     </tr>
     <tr>
+      <td>2</td>
       <td>217</td>
       <td>0</td>
       <td>5</td>
@@ -351,6 +489,7 @@ ORDER BY Absenteeism_time_in_hours;
       <td>Unknown</td>
     </tr>
     <tr>
+      <td>3</td>
       <td>531</td>
       <td>0</td>
       <td>10</td>
@@ -378,6 +517,7 @@ ORDER BY Absenteeism_time_in_hours;
       <td>Unknown</td>
     </tr>
     <tr>
+      <td>4</td>
       <td>559</td>
       <td>13</td>
       <td>12</td>
@@ -405,17 +545,46 @@ ORDER BY Absenteeism_time_in_hours;
       <td style="width: 40%;">Diseases of the musculoskeletal system and connective tissue</td>
     </tr>
     <tr>
-      <td>504</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <td>108</td>
+      <td>540</td>
       <td>23</td>
-      <td>9</td>
+      <td>11</td>
+      <td>6</td>
       <td>4</td>
-      <td>1</td>
       <td>225</td>
       <td>26</td>
       <td>9</td>
       <td>28</td>
-      <td>261756</td>
-      <td>87</td>
+      <td>268519</td>
+      <td>93</td>
       <td>0</td>
       <td>1</td>
       <td>1</td>
@@ -425,78 +594,25 @@ ORDER BY Absenteeism_time_in_hours;
       <td>69</td>
       <td>169</td>
       <td>24</td>
-      <td>1</td>
-      <td>504</td>
-      <td>50</td>
+      <td>4</td>
+      <td>540</td>
+      <td>47</td>
       <td>23</td>
-      <td>Medical consultation</td>
+      <td>Medical Consultation</td>
     </tr>
     <tr>
-      <td>522</td>
+      <td>109</td>
+      <td>315</td>
       <td>1</td>
       <td>10</td>
       <td>4</td>
       <td>4</td>
-      <td>228</td>
-      <td>14</td>
-      <td>16</td>
-      <td>58</td>
-      <td>284853</td>
-      <td>91</td>
-      <td>0</td>
-      <td>1</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>65</td>
-      <td>172</td>
-      <td>22</td>
-      <td>1</td>
-      <td>522</td>
-      <td>55</td>
-      <td>1</td>
-      <td>Certain infectious and parasitic diseases</td>
-    </tr>
-    <tr>
-      <td>525</td>
-      <td>13</td>
-      <td>10</td>
-      <td>5</td>
-      <td>4</td>
-      <td>225</td>
-      <td>26</td>
-      <td>9</td>
-      <td>28</td>
-      <td>284853</td>
-      <td>91</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>69</td>
-      <td>169</td>
-      <td>24</td>
-      <td>1</td>
-      <td>525</td>
-      <td>39</td>
-      <td>13</td>
-      <td>Diseases of the musculoskeletal system and connective tissue</td>
-    </tr>
-    <tr>
-      <td>263</td>
-      <td>23</td>
-      <td>8</td>
-      <td>5</td>
-      <td>1</td>
       <td>179</td>
       <td>26</td>
       <td>9</td>
       <td>30</td>
-      <td>265615</td>
-      <td>94</td>
+      <td>265017</td>
+      <td>88</td>
       <td>0</td>
       <td>3</td>
       <td>0</td>
@@ -506,51 +622,53 @@ ORDER BY Absenteeism_time_in_hours;
       <td>56</td>
       <td>171</td>
       <td>19</td>
+      <td>5</td>
+      <td>315</td>
+      <td>47</td>
       <td>1</td>
-      <td>263</td>
-      <td>50</td>
-      <td>23</td>
-      <td>Medical consultation</td>
+      <td>Certain Infectious and Parasitic Diseases</td>
     </tr>
     <tr>
-      <td>184</td>
-      <td>28</td>
-      <td>3</td>
-      <td>2</td>
-      <td>3</td>
-      <td>225</td>
+      <td>110</td>
+      <td>316</td>
+      <td>7</td>
+      <td>10</td>
+      <td>4</td>
+      <td>4</td>
+      <td>179</td>
       <td>26</td>
       <td>9</td>
-      <td>28</td>
-      <td>343253</td>
-      <td>95</td>
+      <td>30</td>
+      <td>265017</td>
+      <td>88</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
+      <td>3</td>
       <td>0</td>
       <td>0</td>
-      <td>2</td>
-      <td>69</td>
-      <td>169</td>
-      <td>24</td>
-      <td>1</td>
-      <td>184</td>
+      <td>0</td>
+      <td>0</td>
+      <td>56</td>
+      <td>171</td>
+      <td>19</td>
+      <td>5</td>
+      <td>316</td>
       <td>37</td>
-      <td>28</td>
-      <td>Dental consultation</td>
+      <td>7</td>
+      <td>Diseases of the Eye and Adnexa</td>
     </tr>
     <tr>
-      <td>186</td>
+      <td>111</td>
+      <td>359</td>
       <td>23</td>
+      <td>1</td>
       <td>4</td>
-      <td>4</td>
-      <td>3</td>
+      <td>2</td>
       <td>225</td>
       <td>26</td>
       <td>9</td>
       <td>28</td>
-      <td>326452</td>
-      <td>96</td>
+      <td>330061</td>
+      <td>100</td>
       <td>0</td>
       <td>1</td>
       <td>1</td>
@@ -560,17 +678,18 @@ ORDER BY Absenteeism_time_in_hours;
       <td>69</td>
       <td>169</td>
       <td>24</td>
-      <td>1</td>
-      <td>186</td>
-      <td>46</td>
+      <td>5</td>
+      <td>359</td>
+      <td>49</td>
       <td>23</td>
-      <td>Medical consultation</td>
+      <td>Medical Consultation</td>
     </tr>
   </tbody>
 </table>
 </div>
+111 rows &times; 26 columns
 
-<p>Here, the list of company employees who have a healthy lifestyle matches the selection criteria for the bonus program. The output comes from 111 employees. <em>There are ten of them as an example.</em></p>
+<p><br>Here we have the list of company employees who have a healthy lifestyle that matches the selection criteria for the bonus program. The output comes with 111 employees.</p>
 
 <h2>Requirement 2</h2>
 <p>Let’s move on to the next requirement from HR: calculating a wage increase or annual compensation for the insurance budget of $983,221 for all non-smokers</p>
@@ -581,8 +700,7 @@ ORDER BY Absenteeism_time_in_hours;
 <p>Firstly, query the number of employees who are nonsmokers:</p>
 
 <h4>Input [3]:</h4>
-<pre><code class="language-sql">
-SELECT COUNT(*) AS count_nonsmoker 
+<pre><code class="language-sql">SELECT COUNT(*) AS count_nonsmoker 
 FROM Absenteeism_at_work
 WHERE Social_smoker = 0;
 </code></pre>
@@ -607,14 +725,13 @@ WHERE Social_smoker = 0;
 
 <p>Let's do it backward to see the cost in total for an employee per year after the company increases the insurance budget: <i>0.68907 x 8 x 5 x 52 = 1,433.26 ($/year)</i></p>
 
-<p><b>The rise of 0.689 per hour in an employee's hourly income may seem substantial, but a mere $1433 payment for a nonsmoker employee's insurance will have a significant impact on wellness and employee incentives.</b> That's just too tiny for the company to encourage employees to get a better lifestyle for the next bonus program.</p>
+<p><b>The rise of 0.689 dollar per hour in an employee's hourly income may seem substantial, but a mere $1433 payment for a nonsmoker employee's insurance will have a significant impact on wellness and employee incentives.</b> That's just too tiny for the company to encourage employees to get a better lifestyle for the next bonus program.</p>
 
 <h2>Requirement 3</h2>
 <p>Before creating dashboard sections, as you can see from the two previous requirements, we query the data by using <code>SELECT *</code> all the time, which makes sense for people who just check out for the first time and want complete information. For some columns that we don't need in PowerBI, optimize the query again using:</p>
 
 <h4>Input [4]:</h4>
-<pre> <code class="language-sql">
-SELECT 
+<pre><code class="language-sql">SELECT 
 	a.ID, 
 	c.Reason,
 	a.Month_of_absence,
