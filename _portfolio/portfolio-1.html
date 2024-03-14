@@ -925,7 +925,7 @@ According to the characteristics of each group, let's segment them again into la
 
 <h2>Further Steps</h2>
 <p>Great results and conclusions from RFM Analysis helps us to determine which customer group we have to focus on.</p>
-<p>Imagining after considering all of the conditions, we need the Orders data that represents which category and sub-category have purchased the most when customers only buy exactly 2 items per order to make decisions.</p>
+<p>Imagining after considering all of the conditions, we need the Orders data to answer the question 'Which item comes together the most when customers choose an order that has two items in?" that represents which category and sub-category have purchased the most when customers only buy exactly 2 items per order to make decisions.</p>
 
 <h4>Input [10]:</h4>
 <pre><code class="language-sql" style="font-size: 14px;">SELECT DISTINCT Order_ID, 
@@ -1028,7 +1028,7 @@ ORDER BY 2 DESC;
 
 <p>The length of the table is too long and a brief presentation is required, the <strong>Output [10]</strong> cannot comprehensively represent all results. Because of that, I added an extra file that contains all of the Output [10] in <a href="https://github.com/trannphuocloc/sales-data">my repo</a> to make it easier for analysis. </p>
 <p>Let's query again to check how many different categories come together and which sub-category is more frequently purchased by customers at a time. </p>
-<p><i>Note: As presented in <b>Calculating Metrics</b>, we have 3 different categories, allowing customers to buy 3 &times; 3 = 9 different combinations. However, Sub-Category isn't that easy, we have 17 different sub-categories leading to customers having 17  &times; 17 = 289 different combination options, it's too much that I can present it in a table, and we also brief it as previous ones. </i></p>
+<p><i>Note: As presented in <b>Calculating Metrics</b>, we have 3 different categories, allowing customers to buy 3 &times; 3 = 9 different combinations when customers buy exactly 2 items per order. However, Sub-Category isn't that easy, we have 17 different sub-categories leading to customers having 17  &times; 17 = 289 different combination options, it's too much that I can present it in a table, and we also brief it as previous ones. </i></p>
 
 <div class="container">
 
@@ -1241,8 +1241,9 @@ ORDER BY 1;</code></pre></div>
 <p>Here is the list of every sub-category with the highest number of orders by customer in 9 combination options per category. Based on that, for each program in each different sub-category, we all have data to make decisions more accurately.</p>
 <p>Furthermore, we can adjust or add more rank in the query to get more data in a category such as Technology-Technology, to determine which will be combination sub-category in our top selections. </p>
 
-<!-- vì sự hạn chế trong khả năng mà hiện tại chưa thể đào sâu tới cùng nhiệm vụ phức tạp này, ngày qua ngày sẽ nâng cấp khả năng của mình và hoàn thiện sau. -->
-
+<h3>Limitation</h3>
+<p>The limitation of the query is that the tables in SQL cannot detect "Phones,Accessories" and "Acessories,Phones" as the same, leading to the data being missed on the reverse side and not counted in the query. And the same thing happens with other sub-categories, one side that is not recognized by SQL is missing. This means that our data integrity was not ensured.</p>
+<p>Because of the limitations of capabilities, I have not yet been able to dig deeper into this complex task. I'm going to upgrade my skills, complete it and update as soon as possible.</p>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script> hljs.highlightAll();</script>
 </body>
