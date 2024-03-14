@@ -385,7 +385,7 @@ ON a.Reason_for_absence = c.Number;
 740 rows &times; 25 columns
 <p><br>From this, we find the list of employees who are healthy individuals and have low absenteeism for the bonus program. With the assumption that healthy individuals are non-smokers and non-drinkers, their BMI is less than 25, and their absence time must be under the average of the list.</p>
 <h4>Input [2]:</h4>
-<div class="scrollable-code" class="scroll-button" style="height: 285px;">
+<div class="scrollable-code" class="scroll-button" style="height: 290px;">
 <pre><code class="language-sql">SELECT * FROM Absenteeism_at_work a
 LEFT JOIN compensation b
 ON a.ID = b.ID
