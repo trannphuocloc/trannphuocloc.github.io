@@ -951,7 +951,7 @@ According to the characteristics of each group, let's segment them again into la
             FROM (SELECT DISTINCT Order_ID, COUNT(*) row_number
                 FROM sales 
                 GROUP BY Order_ID
-                )m -
+                )m 
             WHERE row_number = 2
             AND p.Order_ID = s.Order_ID
                         )
