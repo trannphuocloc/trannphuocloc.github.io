@@ -87,7 +87,7 @@ author_profile: false
 </body>
 
 <div id="toc-container">
-  <h2>Table of Contents</h2>
+  <p><strong>Content:</strong></p>
   <ul id="toc"></ul>
 </div>
 
@@ -95,19 +95,68 @@ author_profile: false
   document.addEventListener("DOMContentLoaded", function() {
     var toc = document.getElementById("toc");
     var headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+    var currentLevel = 1;
     var tocHTML = "";
+    var levelCounts = [0, 0, 0, 0, 0, 0];
 
     headings.forEach(function(heading) {
-      var level = heading.tagName.charAt(1);
-      var id = heading.textContent.replace(/\s+/g, '-').toLowerCase();
-      heading.id = id;
-      tocHTML += `<li class="toc-level-${level}"><a href="#${id}">${heading.textContent}</a></li>`;
+      if (!heading.classList.contains("toc-title")) {  // Exclude the TOC title
+        var level = parseInt(heading.tagName.charAt(1));
+        var id = heading.textContent.replace(/\s+/g, '-').toLowerCase();
+        heading.id = id;
+
+        // Adjust level counts
+        levelCounts[level - 1]++;
+        for (var i = level; i < 6; i++) {
+          levelCounts[i] = 1;
+        }
+
+        var levelString = levelCounts.slice(0, level).join('.');
+
+        // Create nested lists as necessary
+        if (level > currentLevel) {
+          tocHTML += '<ol>'.repeat(level - currentLevel);
+        } else if (level < currentLevel) {
+          tocHTML += '</li></ol>'.repeat(currentLevel - level);
+        } else {
+          tocHTML += '</li>';
+        }
+
+        tocHTML += `<li><a href="#${id}">${levelString} ${heading.textContent}</a>`;
+        currentLevel = level;
+      }
     });
+
+    // Close remaining open lists
+    tocHTML += '</li></ol>'.repeat(currentLevel - 1);
 
     toc.innerHTML = tocHTML;
   });
 </script>
 
+<style>
+  #toc-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  #toc ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  #toc li {
+    margin-bottom: 5px;
+  }
+
+  .toc-level-1 { margin-left: 0; }
+  .toc-level-2 { margin-left: 20px; }
+  .toc-level-3 { margin-left: 40px; }
+  .toc-level-4 { margin-left: 60px; }
+  .toc-level-5 { margin-left: 80px; }
+  .toc-level-6 { margin-left: 100px; }
+</style>
 <body>
 <h2>RFM Summary</h2>
 <body>
