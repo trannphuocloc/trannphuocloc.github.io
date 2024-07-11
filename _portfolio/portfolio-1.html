@@ -83,8 +83,30 @@ author_profile: false
             padding: 20px 10px;
         }
     </style>
+
 </body>
 
+<div id="toc-container">
+  <h2>Table of Contents</h2>
+  <ul id="toc"></ul>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var toc = document.getElementById("toc");
+    var headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+    var tocHTML = "";
+
+    headings.forEach(function(heading) {
+      var level = heading.tagName.charAt(1);
+      var id = heading.textContent.replace(/\s+/g, '-').toLowerCase();
+      heading.id = id;
+      tocHTML += `<li class="toc-level-${level}"><a href="#${id}">${heading.textContent}</a></li>`;
+    });
+
+    toc.innerHTML = tocHTML;
+  });
+</script>
 
 <body>
 <h2>RFM Summary</h2>
@@ -187,11 +209,11 @@ Here <a href="https://github.com/trannphuocloc/sales-data">our data set</a> for 
 And let's jump right in by checking the data 
 
 
-<h4>Input [1]:</h4>
+<p><strong>Input [1]:</strong></p>
 <pre><code class="language-sql" style="font-size: 14px;">SELECT * FROM sales;
 </code></pre>
 
-<h4>Output [1]:</h4>
+<p><strong>Output [1]:</strong></p>
 <div style="overflow-x: auto;">
   <table class="table table-hover " border="1" style="width: 2000px;">
   <thead >
@@ -405,7 +427,7 @@ And let's jump right in by checking the data
 
 <p></p>	
 <p>Before taking further steps, we need to ensure our data’s integrity by counting the null values we have missed, so as to avoid coming to the wrong conclusion about the data. </p>
-<h4>Input [2]:</h4>
+<p><strong>Input [2]:</strong></p>
 <div class="scrollable-code" class="scroll-button" style="width: 340px;" >
 <pre><code class="language-sql">SELECT SUM(
     CASE WHEN CONCAT_WS('', 
@@ -430,7 +452,7 @@ And let's jump right in by checking the data
 ) AS count_null
 FROM sales;</code></pre></div>
 
-<h4>Output [2]</h4>
+<p><strong>Output [2]:</strong></p>
 <table class="table table-hover " border="1" >
   <thead >
     <tr>
@@ -498,7 +520,7 @@ FROM sales;</code></pre></div>
 
 <h3>Sales by <br>Ship Mode</h3>
   <div class="code">
-    <h4>Input [3]:</h4> 
+    <p><strong>Input [3]:</strong></p> 
         <!-- Đoạn mã của bạn -->
     <pre><code class="language-sql" style="font-size: 14px;">SELECT Ship_Mode, 
       ROUND(SUM(sales),2) AS shipmode_sales 
@@ -506,7 +528,7 @@ FROM sales
 GROUP BY Ship_Mode
 ORDER BY 2 DESC;</code></pre></div>
   <div class="output">
-    <h4>Output [3]:</h4> 
+    <p><strong>Outnput [3]:</strong></p> 
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover table-striped" border="1" style="width: 150px;" >
       <tr style="background-color: #ccc;">
@@ -539,7 +561,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
   <h3>Sales by <br>Segment</h3>
   <div class="code">
-    <h4>Input [4]:</h4> 
+    <p><strong>Input [4]:</strong></p> 
         <!-- Đoạn mã của bạn -->
     <pre><code class="language-sql" style="font-size: 14px;">SELECT Segment, 
       ROUND(SUM(sales),2) AS segment_sales
@@ -547,7 +569,7 @@ FROM sales
 GROUP BY Segment
 ORDER BY 2 DESC;</code></pre></div>
   <div class="output">
-    <h4>Output [4]:</h4>
+    <p><strong>Output [4]:</strong></p>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover table-striped" border="1" style="width: 150px;" >
       <tr style="background-color: #ccc;">
@@ -575,7 +597,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
   <h3>Sales by <br>Category</h3>
   <div class="code" >
-    <h4>Input [5]:</h4> 
+    <p><strong>Input [5]:</strong></p> 
         <!-- Đoạn mã của bạn -->
     <pre><code class="language-sql" style="font-size: 14px;">SELECT Category, 
       ROUND(SUM(sales),2) AS category_sales 
@@ -583,7 +605,7 @@ FROM sales
 GROUP BY Category
 ORDER BY 2 DESC;</code></pre></div>
   <div class="output" >
-    <h4>Output [5]:</h4>
+    <p><strong>Output [5]:</strong></p>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover table-striped " border="1" style="width: 150px;" >
       <tr style="background-color: #ccc;">
@@ -611,7 +633,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
   <h3>Sales by <br>Sub-<br>Category</h3>
   <div class="code">
-    <h4>Input [6]:</h4> 
+    <p><strong>Input [6]:</strong></p> 
         <!-- Đoạn mã của bạn -->
     <pre><code class="language-sql" style="font-size: 14px;">SELECT Sub_Category, 
       ROUND(SUM(sales),2) AS sub_sales 
@@ -619,7 +641,7 @@ FROM sales
 GROUP BY Sub_Category
 ORDER BY 2 DESC;</code></pre></div>
   <div class="output">
-    <h4>Output [6]:</h4>
+    <p><strong>Output [6]:</strong></p>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover table-striped" border="1" style="width: 150px;" >
       <tr style="background-color: #ccc;">
@@ -665,7 +687,7 @@ ORDER BY 2 DESC;</code></pre></div>
 
   <h3>Sales by <br>Year</h3>
   <div class="code">
-    <h4>Input [7]:</h4> 
+    <p><strong>Input [7]:</strong></p> 
     <pre><code class="language-sql" style="font-size: 14px;">SELECT	YEAR(Order_Date) as Year,
         MONTH(Order_Date) as Month, 
         ROUND(SUM(Sales),2) Revenue
@@ -673,7 +695,7 @@ FROM sales
 GROUP BY YEAR(Order_Date), MONTH(Order_Date)
 ORDER BY 1,2;</code></pre></div>
   <div class="output">
-    <h4>Output [7]:</h4>
+    <p><strong>Output [7]:</strong></p>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover table-striped" border="1" style="width: 150px;" >
       <tr style="background-color: #ccc;">
@@ -717,7 +739,7 @@ ORDER BY 1,2;</code></pre></div>
 
   <h3>Sales by <br>State</h3>
   <div class="code">
-    <h4>Input [8]:</h4> 
+    <p><strong>Input [8]:</strong></p> 
         <!-- Đoạn mã của bạn -->
     <pre><code class="language-sql" style="font-size: 14px;">SELECT  State, 
         ROUND(SUM(sales),2) Revenue
@@ -725,7 +747,7 @@ FROM sales
 GROUP BY State
 ORDER BY 2 DESC;</code></pre></div>
   <div class="output">
-    <h4>Output [8]:</h4>
+    <p><strong>Output [8]:</strong></p>
         <!-- Bảng hoặc nội dung đầu ra của bạn -->
     <table class="table table-hover table-striped" border="1" style="width: 150px;" >
       <tr style="background-color: #ccc;">
@@ -774,7 +796,7 @@ ORDER BY 2 DESC;</code></pre></div>
 <h2>RFM Analysis</h2>
 <p>After calculating metrics for core characteristics, the most important section of the RFM technique is grouping our customer segments and determining how much engagement our brand has with the consumer.</p>
 
-<h4>Input [9]:</h4>
+<p><strong>Input [9]:</strong></p>
 <div class="scrollable-code" class="scroll-button">
 <pre><code class="language-sql">WITH rfm AS 
   (
@@ -820,7 +842,7 @@ ORDER BY 2 DESC;</code></pre></div>
   FROM #rfm
   ORDER BY rfm_recency DESC, rfm_frequency DESC ,rfm_monetary DESC;</code></pre></div>
 
-<h4>Output [9]:</h4>
+  <p><strong>Output [9]:</strong></p>
 <table class="table table-hover " border="1" style="width: 500PX;">
   <thead >
     <tr>
@@ -928,7 +950,7 @@ According to the characteristics of each group, let's segment them again into la
 <p>Great results and conclusions from RFM Analysis helps us to determine which customer group we have to focus on.</p>
 <p>Imagining after considering all of the conditions, we need the Orders data to answer the question 'Which item comes together the most when customers choose an order that has two items in?" that represents which category and sub-category have purchased the most when customers only buy exactly 2 items per order to make decisions.</p>
 
-<h4>Input [10]:</h4>
+<p><strong>Input [10]:</strong></p>
 <pre><code class="language-sql" style="font-size: 14px;">SELECT DISTINCT Order_ID, 
   STUFF(
   (SELECT ',' + Category 
@@ -960,7 +982,7 @@ FROM sales s
 ORDER BY 2 DESC;
 </code></pre>
 
-<h4>Output [10]:</h4>
+<p><strong>Output [10]:</strong></p>
 <table class="table table-hover " border="1" style="width: 500PX;">
   <thead >
     <tr>
@@ -1035,7 +1057,7 @@ ORDER BY 2 DESC;
 
   <h3>Category <br>by number <br>of Orders</h3>
     <div class="code">
-      <h4>Input [11]:</h4> 
+      <p><strong>Input [11]:</strong></p> 
           <!-- Đoạn mã của bạn -->
       <pre><code class="language-sql" style="font-size: 14px;">SELECT category, 
       COUNT(*) AS count_order 
@@ -1043,7 +1065,7 @@ FROM extra
 GROUP BY category
 ORDER BY 2 DESC;</code></pre></div>
     <div class="output">
-      <h4>Output [11]:</h4> 
+      <p><strong>Output [11]:</strong></p> 
           <!-- Bảng hoặc nội dung đầu ra của bạn -->
       <table class="table table-hover table-striped" border="1" style="width: 150px;" >
         <tr style="background-color: #ccc;">
@@ -1096,7 +1118,7 @@ ORDER BY 2 DESC;</code></pre></div>
   
     <h3>Sub-<br>Category <br>by number <br>of Orders</h3>
     <div class="code">
-      <h4>Input [12]:</h4> 
+      <p><strong>Input [12]:</strong></p> 
           <!-- Đoạn mã của bạn -->
       <pre><code class="language-sql" style="font-size: 14px;">SELECT category, sub_category, 
       COUNT(*) AS count_order 
@@ -1104,7 +1126,7 @@ FROM extra
 GROUP BY category, sub_category
 ORDER BY 1, 3 DESC;</code></pre></div>
     <div class="output">
-      <h4>Output [12]:</h4>
+      <p><strong>Output [12]:</strong></p>
           <!-- Bảng hoặc nội dung đầu ra của bạn -->
       <table class="table table-hover table-striped" border="1" style="width: 150px;" >
         <tr style="background-color: #ccc;">
@@ -1151,7 +1173,7 @@ ORDER BY 1, 3 DESC;</code></pre></div>
   
     <h3>Rank 1 each <br>Sub-Category <br>in Category</h3>
     <div class="code" >
-      <h4>Input [13]:</h4> 
+      <p><strong>Input [13]:</strong></p> 
           <!-- Đoạn mã của bạn -->
       <pre><code class="language-sql" style="font-size: 14px;">WITH rank_item AS (
   SELECT  category, sub_category, 
@@ -1166,7 +1188,7 @@ FROM rank_item
 WHERE rank = 1
 ORDER BY 1;</code></pre></div>
     <div class="output" >
-      <h4>Output [13]:</h4>
+      <p><strong>Output [13]:</strong></p>
           <!-- Bảng hoặc nội dung đầu ra của bạn -->
       <table class="table table-hover table-striped" border="1" style="width: 150px heigth 100px;" >
         <tr style="background-color: #ccc;">
@@ -1247,6 +1269,10 @@ ORDER BY 1;</code></pre></div>
 <p>Because of the limitations of capabilities, I have not yet been able to dig deeper into this complex task. I'm going to upgrade my skills, complete it and update as soon as possible.</p>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script> hljs.highlightAll();</script>
+
+
+
+
 </body>
 </html>
 
