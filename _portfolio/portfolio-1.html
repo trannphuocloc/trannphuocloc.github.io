@@ -94,7 +94,7 @@ author_profile: false
   document.addEventListener("DOMContentLoaded", function() {
     var toc = document.getElementById("toc");
     var headings = document.querySelectorAll("h2, h3, h4, h5, h6");
-    var tocHTML = "<ol style='list-style-type: none; padding-left: 0;'>"; // Remove default styling
+    var tocHTML = "<ul style='list-style-type: none; padding-left: 0;'>";
     var counters = {h2: 0, h3: 0};
 
     headings.forEach(function(heading) {
@@ -112,11 +112,11 @@ author_profile: false
         numberPrefix = counters.h2 + '.' + counters.h3 + ' ';
       }
 
-      var indent = level === 'h3' ? 'padding-left: 20px;' : '';
-      tocHTML += `<li style="list-style-type: none; ${indent}"><span style="display: inline-block; min-width: 20px;">${numberPrefix}</span><a href="#${id}">${heading.textContent}</a></li>`;
+      var indent = level === 'h3' ? 'style="margin-left: 20px;"' : '';
+      tocHTML += `<li class="toc-level-${level.charAt(1)}" ${indent}><a href="#${id}">${numberPrefix}${heading.textContent}</a></li>`;
     });
 
-    tocHTML += "</ol>";
+    tocHTML += "</ul>";
     toc.innerHTML = tocHTML;
   });
 </script>
