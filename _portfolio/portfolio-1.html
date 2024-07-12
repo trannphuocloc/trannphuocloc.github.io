@@ -101,7 +101,8 @@ author_profile: false
       var id = heading.textContent.replace(/\s+/g, '-').toLowerCase();
       heading.id = id;
 
-      tocHTML += `<li class="toc-level-${level}"><a href="#${id}">${heading.textContent}</a></li>`;
+      var indent = level === '3' ? 'style="margin-left: 20px;"' : '';
+      tocHTML += `<li class="toc-level-${level}" ${indent}><a href="#${id}">${heading.textContent}</a></li>`;
     });
 
     tocHTML += "</ol>";
