@@ -87,14 +87,14 @@ author_profile: false
 </body>
 
 <div id="toc-container">
-  <p><strong>Contents:</strong></p>
+
   <ul id="toc"></ul>
 </div>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     var toc = document.getElementById("toc");
     var headings = document.querySelectorAll("h2, h3, h4, h5, h6");
-    var tocHTML = "<ul style='list-style-type: none; padding-left: 0;'>";
+    var tocHTML = "<div class='toc-container'><p><strong>Contents:</strong></p><ul style='list-style-type: none; padding-left: 0;'>";
     var counters = {h2: 0, h3: 0};
 
     headings.forEach(function(heading) {
@@ -116,11 +116,57 @@ author_profile: false
       tocHTML += `<li class="toc-level-${level.charAt(1)}" ${indent}><a href="#${id}">${numberPrefix}${heading.textContent}</a></li>`;
     });
 
-    tocHTML += "</ul>";
+    tocHTML += "</ul></div>";
     toc.innerHTML = tocHTML;
   });
 </script>
+<style>
+  .toc-container {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 
+  .toc-container h2 {
+    font-size: 1.5em;
+    color: #343a40;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 10px;
+  }
+
+  .toc-container ol {
+    margin: 0;
+    padding: 0;
+  }
+
+  .toc-container li {
+    margin-bottom: 8px;
+  }
+
+  .toc-container a {
+    color: #495057;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .toc-container a:hover {
+    color: #007bff;
+  }
+
+  .toc-container .toc-level-3 {
+    padding-left: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .toc-container {
+      padding: 15px;
+    }
+  }
+</style>
 
 <body>
 <h2>RFM Summary</h2>
