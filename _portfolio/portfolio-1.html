@@ -93,18 +93,14 @@ author_profile: false
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     var toc = document.getElementById("toc");
-    var headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-    var tocHTML = "<ol>"; // Start with an ordered list (ol)
+    var headings = document.querySelectorAll("h2, h3, h4, h5, h6");
+    var tocHTML = "<ol>"; // Start with an ordered list (ol) instead of an unordered list (ul)
 
     headings.forEach(function(heading) {
       var level = heading.tagName.charAt(1);
       var id = heading.textContent.replace(/\s+/g, '-').toLowerCase();
       heading.id = id;
-
-      // Add a tab space before <li> elements for h3 headings
-      var tabSpace = (level === '3') ? "&emsp;&emsp;" : ""; // Using HTML entity for tab space
-
-      tocHTML += `<li class="toc-level-${level}">${tabSpace}<a href="#${id}">${heading.textContent}</a></li>`;
+      tocHTML += `<li class="toc-level-${level}"><a href="#${id}">${heading.textContent}</a></li>`;
     });
 
     tocHTML += "</ol>"; // Close the ordered list (ol)
