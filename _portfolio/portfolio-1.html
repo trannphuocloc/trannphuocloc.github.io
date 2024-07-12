@@ -86,62 +86,33 @@ author_profile: false
 
 </body>
 
-<body>
-  <div id="toc-container"></div>
+<div id="toc-container">
+  <p><strong>Contents:</strong></p>
+  <ul id="toc"></ul>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var toc = document.getElementById("toc");
+    var headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+    var tocHTML = "<ol>"; // Start with an ordered list (ol)
 
-  <div id="content">
-      <h2>RFM Summary</h2>
-      <h2>Checking the data</h2>	
-      <h2>Calculating metrics</h2>
-        <h3>Sales by <br>Ship Mode</h3>
-        <h3>Sales by <br>Segment</h3>
-        <h3>Sales by <br>Category</h3>
-        <h3>Sales by <br>Sub-<br>Category</h3>
-        <h3>Sales by <br>Year</h3>
-        <h3>Sales by <br>State</h3>
-      <h2>RFM Analysis</h2>
-      <h2>Further Steps</h2>
-        <h3>Category <br>by number <br>of Orders</h3>
-        <h3>Sub-<br>Category <br>by number <br>of Orders</h3>
-        <h3>Rank 1 each <br>Sub-Category <br>in Category</h3>
-  </div>
+    headings.forEach(function(heading) {
+      var level = heading.tagName.charAt(1);
+      var id = heading.textContent.replace(/\s+/g, '-').toLowerCase();
+      heading.id = id;
 
-  <script src="script.js"></script>
-</body>
-</html>
+      // Add a tab space before <li> elements for h3 headings
+      var tabSpace = (level === '3') ? "&emsp;&emsp;" : ""; // Using HTML entity for tab space
 
-<script>document.addEventListener("DOMContentLoaded", function() {
-  const tocContainer = document.getElementById('toc-container');
-  const content = document.getElementById('content');
-  const headers = content.querySelectorAll('h1, h2, h3');
-  
-  let tocHTML = '<ul>';
-  let numbering = { h1: 0, h2: 0, h3: 0 };
+      tocHTML += `<li class="toc-level-${level}">${tabSpace}<a href="#${id}">${heading.textContent}</a></li>`;
+    });
 
-  headers.forEach(header => {
-      if (header.tagName === 'H1') {
-          numbering.h1++;
-          numbering.h2 = 0;
-          numbering.h3 = 0;
-          tocHTML += `<li>${numbering.h1}. <a href="#${header.id}">${header.textContent}</a></li>`;
-      } else if (header.tagName === 'H2') {
-          numbering.h2++;
-          numbering.h3 = 0;
-          tocHTML += `<li style="margin-left: 20px;">${numbering.h1}.${numbering.h2}. <a href="#${header.id}">${header.textContent}</a></li>`;
-      } else if (header.tagName === 'H3') {
-          numbering.h3++;
-          tocHTML += `<li style="margin-left: 40px;">${numbering.h1}.${numbering.h2}.${numbering.h3}. <a href="#${header.id}">${header.textContent}</a></li>`;
-      }
+    tocHTML += "</ol>"; // Close the ordered list (ol)
+
+    toc.innerHTML = tocHTML;
   });
+</script>
 
-  tocHTML += '</ul>';
-  tocContainer.innerHTML = tocHTML;
-  
-  // Add IDs to headers
-  headers.forEach((header, index) => {
-      header.id = `header-${index}`;
-  });
-});</script>
 
 
 <body>
