@@ -94,15 +94,17 @@ author_profile: false
   document.addEventListener("DOMContentLoaded", function() {
     var toc = document.getElementById("toc");
     var headings = document.querySelectorAll("h2, h3, h4, h5, h6");
-    var tocHTML = "";
+    var tocHTML = "<ol>";
 
     headings.forEach(function(heading) {
       var level = heading.tagName.charAt(1);
       var id = heading.textContent.replace(/\s+/g, '-').toLowerCase();
       heading.id = id;
+
       tocHTML += `<li class="toc-level-${level}"><a href="#${id}">${heading.textContent}</a></li>`;
     });
 
+    tocHTML += "</ol>";
     toc.innerHTML = tocHTML;
   });
 </script>
