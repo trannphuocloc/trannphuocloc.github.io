@@ -14,6 +14,97 @@ author_profile: false
 <title>Lecture 1</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
+<div id="toc-container">
+
+  <ul id="toc"></ul>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var toc = document.getElementById("toc");
+    var headings = document.querySelectorAll("h2, h3, h4, h5, h6");
+    var tocHTML = "<div class='toc-container'><p><strong>Contents:</strong></p><ul style='list-style-type: none; padding-left: 0;'>";
+    var counters = {h2: 0, h3: 0};
+
+    headings.forEach(function(heading) {
+      var level = heading.tagName.toLowerCase();
+      var id = heading.textContent.replace(/\s+/g, '-').toLowerCase();
+      heading.id = id;
+
+      var numberPrefix = '';
+      if (level === 'h2') {
+        counters.h2++;
+        counters.h3 = 0;
+        numberPrefix = counters.h2 + '. ';
+      } else if (level === 'h3') {
+        counters.h3++;
+        numberPrefix = counters.h2 + '.' + counters.h3 + ' ';
+      }
+
+      var indent = level === 'h3' ? 'style="margin-left: 20px;"' : '';
+      tocHTML += `<li class="toc-level-${level.charAt(1)}" ${indent}><a href="#${id}">${numberPrefix}${heading.textContent}</a></li>`;
+    });
+
+    tocHTML += "</ul></div>";
+    toc.innerHTML = tocHTML;
+  });
+</script>
+<style>
+  .toc-container {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 10px 5px;
+    margin: 15px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%; /* Ensure it doesn't exceed the width of its parent */
+    margin-left: 0; /* Align to the left edge */
+    margin-right: 0; /* Align to the right edge */
+  }
+
+  .toc-container h2 {
+    font-size: 1.5em;
+    color: #343a40;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 10px;
+  }
+
+  .toc-container ol {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .toc-container li {
+    margin-bottom: 8px;
+    width: 100%;
+    padding-left: 15px; /* Remove any left padding */
+  }
+
+  .toc-container a {
+    color: #495057;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .toc-container a:hover {
+    color: #007bff;
+  }
+
+  .toc-container .toc-level-3 {
+    padding-left: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .toc-container {
+      padding: 15px;
+    }
+  }
+</style>
 
 
 
