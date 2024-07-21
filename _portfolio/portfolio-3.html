@@ -1,0 +1,1347 @@
+---
+title: "Exploring Sales data with RFM Analysis"
+excerpt: "Using the RFM (Recency, Frequency, Monetary) Analysis technique to segment customers <br/><img src='/images/RFMsample.png'>"
+collection: portfolio
+author_profile: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Nhúng thư viện Prism.js -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/magula.min.css">
+     <style>
+        pre {
+		        display: inline-block;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+    </style>
+  <title>Scrollable Code Block</title>
+  <style>
+      /* CSS để tạo nút cuộn cho block code */
+      .scrollable-code {
+          width: 600px; /* Chiều rộng của block code */
+          height: 400px; /* Chiều cao của block code */
+          overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
+          white-space: normal; /* Đảm bảo các dòng code không bị wrap */
+          margin-top: 0; /* Khoảng cách phía trên */
+          margin-bottom: 0; /* Khoảng cách phía dưới */
+          margin-right: 0px;
+          font-size: 14px;
+          padding-bottom:0;
+
+          
+      }
+      .scroll-button {
+            
+            margin-top: 0px; /* Khoảng cách từ nút cuộn đến văn bản trên */
+            margin-bottom: 0;
+            padding: 0; /* Điều chỉnh độ lớn của nút cuộn */
+        }
+</head>
+
+<body>
+  <style>
+    table {
+      width: 760px;
+      font-size: 14px;
+    }
+
+    table thead th{
+        background-color: #ccc;
+        text-align: left;
+    }
+
+    .table.table-hover tr:hover{
+      background: #d4d2d2 ;
+    }
+    .table.table-striped tbody tr:nth-child(odd){
+      background: #f0f0f0 ;
+    }
+    </style>
+
+    <style>
+        .odd {
+            background-color: #f0f0f0;
+        }
+
+        .even {
+            background-color: #ffffff;
+        }
+    </style>
+
+
+    <title>Flourish Map Embed</title>
+    <style>
+        .flourish-embed {
+            max-width: 700px;
+            max-height: 400px;
+            padding: 20px 10px;
+        }
+    </style>
+
+</body>
+
+<div id="toc-container">
+
+  <ul id="toc"></ul>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var toc = document.getElementById("toc");
+    var headings = document.querySelectorAll("h2, h3, h4, h5, h6");
+    var tocHTML = "<div class='toc-container'><p><strong>Contents:</strong></p><ul style='list-style-type: none; padding-left: 0;'>";
+    var counters = {h2: 0, h3: 0};
+
+    headings.forEach(function(heading) {
+      var level = heading.tagName.toLowerCase();
+      var id = heading.textContent.replace(/\s+/g, '-').toLowerCase();
+      heading.id = id;
+
+      var numberPrefix = '';
+      if (level === 'h2') {
+        counters.h2++;
+        counters.h3 = 0;
+        numberPrefix = counters.h2 + '. ';
+      } else if (level === 'h3') {
+        counters.h3++;
+        numberPrefix = counters.h2 + '.' + counters.h3 + ' ';
+      }
+
+      var indent = level === 'h3' ? 'style="margin-left: 20px;"' : '';
+      tocHTML += `<li class="toc-level-${level.charAt(1)}" ${indent}><a href="#${id}">${numberPrefix}${heading.textContent}</a></li>`;
+    });
+
+    tocHTML += "</ul></div>";
+    toc.innerHTML = tocHTML;
+  });
+</script>
+<style>
+  .toc-container {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 10px 5px;
+    margin: 15px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%; /* Ensure it doesn't exceed the width of its parent */
+    margin-left: 0; /* Align to the left edge */
+    margin-right: 0; /* Align to the right edge */
+  }
+
+  .toc-container h2 {
+    font-size: 1.5em;
+    color: #343a40;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 10px;
+  }
+
+  .toc-container ol {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .toc-container li {
+    margin-bottom: 8px;
+    width: 100%;
+    padding-left: 15px; /* Remove any left padding */
+  }
+
+  .toc-container a {
+    color: #495057;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .toc-container a:hover {
+    color: #007bff;
+  }
+
+  .toc-container .toc-level-3 {
+    padding-left: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .toc-container {
+      padding: 15px;
+    }
+  }
+</style>
+
+<body>
+<h2>RFM Summary</h2>
+<body>
+    <p>RFM Analysis is a measurement technique that uses existing customer behavior data, based on Recency, Frequency and Monetary value of purchases, to predict how customers will act in the future as well as to group them into behavioral segments.</p>
+    <p>RFM can help you answer these questions and more:</p>
+    <ul>
+        <li>Who can you upsell higher-value products to?</li>
+        <li>Who can you send personalized messages to keep them from churning?</li>
+        <li>Who is most likely to engage with your brand?</li>
+        <li>Who can you offer limited-time offers to and try to reactivate?</li>
+	      <li>...</li>
+    </ul>
+<p>For our visualization, three dimensions of Recency, Frequency, and Monetary coincide with 3D graphics. However, it doesn't work effectively and difficult to understand the result. By combining Frequency and Monetary and turning it to 2D, it is much easier to understand because when a customer subscribes to a month for 100 dollar 12 times in 12 months, it is equivalent to when customers subscribe for $1200 per year all at once. At that time, Recency represented the customer's engagement with our brand.</p>
+
+<p>Having 11 customer segments have the same behavior as the table that we will group them into:</p>
+
+
+
+<table border="1">
+<thead>
+    <tr>
+        <th style="width: fit-content;">Customer segment</th>
+        <th style="width: 24%;">RFM scores</th>
+        <th style="width: fit-content;">Activity</th>
+		    <th style="width: fit-content;">Action Recommend</th>
+    </tr>
+</thead>
+    <tr>
+        <td>Champions</td>
+        <td>555, 554, 544, 545, 454, 455, 445</td>
+        <td>Bought recently, buy often and spend the most!</td>
+		    <td>Reward them. Can be early adopters for new products. Will promote your brand.</td>
+    </tr>
+    <tr class="odd">
+        <td>Loyal customers</td>
+        <td>543, 444, 435, 355, 354, 345, 344, 335</td>
+        <td>Spend good money with us often. Responsive to promotions. </td>
+		    <td>Upsell higher value products. Ask for reviews. Engage them.</td>
+    </tr>
+    <tr >
+        <td>Potential loyalist</td>
+        <td>553, 551, 552, 541, 542, 533, 532, 531, 452, 451, 442, 441, 431, 453, 433, 432, 423, 353, 352, 351, 342, 341, 333, 323</td>
+        <td>Recent customers, but spent a good amount and bought more than once.</td>
+        <td>Offer membership / loyalty program, recommend other products.</td>
+    </tr>
+    <tr class="odd">
+        <td>Recent customers</td>
+        <td>512, 511, 422, 421, 412, 411, 311</td>
+        <td>Bought most recently, but not often.</td>
+        <td>Provide on-boarding support, give them early success, start building relationship.</td>
+    </tr>
+    <tr>
+        <td>Promising</td>
+        <td>525, 524, 523, 522, 521, 515, 514, 513, 425, 424, 413, 414, 415, 315, 314, 313</td>
+        <td>Recent shoppers, but haven’t spent much.</td>
+        <td>Create brand awareness, offer free trials</td>
+    </tr>
+    <tr class="odd">
+        <td>Customers Needing Attention</td>
+        <td>535, 534, 443, 434, 343, 334, 325, 324</td>
+        <td>Above average recency, frequency and monetary values. May not have bought very recently though.</td>
+        <td>Make limited time offers, Recommend based on past purchases. Reactivate them.</td>
+    </tr>
+    <tr>
+        <td>About to sleep</td>
+        <td>331, 321, 312, 221, 213</td>
+        <td>Below average recency, frequency and monetary values. Will lose them if not reactivated.</td>
+        <td>Share valuable resources, recommend popular products / renewals at discount, reconnect with them</td>
+    </tr>
+    <tr class="odd">
+        <td>At risk</td>
+        <td>255, 254, 245, 244, 253, 252, 243, 242, 235, 234, 225, 224, 153, 152, 145, 143, 142, 135, 134, 133, 125, 124</td>
+        <td>Spent big money and purchased often. But long time ago. Need to bring them back!</td>
+        <td>Send personalized emails to reconnect, offer renewals, provide helpful resources.</td>
+    </tr>
+    <tr>
+        <td>Can’t lose them</td>
+        <td>155, 154, 144, 214, 215, 115, 114, 113</td>
+        <td>Made biggest purchases, and often. But haven’t returned for a long time.</td>
+        <td>Win them back via renewals or newer products, don’t lose them to competition, talk to them.</td>
+    </tr>
+    <tr class="odd">
+        <td>Hibernating</td>
+        <td>332, 322, 231, 241, 251, 233, 232, 223, 222, 132, 123, 122, 212, 211</td>
+        <td>Last purchase was long back, low spenders and low number of orders.</td>
+        <td>Offer other relevant products and special discounts. Recreate brand value.</td>
+    </tr>
+    <tr>
+        <td>Lost</td>
+        <td>111, 112, 121, 131, 141, 151</td>
+        <td>Lowest recency, frequency and monetary scores.</td>
+        <td>Revive interest with reach out campaign, ignore otherwise.</td>
+    </tr>
+</table>
+
+
+<h2>Checking the data</h2>	
+Here <a href="https://github.com/trannphuocloc/sales-data">our data set</a> for the project.
+And let's jump right in by checking the data 
+
+
+<p><strong>Input [1]:</strong></p>
+<pre><code class="language-sql" style="font-size: 14px;">SELECT * FROM sales;
+</code></pre>
+
+<p><strong>Output [1]:</strong></p>
+<div style="overflow-x: auto;">
+  <table class="table table-hover " border="1" style="width: 2000px;">
+  <thead >
+    <tr>
+      <th>Row_ID</th>
+      <th>Order_ID</th>
+      <th>Order_Date</th>
+      <th>Ship_Date</th>
+      <th>Ship_Mode</th>
+      <th>Customer_ID</th>
+      <th>Customer_Name</th>
+      <th>Segment</th>
+      <th>Country</th>
+      <th >City</th>
+      <th >State</th>
+      <th >Postal_Code</th>
+      <th >Region</th>
+      <th >Product_ID</th>
+      <th >Category</th>
+      <th >Sub_Category</th>
+      <th>Product_Name</th>
+      <th >Sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>CA-2017-152156</td>
+      <td>08-11-17</td>
+      <td>11-11-17</td>
+      <td>Second Class</td>
+      <td>CG-12520</td>
+      <td>Claire Gute</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Henderson</td>
+      <td>Kentucky</td>
+      <td>42420</td>
+      <td>South</td>
+      <td>FUR-BO-10001798</td>
+      <td>Furniture</td>
+      <td>Bookcases</td>
+      <td>Bush Somerset Collection Bookcase</td>
+      <td>261.9599915</td>
+    </tr>
+    <tr class="odd">
+      <td>2</td>
+      <td>CA-2017-152156</td>
+      <td>08-11-17</td>
+      <td>11-11-17</td>
+      <td>Second Class</td>
+      <td>CG-12520</td>
+      <td>Claire Gute</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Henderson</td>
+      <td>Kentucky</td>
+      <td>42420</td>
+      <td>South</td>
+      <td>FUR-CH-10000454</td>
+      <td>Furniture</td>
+      <td>Chairs</td>
+      <td style="width: max-content;">Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back</td>
+      <td>731.9400024</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>CA-2017-138688</td>
+      <td>12-06-17</td>
+      <td>16-06-17</td>
+      <td>Second Class</td>
+      <td>DV-13045</td>
+      <td>Darrin Van Huff</td>
+      <td>Corporate</td>
+      <td>United States</td>
+      <td>Los Angeles</td>
+      <td>California</td>
+      <td>90036</td>
+      <td>West</td>
+      <td>OFF-LA-10000240</td>
+      <td>Office Supplies</td>
+      <td>Labels</td>
+      <td>Self-Adhesive Address Labels for Typewriters by Universal</td>
+      <td>14.61999989</td>
+    </tr>
+    <tr class="odd">
+      <td>4</td>
+      <td style="width: 5%;">US-2016-108966</td>
+      <td>11-10-16</td>
+      <td>18-10-16</td>
+      <td>Standard Class</td>
+      <td>SO-20335</td>
+      <td>Sean O'Donnell</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Fort Lauderdale</td>
+      <td>Florida</td>
+      <td>33311</td>
+      <td>South</td>
+      <td>FUR-TA-10000577</td>
+      <td>Furniture</td>
+      <td>Tables</td>
+      <td>Bretford CR4500 Series Slim Rectangular Table</td>
+      <td>957.5775146</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+	<tr class="odd">
+	<td >9797</td>
+      <td>CA-2016-128608</td>
+      <td>12-01-16</td>
+      <td>17-01-16</td>
+      <td>Standard Class</td>
+      <td>CS-12490</td>
+      <td>Cindy Schnelling</td>
+      <td>Corporate</td>
+      <td>United States</td>
+      <td>Toledo</td>
+      <td>Ohio</td>
+      <td>43615</td>
+      <td>East</td>
+      <td>OFF-AR-10001374</td>
+      <td>Office Supplies</td>
+      <td>Art</td>
+      <td>BIC Brite Liner Highlighters, Chisel Tip</td>
+      <td>10.36800003</td>
+    </tr>
+    <tr>
+      <td>9798</td>
+      <td>CA-2016-128608</td>
+      <td>12-01-16</td>
+      <td>17-01-16</td>
+      <td>Standard Class</td>
+      <td>CS-12490</td>
+      <td>Cindy Schnelling</td>
+      <td>Corporate</td>
+      <td>United States</td>
+      <td>Toledo</td>
+      <td>Ohio</td>
+      <td>43615</td>
+      <td>East</td>
+      <td>TEC-PH-10004977</td>
+      <td>Technology</td>
+      <td>Phones</td>
+      <td>GE 30524EE4</td>
+      <td>235.1880035</td>
+    </tr>
+    <tr  class="odd">
+      <td>9799</td>
+      <td>CA-2016-128608</td>
+      <td>12-01-16</td>
+      <td>17-01-16</td>
+      <td>Standard Class</td>
+      <td>CS-12490</td>
+      <td>Cindy Schnelling</td>
+      <td>Corporate</td>
+      <td>United States</td>
+      <td>Toledo</td>
+      <td>Ohio</td>
+      <td>43615</td>
+      <td>East</td>
+      <td>TEC-PH-10000912</td>
+      <td>Technology</td>
+      <td>Phones</td>
+      <td>Anker 24W Portable Micro USB Car Charger</td>
+      <td>26.37599945</td>
+    </tr>
+    <tr>
+      <td>9800</td>
+      <td>CA-2016-128608</td>
+      <td>12-01-16</td>
+      <td>17-01-16</td>
+      <td>Standard Class</td>
+      <td>CS-12490</td>
+      <td>Cindy Schnelling</td>
+      <td>Corporate</td>
+      <td>United States</td>
+      <td>Toledo</td>
+      <td>Ohio</td>
+      <td>43615</td>
+      <td>East</td>
+      <td>TEC-AC-10000487</td>
+      <td>Technology</td>
+      <td>Accessories</td>
+      <td>SanDisk Cruzer 4 GB USB Flash Drive</td>
+      <td>10.38399982</td>
+	
+</tbody>
+</table>
+</div>
+9800 rows x 18 columns
+
+
+<p></p>	
+<p>Before taking further steps, we need to ensure our data’s integrity by counting the null values we have missed, so as to avoid coming to the wrong conclusion about the data. </p>
+<p><strong>Input [2]:</strong></p>
+<div class="scrollable-code" class="scroll-button" style="width: 340px;" >
+<pre><code class="language-sql">SELECT SUM(
+    CASE WHEN CONCAT_WS('', 
+    Row_ID, 
+    Order_ID, 
+    Order_Date, 
+    Ship_Date, 
+    Ship_Mode, 
+    Customer_ID, 
+    Customer_Name, 
+    Segment, 
+    Country, 
+    City, 
+    State, 
+    Postal_Code, 
+    Region, 
+    Product_ID, 
+    Category, 
+    Sub_Category, 
+    Product_Name, 
+    Sales) IS NULL THEN 1 ELSE 0 END 
+) AS count_null
+FROM sales;</code></pre></div>
+
+<p><strong>Output [2]:</strong></p>
+<table class="table table-hover " border="1" >
+  <thead >
+    <tr>
+      <th style="width: min-content;">count_null</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: min-content;">0</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2>Calculating metrics</h2>
+<p>After reviewing the data, we may realize some crucial attributes in the table for analyzing and comparing each type with each other, such as:</p>
+<ul>
+  <li><strong>Ship mode</strong> includes <strong> Standard Class, Second Class, First Class,</strong> and <strong>Same Day,</strong> representing the delivery methods that we have served.</li>
+  <li><strong>Segment</strong> includes <strong>Consumer, Corporate,</strong> and <strong>Home Office,</strong> which represent our customer segments.</li>
+  <li><strong>Category</strong> includes <strong>Furniture, Office Supplies,</strong> and <strong>Technology.</strong></li>
+  <li>Each <strong>Sub-category</strong> includes <strong>Chairs, Bookcases, Tables, Art, Paper, Copiers, Accessories,</strong> and <strong>Phones,...</strong> every single sub-category has numerous items from different brands.</li>
+  <li><strong>State</strong> represents 49 states in the US excluding Hawaii, which our store isn't located.</li>
+  <li><strong>Year:</strong> 2015 - 2018</li>
+</ul>
+
+
+
+<p>Let's calculate crucial metrics for the data that we have explored based on its characteristics.</p>
+
+<title>Code and Table Layout</title>
+<style>
+    .container {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        margin-top: 0;
+        justify-content: space-between;
+     
+    }
+    .heading{
+        flex: ;
+        flex: ;
+        align-items: flex-start;
+
+
+    }
+    .code {
+        flex-basis: ; /* Đặt chiều rộng của phần mã */
+        white-space: nowrap;
+        align-items: center;
+        align-content: baseline;
+
+    }
+    .output {
+        flex-basis: ; /* Đặt chiều rộng của phần output */
+        align-items: ;
+        align-content: baseline;
+    }
+</style>
+</head>
+
+
+
+<div class="container">
+
+<h3>Sales by <br>Ship Mode</h3>
+  <div class="code">
+    <p><strong>Input [3]:</strong></p> 
+        <!-- Đoạn mã của bạn -->
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT Ship_Mode, 
+      ROUND(SUM(sales),2) AS shipmode_sales 
+FROM sales 
+GROUP BY Ship_Mode
+ORDER BY 2 DESC;</code></pre></div>
+  <div class="output">
+    <p><strong>Outnput [3]:</strong></p> 
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
+        <th>Ship_Mode</th>
+        <th>shipmode_sales</th>
+    </tr>
+    <tr>
+        <td>Standard Class</td>
+        <td>1340831.31</td>
+    </tr>
+    <tr>
+        <td>Second Class</td>
+        <td>449914.18</td>
+    </tr>
+    <tr>
+        <td>First Class</td>
+        <td>345572.26</td>
+    </tr>
+    <tr>
+        <td>Same Day</td>
+        <td>125219.04</td>
+    </tr>
+    </table>
+    </div>
+</div>
+
+
+
+<div class="container">
+
+  <h3>Sales by <br>Segment</h3>
+  <div class="code">
+    <p><strong>Input [4]:</strong></p> 
+        <!-- Đoạn mã của bạn -->
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT Segment, 
+      ROUND(SUM(sales),2) AS segment_sales
+FROM sales 
+GROUP BY Segment
+ORDER BY 2 DESC;</code></pre></div>
+  <div class="output">
+    <p><strong>Output [4]:</strong></p>
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
+        <th>Segment</th>
+        <th>segment_sales</th>
+    </tr>
+    <tr>
+        <td>Consumer</td>
+        <td>1148060.53</td>
+    </tr>
+    <tr>
+        <td>Corporate</td>
+        <td>688494.07</td>
+    </tr>
+    <tr>
+        <td>Home Office</td>
+        <td>424982.18</td>
+    </tr>
+    </table>
+    </div>
+</div>
+
+
+<div class="container">
+
+  <h3>Sales by <br>Category</h3>
+  <div class="code" >
+    <p><strong>Input [5]:</strong></p> 
+        <!-- Đoạn mã của bạn -->
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT Category, 
+      ROUND(SUM(sales),2) AS category_sales 
+FROM sales
+GROUP BY Category
+ORDER BY 2 DESC;</code></pre></div>
+  <div class="output" >
+    <p><strong>Output [5]:</strong></p>
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table class="table table-hover table-striped " border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
+        <th>Category</th>
+        <th>category_sales</th>
+    </tr>
+    <tr>
+        <td>Technology</td>
+        <td>827455.87</td>
+    </tr>
+    <tr>
+        <td>Furniture</td>
+        <td>728658.57</td>
+    </tr>
+    <tr>
+        <td>Office Supplies</td>
+        <td>705422.33</td>
+    </tr>
+    </table>
+    </div>
+</div>
+
+
+<div class="container">
+
+  <h3>Sales by <br>Sub-<br>Category</h3>
+  <div class="code">
+    <p><strong>Input [6]:</strong></p> 
+        <!-- Đoạn mã của bạn -->
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT Sub_Category, 
+      ROUND(SUM(sales),2) AS sub_sales 
+FROM sales
+GROUP BY Sub_Category
+ORDER BY 2 DESC;</code></pre></div>
+  <div class="output">
+    <p><strong>Output [6]:</strong></p>
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
+        <th>#</th>
+        <th>Sub <br>Category</th>
+        <th>sub_category<br>_sales</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Phones</td>
+        <td>327782.45</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Chairs</td>
+        <td>322822.73</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Storage</td>
+        <td>219343.39</td>
+      </tr>
+      <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td>Labels</td>
+        <td>12347.73</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td>Fasteners</td>
+        <td>3001.96</td>
+      </tr>
+    </table>
+    </div>
+</div>
+
+<div class="container">
+
+  <h3>Sales by <br>Year</h3>
+  <div class="code">
+    <p><strong>Input [7]:</strong></p> 
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT	YEAR(Order_Date) as Year,
+        MONTH(Order_Date) as Month, 
+        ROUND(SUM(Sales),2) Revenue
+FROM sales
+GROUP BY YEAR(Order_Date), MONTH(Order_Date)
+ORDER BY 1,2;</code></pre></div>
+  <div class="output">
+    <p><strong>Output [7]:</strong></p>
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
+        <th>Year</th>
+        <th>Month</th>
+        <th>Revenue</th>
+      </tr>
+      <tr>
+        <td>2015</td>
+        <td>1</td>
+        <td>14205.71</td>
+      </tr>
+      <tr>
+        <td>2015</td>
+        <td>2</td>
+        <td>4519.89</td>
+      </tr>
+      <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+      <tr>
+        <td>2018</td>
+        <td>11</td>
+        <td>117938.15</td>
+      </tr>
+      <tr>
+        <td>2018</td>
+        <td>12</td>
+        <td>83030.39</td>
+      </tr>
+    </table>
+    </div>
+</div>
+
+<div class="flourish-embed flourish-chart" data-src="visualisation/17091110" data-height="400px"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+<p><br><br></p>
+
+<div class="container">
+
+  <h3>Sales by <br>State</h3>
+  <div class="code">
+    <p><strong>Input [8]:</strong></p> 
+        <!-- Đoạn mã của bạn -->
+    <pre><code class="language-sql" style="font-size: 14px;">SELECT  State, 
+        ROUND(SUM(sales),2) Revenue
+FROM sales
+GROUP BY State
+ORDER BY 2 DESC;</code></pre></div>
+  <div class="output">
+    <p><strong>Output [8]:</strong></p>
+        <!-- Bảng hoặc nội dung đầu ra của bạn -->
+    <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+      <tr style="background-color: #ccc;">
+        <th>#</th>
+        <th>State</th>
+        <th>Revenue</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>California</td>
+        <td>446306.46</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>New York</td>
+        <td>306361.15</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Texas</td>
+        <td>168572.53</td>
+      </tr>
+      <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+      <tr>
+        <td>48</td>
+        <td>West Virginia</td>
+        <td>1209.82</td>
+      </tr>
+      <tr>
+        <td>49</td>
+        <td>North Dakota</td>
+        <td>919.91</td>
+      </tr>
+    </table>
+    </div>
+</div>
+<div class="flourish-embed flourish-map" data-src="visualisation/17083473" data-height="400px"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+
+
+
+
+<h2>RFM Analysis</h2>
+<p>After calculating metrics for core characteristics, the most important section of the RFM technique is grouping our customer segments and determining how much engagement our brand has with the consumer.</p>
+
+<p><strong>Input [9]:</strong></p>
+<div class="scrollable-code" class="scroll-button">
+<pre><code class="language-sql">WITH rfm AS 
+  (
+    SELECT 
+      Customer_Name, 
+      SUM(sales) MonetaryValue,
+      AVG(sales) AvgMonetaryValue,
+      COUNT(Order_ID) Frequency,
+      MAX(Order_Date) last_order_date,
+      (SELECT MAX(Order_Date) FROM sales) max_order_date,
+      DATEDIFF(DD, MAX(Order_Date), (SELECT MAX(Order_Date) FROM sales)) Recency
+    FROM sales
+    GROUP BY Customer_Name
+  ),
+  rfm_calc AS
+  (
+      SELECT r.*,
+      NTILE(5) OVER (ORDER BY Recency DESC) rfm_recency,
+      NTILE(5) OVER (ORDER BY Frequency) rfm_frequency,
+      NTILE(5) OVER (ORDER BY MonetaryValue) rfm_monetary
+    FROM rfm r
+  )
+  SELECT 
+    c.*, rfm_recency+ rfm_frequency+ rfm_monetary AS rfm_cell,
+    CAST(rfm_recency AS VARCHAR) + CAST(rfm_frequency AS VARCHAR) + CAST(rfm_monetary  AS VARCHAR)rfm_cell_string
+  INTO #rfm
+  FROM rfm_calc c
+  
+  SELECT Customer_Name , rfm_recency, rfm_frequency, rfm_monetary,
+    CASE
+      WHEN rfm_cell_string IN (555, 554, 544, 545, 454, 455, 445) THEN 'Champions'
+      WHEN rfm_cell_string IN (543, 444, 435, 355, 354, 345, 344, 335) THEN 'Loyal customers'
+      WHEN rfm_cell_string IN (553, 551, 552, 541, 542, 533, 532, 531, 452, 451, 442, 441, 431, 453, 433, 432, 423, 353, 352, 351, 342, 341, 333, 323) THEN 'Potential loyalist'
+      WHEN rfm_cell_string IN (512, 511, 422, 421, 412, 411, 311) THEN 'Recent customers'
+      WHEN rfm_cell_string IN (525, 524, 523, 522, 521, 515, 514, 513, 425, 424, 413, 414, 415, 315, 314, 313) THEN 'Promising'
+      WHEN rfm_cell_string IN (535, 534, 443, 434, 343, 334, 325, 324) THEN 'Customers needing attention' 
+      WHEN rfm_cell_string IN (331, 321, 312, 221, 213) THEN 'About to sleep' 
+      WHEN rfm_cell_string IN (255, 254, 245, 244, 253, 252, 243, 242, 235, 234, 225, 224, 153, 152, 145, 143, 142, 135, 134, 133, 125, 124) THEN 'At risk'
+      WHEN rfm_cell_string IN (155, 154, 144, 214, 215, 115, 114, 113) THEN 'Can’t lose them'
+      WHEN rfm_cell_string IN (332, 322, 231, 241, 251, 233, 232, 223, 222, 132, 123, 122, 212, 211) THEN 'Hibernating' 
+      WHEN rfm_cell_string IN (111, 112, 121, 131, 141, 151) THEN 'Lost'
+    END rfm_segment
+  FROM #rfm
+  ORDER BY rfm_recency DESC, rfm_frequency DESC ,rfm_monetary DESC;</code></pre></div>
+
+  <p><strong>Output [9]:</strong></p>
+<table class="table table-hover " border="1" style="width: 500PX;">
+  <thead >
+    <tr>
+      <th>#</th>
+      <th>Customer_Name</th>
+      <th>rfm_recency</th>
+      <th>rfm_frequency</th>
+      <th>rfm_monetary</th>
+      <th>rfm_segment</th>
+  </tr>
+ </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Arianne Irving</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>Champions</td>
+    </tr>
+    <tr class="odd">
+      <td>2</td>
+      <td>Suzanne McNair</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>Champions</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Rick Bensley</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>Champions</td>
+    </tr>
+    <tr class="odd">
+      <td>4</td>
+      <td>Mike Pelletier</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>Champions</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+	<tr class="odd">
+    <td>790</td>
+    <td>Anna Chung</td>
+    <td>1</td>
+    <td>1</td>
+    <td>1</td>
+    <td>Lost</td>
+    </tr>
+    <tr>
+      <td>791</td>
+      <td>Carlos Meador</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Lost</td>
+    </tr>
+    <tr  class="odd">
+      <td>792</td>
+      <td>Bobby Trafton</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Lost</td>
+    </tr>
+    <tr>
+      <td>793</td>
+      <td>Shirley Schmidt</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Lost</td>
+	
+</tbody>
+</table>
+
+<div class="flourish-embed flourish-hierarchy" data-src="visualisation/16972523" data-height="400px"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+
+<p><br><br>
+According to the characteristics of each group, let's segment them again into larger groups for easier analysis:
+  <ul>
+  <li><strong>Loyal Group</strong> as <strong>Group 1</strong> includes Champions, Loyal customers.</li>
+  <li><strong>Vulnerable Group</strong> as <strong>Group 2</strong> includes Potential loyalist, Promising, Customers needing action, At risk, Can't lose them and Recent customers.</li>
+  <li><strong>Lost Group</strong> as <strong>Group 3</strong> includes About to sleep, Hibernating and Lost.</li>
+  </ul>
+<p>As the result shows, our supermarket has the number of customers in <strong>Group 1</strong> at 32.83%, who pay over average and also shop frequently. With the highest engagement, they can be early adopters of new products, need to reward them by asking for reviews to get discounts or coupons on the next purchase. We could lessen our focus on them because they trusted to buy our products.</p>
+
+<p>Instead, <strong>Group 2</strong> is the group that needs the most concentration because their vulnerability makes it easy to get influenced or attracted by competitor products or on-sale products from others and leave our brand as presented by our characteristics. They are 51.37% of our consumer base, that much force we must focus on and take action on, such as a mix of methods like discounts on products, email marketing and social advertising to get their attention and bring them back, depending on our financial situation, for instance that group in them we may consider focusing on as <strong> Potential loyalist and At risk </strong> has over 2000 customers, which is approximately 55% of vulnerable customers.</p>
+  
+<p>And at least focusing is <strong> Lost Group (Group 3)</strong>,which represents around 15% of our consumer base. Characteristics of this group include variety-seeking buying behavior and comparing with other products, making it challenging to re-engage them after a long period of not interacting with or trusting alternative products. 15% seems pretty large, however the reason for least focusing is because our resources must be spent on <strong>Group 2</strong> much more than <strong>Group 3</strong> to achieve maximum effectiveness.</p>
+
+
+
+<h2>Further Steps</h2>
+<p>Great results and conclusions from RFM Analysis helps us to determine which customer group we have to focus on.</p>
+<p>Imagining after considering all of the conditions, we need the Orders data to answer the question 'Which item comes together the most when customers choose an order that has two items in?" that represents which category and sub-category have purchased the most when customers only buy exactly 2 items per order to make decisions.</p>
+
+<p><strong>Input [10]:</strong></p>
+<pre><code class="language-sql" style="font-size: 14px;">SELECT DISTINCT Order_ID, 
+  STUFF(
+  (SELECT ',' + Category 
+  FROM sales p
+  WHERE Order_ID IN (
+            SELECT Order_ID 
+            FROM (SELECT DISTINCT Order_ID, COUNT(*) row_number
+                FROM sales 
+                GROUP BY Order_ID
+                )m 
+            WHERE row_number = 2
+            AND p.Order_ID = s.Order_ID
+                        ) 
+  FOR XML PATH ('')),1,1,'') AS Category,
+  STUFF(
+  (SELECT ',' + Sub_Category
+  FROM sales p
+  WHERE Order_ID in (
+            SELECT Order_ID 
+            FROM (SELECT DISTINCT Order_ID, COUNT(*) row_number
+                FROM sales 
+                GROUP BY Order_ID
+                )m 
+            WHERE row_number = 2
+            AND p.Order_ID = s.Order_ID
+                        )
+  FOR XML PATH ('')),1,1,'') AS Sub_Category
+FROM sales s
+ORDER BY 2 DESC;
+</code></pre>
+
+<p><strong>Output [10]:</strong></p>
+<table class="table table-hover " border="1" style="width: 500PX;">
+  <thead >
+    <tr>
+      <th>#</th>
+      <th>Order_ID</th>
+      <th>Category</th>
+      <th>Sub_Category</th>
+  </tr>
+ </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>CA-2015-134726</td>
+      <td>Technology,Technology</td>
+      <td>Accessories,Phones</td>
+    </tr>
+    <tr class="odd">
+      <td>2</td>
+      <td>CA-2015-135993</td>
+      <td>Technology,Technology</td>
+      <td>Phones,Accessories</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>CA-2015-139192</td>
+      <td>Technology,Technology</td>
+      <td>Phones,Accessories</td>
+    </tr>
+    <tr class="odd">
+      <td>4</td>
+      <td>CA-2015-143840</td>
+      <td>Technology,Technology</td>
+      <td>Phones,Phones</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+	<tr class="odd">
+    <td>4919</td>
+    <td>US-2018-168613</td>
+    <td>NULL</td>
+    <td>NULL</td>
+    </tr>
+    <tr>
+      <td>4920</td>
+      <td>US-2018-168690</td>
+      <td>NULL</td>
+      <td>NULL</td>
+    </tr>
+    <tr  class="odd">
+      <td>4921</td>
+      <td>US-2018-168802</td>
+      <td>NULL</td>
+      <td>NULL</td>
+    </tr>
+    <tr>
+      <td>4922</td>
+      <td>US-2018-169551</td>
+      <td>NULL</td>
+      <td>NULL</td>
+	</tbody>
+</table>
+
+<p>The length of the table is too long and a brief presentation is required, the <strong>Output [10]</strong> cannot comprehensively represent all results. Because of that, I added an extra file that contains all of the Output [10] in <a href="https://github.com/trannphuocloc/sales-data">my repo</a> to make it easier for analysis. </p>
+<p>Let's query again to check how many different categories come together and which sub-category is more frequently purchased by customers at a time. </p>
+<p><i>Note: As presented in <b>Calculating Metrics</b>, we have 3 different categories, allowing customers to buy 3 &times; 3 = 9 different combinations when customers buy exactly 2 items per order. However, Sub-Category isn't that easy, we have 17 different sub-categories leading to customers having 17  &times; 17 = 289 different combination options, it's too much that I can present it in a table, and we also brief it as previous ones. </i></p>
+
+<div class="container">
+
+  <h3>Category <br>by number <br>of Orders</h3>
+    <div class="code">
+      <p><strong>Input [11]:</strong></p> 
+          <!-- Đoạn mã của bạn -->
+      <pre><code class="language-sql" style="font-size: 14px;">SELECT category, 
+      COUNT(*) AS count_order 
+FROM extra
+GROUP BY category
+ORDER BY 2 DESC;</code></pre></div>
+    <div class="output">
+      <p><strong>Output [11]:</strong></p> 
+          <!-- Bảng hoặc nội dung đầu ra của bạn -->
+      <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+        <tr style="background-color: #ccc;">
+          <th>Category</th>
+          <th>count_order</th>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Office Supplies</td>
+        <td>846</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Technology</td>
+        <td>312</td>
+      </tr>
+      <tr>
+        <td>Furniture,<br>Office Supplies</td>
+        <td>296</td>
+      </tr>
+      <tr>
+        <td>Technology,<br>Office Supplies</td>
+        <td>266</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Furniture</td>
+        <td>264</td>
+      </tr>
+      <tr>
+        <td>Furniture,Technology</td>
+        <td>118</td>
+      </tr>
+      <tr>
+        <td>Furniture,Furniture</td>
+        <td>108</td>
+      </tr>
+      <tr>
+        <td>Technology,Furniture</td>
+        <td>108</td>
+      </tr>
+      <tr>
+        <td>Technology,Technology</td>
+        <td>78</td>
+      </tr>
+      </table>
+      </div>
+  </div>
+  
+  
+  
+  <div class="container">
+  
+    <h3>Sub-<br>Category <br>by number <br>of Orders</h3>
+    <div class="code">
+      <p><strong>Input [12]:</strong></p> 
+          <!-- Đoạn mã của bạn -->
+      <pre><code class="language-sql" style="font-size: 14px;">SELECT category, sub_category, 
+      COUNT(*) AS count_order 
+FROM extra
+GROUP BY category, sub_category
+ORDER BY 1, 3 DESC;</code></pre></div>
+    <div class="output">
+      <p><strong>Output [12]:</strong></p>
+          <!-- Bảng hoặc nội dung đầu ra của bạn -->
+      <table class="table table-hover table-striped" border="1" style="width: 150px;" >
+        <tr style="background-color: #ccc;">
+          <th>#</th>
+          <th>Category</th>
+          <th>Sub Category</th>
+          <th>Count Order</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Furniture,<br>Furniture</td>
+        <td>Furnishings,<br>Furnishings</td>
+        <td>28</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Furniture,<br>Furniture</td>
+        <td>Chairs,<br>Furnishings</td>
+        <td>18</td>
+      </tr>
+      <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+      <tr>
+        <td>219</td>
+        <td>Technology,<br>Technology</td>
+        <td>Machines,<br>Accessories</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>220</td>
+        <td>Technology,<br>Technology</td>
+        <td>Phones,<br>Copiers</td>
+        <td>2</td>
+      </tr>
+      </table>
+      </div>
+  </div>
+  
+  <div class="container">
+  
+    <h3>Rank 1 each <br>Sub-Category <br>in Category</h3>
+    <div class="code" >
+      <p><strong>Input [13]:</strong></p> 
+          <!-- Đoạn mã của bạn -->
+      <pre><code class="language-sql" style="font-size: 14px;">WITH rank_item AS (
+  SELECT  category, sub_category, 
+          COUNT(*) AS count_order,
+          RANK() OVER(PARTITION BY category 
+          ORDER BY COUNT(*) DESC) AS rank
+  FROM extra
+  GROUP BY category,sub_category)
+SELECT category, sub_category, 
+      count_order, rank
+FROM rank_item
+WHERE rank = 1
+ORDER BY 1;</code></pre></div>
+    <div class="output" >
+      <p><strong>Output [13]:</strong></p>
+          <!-- Bảng hoặc nội dung đầu ra của bạn -->
+      <table class="table table-hover table-striped" border="1" style="width: 150px heigth 100px;" >
+        <tr style="background-color: #ccc;">
+          <th>category</th>
+          <th>sub category</th>
+          <th>count<br>_order</th>
+          <th>rank</th>
+      </tr>
+      <tr>
+        <td>Furniture,<br>Furniture</td>
+        <td>Furnishings,<br>Furnishings</td>
+        <td>28</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Furniture,<br>Office Supplies</td>
+        <td>Furnishings,<br>Binders</td>
+        <td>44</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Furniture,<br>Technology</td>
+        <td>Furnishings,<br>Phones</td>
+        <td>30</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Furniture</td>
+        <td>Paper,<br>Furnishings</td>
+        <td>30</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Office Supplies</td>
+        <td>Paper,<br>Binders</td>
+        <td>58</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Technology</td>
+        <td>Paper,<br>Accessories</td>
+        <td>38</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Office Supplies,<br>Technology</td>
+        <td>Binders,<br>Accessories</td>
+        <td>53</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Technology,<br>Furniture</td>
+        <td>Furnishings,<br>Phones</td>
+        <td>24</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Technology,<br>Office Supplies</td>
+        <td>Phones,<br>Binders</td>
+        <td>34</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Technology,<br>Technology</td>
+        <td>Accessories,<br>Phones</td>
+        <td>38</td>
+        <td>1</td>
+      </tr>
+      </table>
+      </div>
+  </div>
+
+<p>Here is the list of every sub-category with the highest number of orders by customer in 9 combination options per category. Based on that, for each program in each different sub-category, we all have data to make decisions more accurately.</p>
+<p>Furthermore, we can adjust or add more rank in the query to get more data in a category such as Technology-Technology, to determine which will be combination sub-category in our top selections. </p>
+
+<h3>Limitation</h3>
+<p>The limitation of the query is that the tables in SQL cannot detect "Phones,Accessories" and "Acessories,Phones" as the same, leading to the data being missed on the reverse side and not counted in the query. And the same thing happens with other sub-categories, one side that is not recognized by SQL is missing. This means that our data integrity was not ensured.</p>
+<p>Because of the limitations of capabilities, I have not yet been able to dig deeper into this complex task. I'm going to upgrade my skills, complete it and update as soon as possible.</p>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script> hljs.highlightAll();</script>
+
+
+
+
+</body>
+</html>
