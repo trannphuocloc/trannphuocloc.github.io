@@ -11,7 +11,83 @@ author_profile: false
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- Nhúng thư viện Prism.js -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/magula.min.css">
-     <style>
+<style>
+
+        pre {
+		        display: inline-block;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+    </style>
+  <title>Scrollable Code Block</title>
+  <style>
+      /* CSS để tạo nút cuộn cho block code */
+      .scrollable-code {
+          width: 600px; /* Chiều rộng của block code */
+          height: 400px; /* Chiều cao của block code */
+          overflow-x: auto; /* Tạo ra thanh cuộn ngang khi cần thiết */
+          white-space: normal; /* Đảm bảo các dòng code không bị wrap */
+          margin-top: 0; /* Khoảng cách phía trên */
+          margin-bottom: 0; /* Khoảng cách phía dưới */
+          margin-right: 0px;
+          font-size: 14px;
+          padding-bottom:0;
+
+          
+      }
+      .scroll-button {
+            
+            margin-top: 0px; /* Khoảng cách từ nút cuộn đến văn bản trên */
+            margin-bottom: 0;
+            padding: 0; /* Điều chỉnh độ lớn của nút cuộn */
+        }
+</head>
+
+<body>
+  <style>
+    table {
+      width: 760px;
+      font-size: 14px;
+    }
+
+    table thead th{
+        background-color: #ccc;
+        text-align: left;
+    }
+
+    .table.table-hover tr:hover{
+      background: #d4d2d2 ;
+    }
+    .table.table-striped tbody tr:nth-child(odd){
+      background: #f0f0f0 ;
+    }
+    </style>
+
+    <style>
+        .odd {
+            background-color: #f0f0f0;
+        }
+
+        .even {
+            background-color: #ffffff;
+        }
+    </style>
+
+
+    <title>Flourish Map Embed</title>
+    <style>
+        .flourish-embed {
+            max-width: 700px;
+            max-height: 400px;
+            padding: 20px 10px;
+        }
+    </style>
+
+</body>
+
+<div id="toc-container">
 
   <ul id="toc"></ul>
 </div>
@@ -45,6 +121,63 @@ author_profile: false
     toc.innerHTML = tocHTML;
   });
 </script>
+<style>
+  .toc-container {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 10px 5px;
+    margin: 15px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%; /* Ensure it doesn't exceed the width of its parent */
+    margin-left: 0; /* Align to the left edge */
+    margin-right: 0; /* Align to the right edge */
+  }
+
+  .toc-container h2 {
+    font-size: 1.5em;
+    color: #343a40;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 10px;
+  }
+
+  .toc-container ol {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .toc-container li {
+    margin-bottom: 8px;
+    width: 100%;
+    padding-left: 15px; /* Remove any left padding */
+  }
+
+  .toc-container a {
+    color: #495057;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .toc-container a:hover {
+    color: #007bff;
+  }
+
+  .toc-container .toc-level-3 {
+    padding-left: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .toc-container {
+      padding: 15px;
+    }
+  }
+</style>
 
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
